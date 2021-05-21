@@ -17,16 +17,16 @@ class HomeHeader extends React.Component {
                 </button>
                 <div className="collapse navbar-collapse d-flex align-items-center justify-content-end" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto d-flex justify-content-center">
-                        <li class="nav-item active">
+                        <li className="nav-item active">
                             <Link className="nav-link navBarLink p-2 mx-2" to="/">Produtos</Link>
                         </li>
-                        <li class="nav-item active">
+                        <li className="nav-item active">
                             <Link className="nav-link navBarLink p-2 mx-2" to="/">Sobre nós</Link>
                         </li>
-                        <li class="nav-item active">
+                        <li className="nav-item active">
                             <Link className="nav-link navBarLink p-2 mx-2" to="/">Contato</Link>
                         </li>
-                        <li class="nav-item active">
+                        <li className="nav-item active">
                             <Link className="nav-link navBarLinkSpecial p-2 mx-2" to="/">Compre agora</Link>
                         </li>
                     </ul>
