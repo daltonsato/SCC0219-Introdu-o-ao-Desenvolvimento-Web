@@ -1,0 +1,33 @@
+.productBar {
+    background: linear-gradient(to bottom right, #e8cf1e 0%, #ffffff 150%);
+    border-radius: 25px;
+   
+}
+
+.productContainer {
+    background-color: #6D676E; 
+    width: 250px;
+    height: 250px;
+    margin: 15px;
+    border-radius: 25px;
+    text-align: center;
+    -webkit-box-shadow: 1px 5px 14px 0px rgba(0,0,0,0.64); 
+    box-shadow: 1px 5px 14px 0px rgba(0,0,0,0.64);
+}
+
+.backgroundColor{
+    background-color: #ffffff;
+}
+
+.searchBar{
+    padding: 10px;
+    background-color: #c4c4c4; 
+    border-radius: 25px;
+}
+
+.add{
+    background-color: #FA7921; 
+    border-radius: 50px;
+    
+}
+
