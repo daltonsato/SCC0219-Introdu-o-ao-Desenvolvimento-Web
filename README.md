@@ -34,7 +34,7 @@ _// TO DO: Text describing the tests that will be performed. If an automatic tes
 _// TO DO: Text describing the test results. If an automatic test tool/framework is used, its output can be used_
 
 ## Build Procedures
-_// TO DO: A step-by-step guide to run your code. You should start telling how to install whatever software you need, then how to download/build your program, and finally how to set up the environment to run it. Imagine that someone installing will just follow these commands (nothing more)._
+
 ### First milestone
 For now, to build and run the project, there's a standard guide [here](https://github.com/daltonsato/SCC0219-Introdu-o-ao-Desenvolvimento-Web/blob/master/frontend/README.md).
 
@@ -45,7 +45,7 @@ As an alternative to the standard guide, if you are using Linux, what you can do
 2. Run `npm start` inside `/frontend` and you're done!
 3. Wait until the development server is up (check your terminal) and then visit `http://localhost:3000/`.
 
-_Obs.: for Windows, you can use WSL and follow these steps.
+_Obs.: for Windows, you can use WSL and follow these steps._
 
 The pages that exist for now are: 
 1. Homepage (source code [here](https://github.com/daltonsato/SCC0219-Introdu-o-ao-Desenvolvimento-Web/tree/master/frontend/src/pages/Homepage))
