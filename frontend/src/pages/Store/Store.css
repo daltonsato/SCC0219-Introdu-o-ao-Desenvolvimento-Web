@@ -1,7 +1,6 @@
 .productBar {
     background: linear-gradient(to bottom right, #e8cf1e 0%, #ffffff 150%);
     border-radius: 25px;
-   
 }
 
 .productContainer {
@@ -28,6 +27,5 @@
 .add{
     background-color: #FA7921; 
     border-radius: 50px;
-    
 }
 

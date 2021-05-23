@@ -8,30 +8,31 @@ import EggLogo from '../../../images/egg_logo_example.png';
 class HomeHeader extends React.Component {
     render() {
         return (
-            <div className="navbar navbar-expand-lg homepageHeader sticky-top py-2 px-4">
+            <nav className="navbar navbar-default navbar-expand-lg homepageHeader sticky-top py-2 px-4"> {/*navbar-expand-lg */}
+            {/* <nav className="navbar navbar-inverse bg-inverse navbar-toggleable-sm fixed-top"></nav> */}
                 <Link className="navbar-brand d-flex justify-content-center align-items-center" to="/"><img className="img-fluid headerLogo" src={EggLogo} alt="Egg Logo"/>
                     <span className="headerBrandName p-2"> T A M A G O V O </span>
                 </Link>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse d-flex align-items-center justify-content-end" id="navbarSupportedContent">
+                <div className="collapse navbar-collapse navbar-right align-items-center justify-content-end" id="navbarNav">
                     <ul className="navbar-nav mr-auto d-flex justify-content-center">
-                        <li className="nav-item active">
+                        <li className="nav-item">
                             <Link className="nav-link navBarLink p-2 mx-2" to="/">Produtos</Link>
                         </li>
-                        <li className="nav-item active">
+                        <li className="nav-item">
                             <Link className="nav-link navBarLink p-2 mx-2" to="/">Sobre nós</Link>
                         </li>
-                        <li className="nav-item active">
+                        <li className="nav-item">
                             <Link className="nav-link navBarLink p-2 mx-2" to="/">Contato</Link>
                         </li>
-                        <li className="nav-item active">
-                            <Link className="nav-link navBarLinkSpecial p-2 mx-2" to="/">Compre agora</Link>
+                        <li className="nav-item">
+                            <Link className="nav-link navBarLinkSpecial p-2 mx-2" to="/store">Compre agora</Link>
                         </li>
                     </ul>
                 </div>
-            </div>
+            </nav>
         );
     }
 }
