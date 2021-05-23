@@ -13,16 +13,26 @@ This is a website developed for "SCC0219 - Introduction to Web Development" at t
 For now, we're also using React.js, but we'll change for Vue.js in the future (this is a project requirement).
 
 ## Requirements
-_// TO DO: The requirements are given in the assignment, but you have to add any new requirements needed by your particular store implementation._
+The system has 2 types of users: Clients and Administrators
+Administrators are yet to be implemented, but they are responsible for registering/managing products provided.
+Customers are users who access the system to buy products.
 
-Don't forget:
-- The functionalities you are going to implement.
-- Navigation diagram for your application linked to the screen mockups. This link can be just the name of the mockup (i.e. Mockup1, Mockup2, etc) or an HTML link.
-- The information you are going to save in the server (no need to decide how that information will be saved).
+Each customer's record includes, at least: name, id, email
+Product records include, at least: name, id, photo, description, price, quantity in stock and quantity sold.
+Selling Products: Products are selected, their quantity chosen, and are included in a cart. Products are purchased using a credit card number (any number is accepted by the system), a debit card number or even a bank slip. The quantity of product sold is added to the quantity sold and subtracted form the stock. Carts are emptied only on payment or by customers.
+Product Management: Administrators can create/update/read/delete (crud) new products and services. For example, they can change the stock quantity.
 
+Functionalities yet to be implemented:
+- Register and login into an account
+- Choose payment method
+- Insert address to deliver the eggs
+- Manage the shopping cart
+- Check history of purchases
 
 ## Project Description
-_// TO DO: Describe how your project implements the functionality in the requirements. Diagrams can help a lot here._
+Our store is made with javascript, css, node modules and react. When entering the main page (or running with npm start), you will see homepage welcoming the user, containing an opening message, a brief description about our products and an about us section, containing our history and a list of our contacts.
+Using React, we designed our screens, applying the Single Page Application style.
+Our pages will contain clickable buttons, and they will be used to navigate between other pages and also to do specific actions, like log-in and log-out, create an account, choose method payment, check history of purchases and manage the shopping cart. There will be also areas to input information, such as address to deliver the eggs, and insert personal information to manage the account.
 
 ## Comments About the Code
 _// TO DO: Any comment you may want to add to help understand your code. This is good programming practice_
