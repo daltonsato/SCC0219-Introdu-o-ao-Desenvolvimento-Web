@@ -14,7 +14,7 @@ For now, we're also using React.js, but we'll change for Vue.js in the future (t
 
 ## Requirements
 The system has 2 types of users: Clients and Administrators
-Administrators are yet to be implemented, but they are responsible for registering/managing products provided.
+Administrators are yet to be implemented, but they are responsible for registering/managing products and users.
 Customers are users who access the system to buy products.
 
 Each customer's record includes, at least: name, id, email
@@ -23,14 +23,19 @@ Selling Products: Products are selected, their quantity chosen, and are included
 Product Management: Administrators can create/update/read/delete (crud) new products and services. For example, they can change the stock quantity.
 
 Functionalities yet to be implemented:
-- Register and login into an account
-- Choose payment method
-- Insert address to deliver the eggs
-- Manage the shopping cart
-- Check history of purchases
+- Easily buy eggs;
+- Register and login into an account;
+- Choose payment method;
+- Insert addresses to deliver the eggs;
+- Change profile details (name, email, password, payment methods etc.);
+- Check and manage the shopping cart;
+- Check history of purchases;
+- Add eggs to shopping cart (and, if necessary, remove them);
+- Read about the company/store and its creators;
+- Contact the website's creators
 
 ## Project Description
-Our store is made with javascript, css, node modules and react. When entering the main page (or running with npm start), you will see homepage welcoming the user, containing an opening message, a brief description about our products and an about us section, containing our history and a list of our contacts.
+Our store is made with Javascript, CSS, Node.js and React (we'll change for Vue.js). When entering the main page (or running with `npm start`), you will see homepage welcoming the user, containing an opening message, a brief description about our products and an about us section, containing our history and a list of our contacts.
 Using React, we designed our screens, applying the Single Page Application style.
 Our pages will contain clickable buttons, and they will be used to navigate between other pages and also to do specific actions, like log-in and log-out, create an account, choose method payment, check history of purchases and manage the shopping cart. There will be also areas to input information, such as address to deliver the eggs, and insert personal information to manage the account.
 
@@ -62,7 +67,9 @@ The pages that exist for now are:
 2. ShoppingCart (source code [here](https://github.com/daltonsato/SCC0219-Introdu-o-ao-Desenvolvimento-Web/tree/master/frontend/src/pages/ShoppingCart))
 3. Store (source code [here](https://github.com/daltonsato/SCC0219-Introdu-o-ao-Desenvolvimento-Web/tree/master/frontend/src/pages/Store))
 
-You can check the design for other pages in `mockup.pdf` and a flow diagram (indicating the navigation flow) in `flowDiagram.pdf`.
+You can check the design for other pages in `mockup.pdf` (the raw idea is there, the details are or will be present in the HTML files) and a flow diagram (indicating the navigation flow) in `flowDiagram.png`.
+
+**Important: the current design is temporary. After finishing it, we decided changing  everything!! For the next milestone, we'll have a different mockup. Sorry for this "inconvenience"...**
 
 ## Problems
 _// TO DO: List any major problems you had._
