@@ -1,106 +1,122 @@
-import React , { useRef }from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './Homepage.css';
 import HomeHeader from '../components/Headers/HomeHeader';
 
 // Images
-import chickenImg from '../../images/chicken_homepage.png';
-import Gudetama from '../../images/gudetama.png';
+import KawaiiEgg from '../../images/kawaii_egg.svg'
+import ShoppingCart from '../../images/shopping_cart_home.svg';
+import PaymentStep from '../../images/credit_cart_payment.svg';
+import HappyFace from '../../images/happy_face_home.svg';
+import EggPackExample from '../../images/generic_egg_product_home.svg'
+import WomanWithChicken from '../../images/woman_chicken.svg';
 
 export default function Homepage() {
-    const our_products = useRef(null); // create reference to scroll to 
-
     return (
-        <div className="gradiantMainContainer">
+        <div className="gradientMainContainer">
             <HomeHeader />
             <div className="container">
-                <div className="row d-flex justify-content-center py-4">
-                    <div className="col-md-7 col-sm-12">
-                        <h1 className="brandName text-center text-lg-start">T A M A G O V O</h1>
-                        <p className="homepageMainText">Conheça o maior mercado de ovos de todo o Brasil!</p>
-                        <p className="homepageMainText">A TAMAGOVO trabalha com ovos de qualidade de todos os tipos, com grande variedade e preço bom.</p>
-                        <p className="homepageMainText">Aqui você encontra ovos de galinha, de cordorna, de avestruz, ovos centenários, exóticos e até mesmo ovo em pó!</p>
+                <div className="row">
+                    <div className="col d-flex flex-column justify-content-between align-items-center py-4">
+                        <h1 className="homepageMainText"> O maior mercado de ovos do Brasil</h1>
+                        <div className="homepageMainDesc">
+                            <p> Aqui você vai encontrar as melhores opções e qualidades de ovos disponíveis no mercado. </p>
+                            <p> Animais criados livres</p>
+                            <p> Variedades de opções </p>
+                            <p> Melhores preços do mercado </p>
+                            <Link className="homepageBuyButton mt-3 py-2 px-5" type="button" to="/store"> Comprar </Link>
+                        </div>
                     </div>
-                    <div className="col-md-5 col-sm-12">
-                        <img className="img-fluid" src={chickenImg} alt="Galinha gigante simpática" />
+                    <div className="col">
+                        <img clasName="img-fluid" src={KawaiiEgg} alt="Cute egg" />
                     </div>
                 </div>
-                <div className="row text-center d-flex justify-content-center align-items-center">
-                    <Link className="buttonHomeScroll py-4 w-auto" to="#our_products" onClick={() => our_products.current.scrollIntoView() }> \/ </Link>
+                <div className="row text-center py-5">
+                    <h1 className="howItWorksText mt-5 mb-3"> Como funciona? </h1>
                 </div>
-                <div className="row d-flex flex-column justify-content-center align-items-center pt-5" ref={our_products}>
-                    <h1 className="brandName text-center pt-3"> Nossos produtos </h1>
-                    <p className="homepageMainText text-center"> Encontre aqui a maior variedade de ovos do Brasil! </p>
-                    <div className="row d-flex justify-content-around align-items-center">
-                        { /* create component for egg display*/ }
-                        <div className="highlightedProduct d-flex flex-column justify-content-center align-items-center col-lg-3 col-md-12 shadow mx-3 my-2 py-4">
-                            <div className="innerHighlightedProduct d-flex justify-content-center align-items-center mx-4 py-4">
-                                <img className="img-fluid w-75" src={Gudetama} alt="He's an egg" />
-                            </div>
-                            <div className="text-center pt-2">
-                                <h3> Ovo Gudetama </h3>
-                                <h3> R$ 13,37 </h3> 
-                            </div>
+                <div className="row">
+                    <div className="homepageCard col d-flex flex-column justify-content-center align-items-center mx-4 p-3">
+                        <div>
+                            <b> 1. Você escolhe </b>
+                            <br /><br />
+                            Você adiciona nossos melhores produtos em seu carrinho.
+                            <br /><br /><br />
                         </div>
-                        <div className="highlightedProduct d-flex flex-column justify-content-center align-items-center col-lg-3 col-md-12 shadow mx-3 my-2 py-4">
-                            <div className="innerHighlightedProduct d-flex justify-content-center align-items-center mx-4 py-4">
-                                <img className="img-fluid w-75" src={Gudetama} alt="He's an egg" />
-                            </div>
-                            <div className="text-center pt-2">
-                                <h3> Ovo Gudetama </h3>
-                                <h3> R$ 13,37 </h3> 
-                            </div>
-                        </div>
-                        <div className="highlightedProduct d-flex flex-column justify-content-center align-items-center col-lg-3 col-md-12 shadow mx-3 my-2 py-4">
-                            <div className="innerHighlightedProduct d-flex justify-content-center align-items-center mx-4 py-4">
-                                <img className="img-fluid w-75" src={Gudetama} alt="He's an egg" />
-                            </div>
-                            <div className="text-center pt-2">
-                                <h3> Ovo Gudetama </h3>
-                                <h3> R$ 13,37 </h3> 
-                            </div>
-                        </div>
+                        <img className="img-fluid pt-5 pb-2" src={ShoppingCart} alt="Shopping cart icon" />
                     </div>
-                    <div className="row w-auto p-5 d-flex justify-content-center">
-                        <Link className="highlightedButton py-2 px-5 text-center" type="button" to="/store">Conheça nosso catálogo!</Link>
+                    <div className="homepageCard col d-flex flex-column justify-content-center align-items-center mx-4 p-3">
+                        <div>
+                            <b> 2. Você paga </b>
+                            <br /><br />
+                            Você realiza o pagamento de forma rápida e digital via Pix, cartão de crédito ou débito ou boleto bancário.
+                            <br /><br /><br />
+                        </div>
+                        <img className="img-fluid pt-5 pb-2" src={PaymentStep} alt="Payment step icon" />
+                    </div>
+                    <div className="homepageCard col d-flex flex-column justify-content-center align-items-center mx-4 p-3">
+                        <div>
+                            <b> 3. Você relaxa e aguarda sua entrega :) </b>
+                            <br /><br />
+                            Nós garantimos sua satisfação com uma entrega rápida e eficiente.
+                            <br /><br /><br />
+                        </div>
+                        <img className="img-fluid pt-5 pb-2" src={HappyFace} alt="Payment step icon" />
                     </div>
                 </div>
-                <div className="row pt-5">
-                    <div className="col-sm-12 col-lg px-3 m-2 pb-4">
-                        <h1 className="aboutUsTitle"> Sobre Nós </h1>
-                        <p className="aboutUsText"> Somos uma empresa que se originou no interior do estado de São Paulo, na cidade de Bastos, a Capital do Ovo, que conta com uma rica história que remete ao inicio da colonização japonesa no Brasil! </p>
-                        <p className="aboutUsText"> Exemplo no ramo da avicultura, contamos com a parceria de diversas granjas consolidadas no mercado com uma história que é continuada a cada geração. </p>
-                        <p className="aboutUsText"> Possuimos à disposição ovos das mais diversas categorias e da melhor qualidade disponível no mercado, abrangendo um grande leque de consumidores e especialistas da área. </p>
-                        <p className="aboutUsText"> Há mais de 15 anos no mercado, garantimos excelência e prontidão na compra e na manutenção de um bom relacionamento com nossos clientes! </p>
-                    </div>
-                    <div className="col-sm-12 col-lg px-3">
-                        <h1 className="aboutUsTitle"> Contato </h1>
-                        <div className="aboutUsText">
-                            <ul className="py-2"> 
-                                Emails:
-                                <li> brenopolpinha@gmail.com </li>
-                                <li> joaosilva@gmail.com </li>
-                            </ul>
-                            
-                            <ul className="py-2"> 
-                                Email corporativo:
-                                <li> contactus@tamagovo.com.br </li>
-                            </ul>
-                            
-                            <ul className="py-2"> 
-                                Telefone:
-                                <li> (14)3478-5050 </li>
-                            </ul>
-
-                            <ul className="py-2"> 
-                                Redes sociais:
-                                <li> Telegram: @tamagovo </li>
-                                <li> Instagram: @tamagovo </li>
-                                <li> Twitter: @tamagovoficial </li>
-                            </ul>
+                <br /><br /><br /><br /><br /><br />
+                <div className="row"> { /* Change to carousel: https://getbootstrap.com/docs/4.0/components/carousel/ */ }
+                    <div className="col d-flex flex-column justify-content-center align-items-center mx-3 py-3">
+                        <div className="homepageProductEggOuter d-flex justify-content-center align-items-center px-4 py-5">
+                            <div className="homepageProductEggInner px-4 py-5">
+                                <img className="img-fluid" alt="Example of egg's pack" src={EggPackExample} />
+                            </div>
+                        </div>
+                        <div className="d-flex flex-column text-center justify-content-center align-items-center pt-5">
+                            <b>Ovo X</b> R$ 100,00
                         </div>
                     </div>
+                    <div className="col d-flex flex-column justify-content-center align-items-center w-100 mx-3 py-3">
+                        <div className="homepageProductEggOuter scaledUp d-flex justify-content-center align-items-center px-4 py-5">
+                            <div className="homepageProductEggInner px-4 py-5">
+                                <img className="img-fluid" alt="Example of egg's pack" src={EggPackExample} />
+                            </div>
+                        </div>
+                        <div className="d-flex flex-column text-center justify-content-center align-items-center pt-5">
+                            <b>Ovo X</b> R$ 100,00
+                        </div>
+                    </div>
+                    <div className="col d-flex flex-column justify-content-center align-items-center mx-3 py-3">
+                        <div className="homepageProductEggOuter d-flex justify-content-center align-items-center px-4 py-5">
+                            <div className="homepageProductEggInner px-4 py-5">
+                                <img className="img-fluid" alt="Example of egg's pack" src={EggPackExample} />
+                            </div>
+                        </div>
+                        <div className="d-flex flex-column text-center justify-content-center align-items-center pt-5">
+                            <b>Ovo X</b> R$ 100,00
+                        </div>
+                    </div>
+                </div>
+                <div className="row justify-content-center align-items-center py-5">
+                    <Link className="homepageBuyButton text-center w-auto py-2 mb-5 px-5" type="button" to="/store"> Conheça nosso catálogo! </Link>
+                </div>
+                <div className="difBackgoundPanel row py-5 px-3">
+                    <div className="col d-flex justify-content-center align-items-center">
+                        <img className="img-fluid" style={{ 'border-radius' : '20px'}} src={WomanWithChicken} alt="Woman with chicken" />
+                    </div>
+                    <div className="col d-flex justify-content-center align-items-center">
+                        <div>
+                            <p className="homeTextYellowPanel"> Nossas aves são criadas em um ambiente espaçoso e de forma totalmente livre! </p>
+                            <p className="homeTextYellowPanel"> Nossos funcionários fazem questão de cuidá-las com muito carinho para que o produto chegue a você com a melhor qualidade possível! </p>
+                        </div>
+                    </div>
+                </div>
+                <div className="row py-5 d-flex flex-column justify-content-center align-items-center text-center">
+                    <br /><br />
+                    <h1 className="pt-5 pb-1"> Venha fazer parte da nossa granja </h1>
+                    <h3> Aproveite nossos ovos e compre com a gente um delicioso ovo </h3>
+                    <Link className="homepageBuyButton text-center w-auto py-2 my-5 px-5" type="button" to="/store"> Conheça nosso catálogo! </Link>
+                    <br /><br /><br /><br /><br />
                 </div>
             </div>
         </div>
