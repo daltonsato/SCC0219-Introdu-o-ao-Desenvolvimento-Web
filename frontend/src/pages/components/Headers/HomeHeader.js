@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './HomeHeader.css';
 
 // Images
-import EggLogo from '../../../images/egg_logo_example.png';
+import EggLogo from '../../../images/egg_logo.png';
 
 class HomeHeader extends React.Component {
     render() {
@@ -19,16 +19,19 @@ class HomeHeader extends React.Component {
                 <div className="collapse navbar-collapse navbar-right align-items-center justify-content-end" id="navbarNav">
                     <ul className="navbar-nav mr-auto d-flex justify-content-center">
                         <li className="nav-item">
-                            <Link className="nav-link navBarLink p-2 mx-2" to="/">Produtos</Link>
+                            <Link className="nav-link navBarLink py-1 px-2 mx-2" to="/">Produtos</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link navBarLink p-2 mx-2" to="/">Sobre nós</Link>
+                            <Link className="nav-link navBarLink py-1 px-2 mx-2" to="/">Sobre nós</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link navBarLink p-2 mx-2" to="/">Contato</Link>
+                            <Link className="nav-link navBarLink py-1 px-2 mx-2" to="/">Contato</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link navBarLinkSpecial p-2 mx-2" to="/store">Compre agora</Link>
+                            <Link className="nav-link navBarLinkLogin py-1 px-2 mx-2" to="/">Login / Criar conta</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link navBarLinkSpecial py-1 px-3 mx-2" to="/store"> Comprar </Link>
                         </li>
                     </ul>
                 </div>

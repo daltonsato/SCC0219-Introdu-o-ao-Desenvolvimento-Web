@@ -4,59 +4,56 @@
 
 .homepageHeader {
     height: 10vh;
-    background-color: #6D676E;
+    background: #FEC300;
     box-shadow: 0px 4px 4px 0px #00000040;
 }
 
 .headerLogo {
     height: 100%;
-    width: 5vh;
+    width: 7vh;
 }
 
 .headerBrandName {
-    color: #e8cf1eff !important;
+    color: rgba(0, 0, 0, 0.64) !important;
     font-size: 26px;
     font-weight: bold;
 }
 
 .navBarLink {
-    color: #FFFFFF !important;
-    font-size: 22px;
-    box-shadow: 0px 4px 4px 0px #00000040;
-    border-radius: 100px;
     transition-duration: 0.5s;
     -webkit-transition: 0.5s;
+    font-size: 22px;
+    color: rgba(0, 0, 0, 1) !important;
+    border-radius: 10px;
 }
 
-.navBarLink:hover {
+.navBarLink:hover, .navBarLinkLogin:hover {
     transition-duration: 0.5s;
     -webkit-transition: 0.5s;
-    background-color: #FA7921;
+    color: white !important;
+    background-color: rgba(0, 0, 0, 0.65);
+}
+
+.navBarLinkLogin {
+    transition-duration: 0.5s;
+    -webkit-transition: 0.5s;
+    font-size: 22px;
+    color: rgba(0, 0, 0, 0.65) !important;
+    border-radius: 10px;
 }
 
 .navBarLinkSpecial {
-    color: #FFFFFF !important;
+    color: #000000 !important;
     font-size: 24px;
-    font-weight: bold;
-    border-radius: 10px;
-    background: #FA7921;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 100px;
+    background: #FFFFFF;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.35);
+    border-radius: 32px;
+    transition-duration: 0.5s;
+    -webkit-transition: 0.5s;
 }
 
 .navBarLinkSpecial:hover {
-    transform: scale(1.15);
     transition-duration: 0.5s;
     -webkit-transition: 0.5s;
-    background-color: #e8cf1eff;
-    color: #230007ff !important;
+    transform: scale(1.15);
 }
-
-/* CSS HEX */
-/* --dark-sienna: #230007ff;
---dim-gray: #6d676eff;
---safety-yellow: #e8cf1eff;
---atomic-tangerine: #f39b6dff;
---mango-tango: #f08a4bff;
---white: #ffffffff;
---pumpkin: #fa7921ff; */
