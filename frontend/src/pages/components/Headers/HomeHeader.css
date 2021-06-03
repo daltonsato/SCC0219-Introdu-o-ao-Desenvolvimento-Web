@@ -3,7 +3,7 @@
 }
 
 .homepageHeader {
-    height: 10vh;
+    height: 15vh;
     background: #FEC300;
     box-shadow: 0px 4px 4px 0px #00000040;
 }
@@ -47,7 +47,7 @@
     font-size: 24px;
     background: #FFFFFF;
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.35);
-    border-radius: 32px;
+    border-radius: 10px;
     transition-duration: 0.5s;
     -webkit-transition: 0.5s;
 }

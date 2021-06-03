@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './Homepage.css';
 import HomeHeader from '../components/Headers/HomeHeader';
+import Footer from '../components/Footer/Footer';
 
 // Images
 import KawaiiEgg from '../../images/kawaii_egg.svg'
@@ -18,9 +19,9 @@ export default function Homepage() {
             <HomeHeader />
             <div className="container">
                 <div className="row">
-                    <div className="col d-flex flex-column justify-content-between align-items-center py-4">
-                        <h1 className="homepageMainText"> O maior mercado de ovos do Brasil</h1>
-                        <div className="homepageMainDesc">
+                    <div className="col-sm-12 col-md-6 d-flex flex-column justify-content-between align-items-center py-4">
+                        <h1 className="homepageMainText text-center"> O maior mercado de ovos do Brasil</h1>
+                        <div className="homepageMainDesc text-center">
                             <p> Aqui você vai encontrar as melhores opções e qualidades de ovos disponíveis no mercado. </p>
                             <p> Animais criados livres</p>
                             <p> Variedades de opções </p>
@@ -28,45 +29,45 @@ export default function Homepage() {
                             <Link className="homepageBuyButton mt-3 py-2 px-5" type="button" to="/store"> Comprar </Link>
                         </div>
                     </div>
-                    <div className="col">
-                        <img clasName="img-fluid" src={KawaiiEgg} alt="Cute egg" />
+                    <div className="col-sm-12 col-md-6">
+                        <img className="img-fluid" src={KawaiiEgg} alt="Cute egg" />
                     </div>
                 </div>
                 <div className="row text-center py-5">
                     <h1 className="howItWorksText mt-5 mb-3"> Como funciona? </h1>
                 </div>
-                <div className="row">
-                    <div className="homepageCard col d-flex flex-column justify-content-center align-items-center mx-4 p-3">
+                <div className="row justify-content-center align-items-center">
+                    <div className="homepageCard col-sm-12 col-md-3 d-flex flex-column justify-content-center align-items-center mx-4 my-2 p-3">
                         <div>
                             <b> 1. Você escolhe </b>
                             <br /><br />
                             Você adiciona nossos melhores produtos em seu carrinho.
-                            <br /><br /><br />
+                            <br /><br />
                         </div>
                         <img className="img-fluid pt-5 pb-2" src={ShoppingCart} alt="Shopping cart icon" />
                     </div>
-                    <div className="homepageCard col d-flex flex-column justify-content-center align-items-center mx-4 p-3">
+                    <div className="homepageCard col-sm-12 col-md-3 d-flex flex-column justify-content-center align-items-center mx-4 my-2 p-3">
                         <div>
                             <b> 2. Você paga </b>
                             <br /><br />
                             Você realiza o pagamento de forma rápida e digital via Pix, cartão de crédito ou débito ou boleto bancário.
-                            <br /><br /><br />
+                            <br />
                         </div>
                         <img className="img-fluid pt-5 pb-2" src={PaymentStep} alt="Payment step icon" />
                     </div>
-                    <div className="homepageCard col d-flex flex-column justify-content-center align-items-center mx-4 p-3">
+                    <div className="homepageCard col-sm-12 col-md-3 d-flex flex-column justify-content-center align-items-center mx-4 my-2 p-3">
                         <div>
                             <b> 3. Você relaxa e aguarda sua entrega :) </b>
                             <br /><br />
                             Nós garantimos sua satisfação com uma entrega rápida e eficiente.
-                            <br /><br /><br />
+                            <br /><br />
                         </div>
                         <img className="img-fluid pt-5 pb-2" src={HappyFace} alt="Payment step icon" />
                     </div>
                 </div>
                 <br /><br /><br /><br /><br /><br />
-                <div className="row"> { /* Change to carousel: https://getbootstrap.com/docs/4.0/components/carousel/ */ }
-                    <div className="col d-flex flex-column justify-content-center align-items-center mx-3 py-3">
+                <div className="row justify-content-center align-items-center"> { /* Change to carousel: https://getbootstrap.com/docs/4.0/components/carousel/ */ }
+                    <div className="col-sm-12 col-md-3 d-flex flex-column justify-content-center align-items-center m-3 py-3">
                         <div className="homepageProductEggOuter d-flex justify-content-center align-items-center px-4 py-5">
                             <div className="homepageProductEggInner px-4 py-5">
                                 <img className="img-fluid" alt="Example of egg's pack" src={EggPackExample} />
@@ -76,7 +77,7 @@ export default function Homepage() {
                             <b>Ovo X</b> R$ 100,00
                         </div>
                     </div>
-                    <div className="col d-flex flex-column justify-content-center align-items-center w-100 mx-3 py-3">
+                    <div className="col-sm-12 col-md-3 d-flex flex-column justify-content-center align-items-center m-3 py-3">
                         <div className="homepageProductEggOuter scaledUp d-flex justify-content-center align-items-center px-4 py-5">
                             <div className="homepageProductEggInner px-4 py-5">
                                 <img className="img-fluid" alt="Example of egg's pack" src={EggPackExample} />
@@ -86,7 +87,7 @@ export default function Homepage() {
                             <b>Ovo X</b> R$ 100,00
                         </div>
                     </div>
-                    <div className="col d-flex flex-column justify-content-center align-items-center mx-3 py-3">
+                    <div className="col-sm-12 col-md-3 d-flex flex-column justify-content-center align-items-center m-3 py-3">
                         <div className="homepageProductEggOuter d-flex justify-content-center align-items-center px-4 py-5">
                             <div className="homepageProductEggInner px-4 py-5">
                                 <img className="img-fluid" alt="Example of egg's pack" src={EggPackExample} />
@@ -102,7 +103,7 @@ export default function Homepage() {
                 </div>
                 <div className="difBackgoundPanel row py-5 px-3">
                     <div className="col d-flex justify-content-center align-items-center">
-                        <img className="img-fluid" style={{ 'border-radius' : '20px'}} src={WomanWithChicken} alt="Woman with chicken" />
+                        <img className="img-fluid" style={{ 'borderRadius' : '20px'}} src={WomanWithChicken} alt="Woman with chicken" />
                     </div>
                     <div className="col d-flex justify-content-center align-items-center">
                         <div>
@@ -119,6 +120,7 @@ export default function Homepage() {
                     <br /><br /><br /><br /><br />
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }
