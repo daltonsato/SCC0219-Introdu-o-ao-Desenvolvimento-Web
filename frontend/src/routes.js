@@ -6,6 +6,9 @@ import ShoppingCart from './pages/ShoppingCart/ShoppingCart';
 import Store from './pages/Store/Store';
 import AboutUs from './pages/AboutUs/AboutUs';
 import ContactUs from './pages/ContactUs/ContactUs';
+import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
+import NotFound from './pages/components/NotFound/NotFound'
 
 export default function Routes() {
     return (
@@ -16,6 +19,9 @@ export default function Routes() {
                 <Route path={'/contact-us'} exact component={ContactUs}/>
 				<Route path={'/shopping-cart'} exact component={ShoppingCart}/>
                 <Route path={'/store'} exact component={Store}/>
+                <Route path={'/login'} exact component={Login}/>
+                <Route path={'/register'} exact component={Register}/>
+                <Route path={'/'} component={NotFound}/>
             </Switch>
         </BrowserRouter>
     );

@@ -28,7 +28,7 @@ class HomeHeader extends React.Component {
                             <Link className="nav-link navBarLink py-1 px-2 mx-2" to="/contact-us">Contato</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link navBarLinkLogin py-1 px-2 mx-2" to="/">Login / Criar conta</Link>
+                            <Link className="nav-link navBarLinkLogin py-1 px-2 mx-2" to="/login">Login / Criar conta</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link navBarLinkSpecial py-1 px-3 mx-2" to="/store"> Comprar </Link>

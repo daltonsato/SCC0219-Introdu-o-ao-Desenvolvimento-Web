@@ -8,6 +8,7 @@ import  './ContactUs.css'
 import Person1 from '../../images/person1_contactImg.svg'
 import Person2 from '../../images/person2_contactImg.svg'
 import Person3 from '../../images/person3_contactImg.svg'
+import Chicken from '../../images/small_chicken.svg';
 
 export default function ContactUs() {
     return (
@@ -46,6 +47,15 @@ export default function ContactUs() {
                             <b> Aaaa Bcccc </b> <br />
                             Telefone: (12) 3456-7890 <br />
                             Email: Ab@tamagovo.com.br <br />
+                        </div>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col m-3 d-flex align-items-end justify-content-center">
+                        <img className="img-fluid px-4" src={Chicken} alt="Small chicken drawing 1" />
+                        <div className="d-flex flex-column align-items-center justify-content-center">
+                            <p> tamagovo@tamagovo.com.br</p>
+                            <p> (12) 3456-7890 </p>
                         </div>
                     </div>
                 </div>
