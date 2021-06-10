@@ -2,6 +2,7 @@ import React from 'react';
 
 import './ShoppingCart.css';
 import HomeHeader from '../components/Headers/HomeHeader';
+import Footer from '../components/Footer/Footer';
 
 export default function ShoppingCart() {
     return (
@@ -39,6 +40,7 @@ export default function ShoppingCart() {
 					</div>
 				</div>
 			</div>
-        </div>
+			<Footer />
+		</div>
     );
 }
