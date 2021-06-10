@@ -16,7 +16,7 @@ import WomanWithChicken from '../../images/woman_chicken.svg';
 export default function Homepage() {
     return (
         <div className="gradientMainContainer">
-            <HomeHeader />
+            <HomeHeader isLoggedIn={false}/>
             <div className="container">
                 <div className="row">
                     <div className="col-sm-12 col-md-6 d-flex flex-column justify-content-between align-items-center py-4">

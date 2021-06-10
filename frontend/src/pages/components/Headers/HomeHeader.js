@@ -7,6 +7,24 @@ import EggLogo from '../../../images/egg_logo.png';
 
 class HomeHeader extends React.Component {
     render() {
+        const isLoggedIn = this.props.isLoggedIn;
+        console.log(this.props)
+        let isLoggedComponent;
+        if (isLoggedIn) {
+            isLoggedComponent = (
+                <li className="nav-item">
+                    <Link className="nav-link navBarLinkLogin py-1 px-2 mx-2" to="/login"> Perfil </Link>
+                    <Link className="nav-link navBarLinkLogin py-1 px-2 mx-2" to="/login"> Carrinho </Link>
+                </li> );
+        }
+        else {
+            isLoggedComponent = (
+                <li className="nav-item">
+                    <Link className="nav-link navBarLinkLogin py-1 px-2 mx-2" to="/login">Login / Criar conta</Link>
+                </li>
+            );
+        }
+
         return (
             <nav className="navbar navbar-default navbar-expand-lg homepageHeader sticky-top py-2 px-4"> {/*navbar-expand-lg */}
             {/* <nav className="navbar navbar-inverse bg-inverse navbar-toggleable-sm fixed-top"></nav> */}
@@ -27,9 +45,7 @@ class HomeHeader extends React.Component {
                         <li className="nav-item">
                             <Link className="nav-link navBarLink py-1 px-2 mx-2" to="/contact-us">Contato</Link>
                         </li>
-                        <li className="nav-item">
-                            <Link className="nav-link navBarLinkLogin py-1 px-2 mx-2" to="/login">Login / Criar conta</Link>
-                        </li>
+                        {isLoggedComponent}
                         <li className="nav-item">
                             <Link className="nav-link navBarLinkSpecial py-1 px-3 mx-2" to="/store"> Comprar </Link>
                         </li>

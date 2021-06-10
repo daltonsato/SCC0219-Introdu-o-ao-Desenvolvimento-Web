@@ -9,6 +9,7 @@ import ContactUs from './pages/ContactUs/ContactUs';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import NotFound from './pages/components/NotFound/NotFound'
+import AdminLogin from './pages/AdminLogin/AdminLogin';
 
 export default function Routes() {
     return (
@@ -21,6 +22,7 @@ export default function Routes() {
                 <Route path={'/store'} exact component={Store}/>
                 <Route path={'/login'} exact component={Login}/>
                 <Route path={'/register'} exact component={Register}/>
+                <Route path={'/admin'} exact component={AdminLogin}/>
                 <Route path={'/'} component={NotFound}/>
             </Switch>
         </BrowserRouter>
