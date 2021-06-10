@@ -1,18 +1,24 @@
 .shoppingCart{
-	background: #C4C4C4;
+	background: #fde751;
 	box-shadow: inset -4px -4px 25px rgba(0, 0, 0, 0.25);
 	border-radius: 100px;
 }
 
 .generalBox{
 	font-size: 18px;
-	background: #C4C4C4;
+	background: #FFCC65;
 	box-shadow: inset -4px -4px 25px rgba(0, 0, 0, 0.25);
 	border-radius: 50px;
 }
 
 .finishShop{
-	background: #FA7921;
+	background: #fde751;
+	box-shadow: inset -4px -4px 25px rgba(0, 0, 0, 0.25);
+	border-radius: 100px;
+}
+
+.totalPay{
+	background-color: #fde751;
 	box-shadow: inset -4px -4px 25px rgba(0, 0, 0, 0.25);
 	border-radius: 100px;
 }
