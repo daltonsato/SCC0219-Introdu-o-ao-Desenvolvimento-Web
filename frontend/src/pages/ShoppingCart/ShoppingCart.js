@@ -32,7 +32,7 @@ export default function ShoppingCart() {
 					<div className="col generalBox"><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></div>
 				</div>
 				<div className="row d-flex justify-content-end py-3">
-					<div className="col-3 generalBox p-3 border border-primary text-left">Total a pagar:</div>
+					<div className="col-3 totalPay p-3 text-left">Total a pagar:</div>
 				</div>
 				<div className="row finishShop text-center ">
 					<div className="col finishShopF py-3">
