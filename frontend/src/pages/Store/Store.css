@@ -1,17 +1,18 @@
 .productBar {
-    background: linear-gradient(to bottom right, #e8cf1e 0%, #ffffff 150%);
-    border-radius: 25px;
+  
 }
 
 .productContainer {
-    background-color: #6D676E; 
+    background-color: #FFCC65; 
     width: 250px;
-    height: 250px;
-    margin: 15px;
-    border-radius: 25px;
+    height: 280px;
+    margin: 0px;
+    padding-top: 30px;
+    border-radius: 15px;
     text-align: center;
     -webkit-box-shadow: 1px 5px 14px 0px rgba(0,0,0,0.64); 
     box-shadow: 1px 5px 14px 0px rgba(0,0,0,0.64);
+    font-family: Montserrat;
 }
 
 .backgroundColor{
@@ -24,8 +25,16 @@
     border-radius: 25px;
 }
 
-.add{
-    background-color: #FA7921; 
-    border-radius: 50px;
+.buy{
+    background-color: #FFFFFF; 
+    border-radius: 10px;
+    font-family: Inter;
 }
 
+.test{
+    background-color: #FFCC65; 
+}
+
+.category{
+    color: #757575;
+}
