@@ -8,7 +8,7 @@ export default function AddAddress() {
     return (
         <div className="gradiantMainContainer">
             <HomeHeader />
-            <div className="container my-5 d-flex align-itens-center justify-content-center">
+            <div className="container my-5 d-flex align-itens-center">
 				<h1>Endereço de entrega</h1>
 				<div className="col my-5 d-flex flex-column justify-content-center">
 					<div className="row d-flex flex-column col-5 dataBox align-itens-center">
@@ -22,11 +22,10 @@ export default function AddAddress() {
 							</div>
 						</form>
 					</div>
-					<div className="row followPayment col-3">
+					<div className="row followPayment col-3 my-4 mx-3 p-3">
 						Seguir para pagamento
 					</div>
 				</div>
-				
 			</div>
 			<Footer />
         </div>
