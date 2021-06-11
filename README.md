@@ -76,4 +76,7 @@ _// TO DO: List any major problems you had._
 
 ## Comments: 
 _// TO DO: Any comments you wish to add._
+### Next Steps:
+- Use Passport to authenticate users
+- Start using a real database to store users, products, shopping carts etc.
 
