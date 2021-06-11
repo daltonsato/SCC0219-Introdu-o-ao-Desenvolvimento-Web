@@ -8,7 +8,7 @@ import '../Login/Login.css'; // using same CSS
 export default function Login() {
     return (
         <div>
-            <HomeHeader isLoggedIn={false}/>
+            <HomeHeader/>
             <div className="container d-flex align-items-center justify-content-center loginEggBackground">
                 <div className="row d-flex flex-column align-items-center justify-content-center py-4">
                     <div className="loginFormContainer col py-5 w-auto d-flex flex-column align-items-center justify-content-center shadow">

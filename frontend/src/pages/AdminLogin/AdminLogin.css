@@ -52,3 +52,48 @@
     background-color: #E27F86;
     transition-duration: 0.5s;
 }
+.adminProductListItem {
+    font-size: 22px;
+    background: #FFCC65;
+    border-radius: 10px;
+}
+
+.adminProductListButton {
+    font-size: 22px;
+    background: #FDE751;
+    border-radius: 10px;
+    border: none;
+    transition-duration: 0.5s;
+}
+
+.adminProductListButton:hover {
+    background: #FEC300;
+    color: white;
+    transition-duration: 0.5s;
+}
+
+.adminList {
+    background-color: white;
+    max-height: 300px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+/* Scrollbar */
+/* width */
+::-webkit-scrollbar {
+    width: 13px;
+    height: 13px;
+}
+::-webkit-scrollbar-thumb {
+    background: radial-gradient(circle, #FEC300 14%,#fbff40 64%);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover{
+    background: #fbff40;
+}
+::-webkit-scrollbar-track{
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: inset 7px 10px 12px #f0f0f0;
+}

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Cookies from 'universal-cookie';
+
 import './HomeHeader.css';
 
 // Images
@@ -7,10 +9,14 @@ import EggLogo from '../../../images/egg_logo.png';
 
 class HomeHeader extends React.Component {
     render() {
-        const isLoggedIn = this.props.isLoggedIn;
-        console.log(this.props)
+        const activeSessions = [ "280E8410C4A05326EB815B577B05574FDFB4AE016C399ACF1B02CFE5C59D59FE" ]; // this will be treated in the backend
+        
         let isLoggedComponent;
-        if (isLoggedIn) {
+
+        const cookies = new Cookies();
+        let sessionCookie = cookies.get('SESSION');
+
+        if (activeSessions.includes(sessionCookie)) {
             isLoggedComponent = (
                 <li className="nav-item">
                     <Link className="nav-link navBarLinkLogin py-1 px-2 mx-2" to="/login"> Perfil </Link>
@@ -18,6 +24,7 @@ class HomeHeader extends React.Component {
                 </li> );
         }
         else {
+            console.log("not in active sessions");
             isLoggedComponent = (
                 <li className="nav-item">
                     <Link className="nav-link navBarLinkLogin py-1 px-2 mx-2" to="/login">Login / Criar conta</Link>
