@@ -6,6 +6,8 @@ import './HomeHeader.css';
 
 // Images
 import EggLogo from '../../../images/egg_logo.png';
+import ShoppingCart from '../../../images/shopping_cart_home.svg';
+import MyProfileImg from '../../../images/my_profile_icon.svg';
 
 class HomeHeader extends React.Component {
     render() {
@@ -18,9 +20,13 @@ class HomeHeader extends React.Component {
 
         if (activeSessions.includes(sessionCookie)) {
             isLoggedComponent = (
-                <li className="nav-item">
-                    <Link className="nav-link navBarLinkLogin py-1 px-2 mx-2" to="/login"> Perfil </Link>
-                    <Link className="nav-link navBarLinkLogin py-1 px-2 mx-2" to="/login"> Carrinho </Link>
+                <li className="nav-item d-flex">
+                    <Link className="nav-link navBarLinkLoginImg d-flex align-items-center justify-content-center py-1 px-1 mx-1" to="/shopping-cart"> 
+                        <img className="img-fluid w-25" src={ShoppingCart} alt="Carrinho de Compras" />
+                    </Link>
+                    <Link className="nav-link navBarLinkLoginImg d-flex align-items-center justify-content-center py-1 px-1 mx-1" to="/my-profile"> 
+                        <img className="img-fluid w-25" src={MyProfileImg} alt="Ícone da página de meu perfil" />
+                    </Link>
                 </li> );
         }
         else {

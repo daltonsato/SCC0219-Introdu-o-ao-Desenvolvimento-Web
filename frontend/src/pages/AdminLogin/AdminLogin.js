@@ -31,20 +31,20 @@ export default function AdminLogin() {
 
     if (activeAdminSession.includes(cookies.get("ADMIN_SESSION"))) {
         adminScreen = (
-            <div className="adminLoginBackground container py-4 px-5">
+            <div className="adminLoginBackground container py-4">
                 <div className="row text-center py-5">
-                    <h1 className="adminText"> Admin Dashboard </h1>
+                    <h1 className="col adminText bg-white shadow mx-3 py-1"> Admin Dashboard </h1>
                 </div>
                 <div className="row py-5 text-left">
-                    <h2 className="adminText"> Produtos </h2>
+                    <h2 className="col adminText"> Produtos </h2>
                 </div>
-                <div className=" row bg-white shadow p-3 w-100">
-                    <ul className="adminList">
+                <div className="row bg-white shadow mx-1 p-3 w-100">
+                    <ul className="col adminList">
                         <li className="adminProductListItem shadow d-flex align-itens-center justify-content-center p-3 my-3">
                             <div className="text-left px-3 w-100">
                                 <span className="align-middle"> Produto X </span>
                             </div>
-                            <div className="d-flex w-100 align-itens-center justify-content-center">
+                            <div className="d-flex w-100 align-itens-center justify-content-center d-none d-sm-none d-md-none d-lg-inline">
                                 <span className="align-middle px-3"> Qtd.: XX </span> 
                                 <span className="align-middle px-3"> Preço: R$10,00/un. </span> 
                             </div>
@@ -57,7 +57,7 @@ export default function AdminLogin() {
                             <div className="text-left px-3 w-100">
                                 <span className="align-middle"> Produto X </span>
                             </div>
-                            <div className="d-flex w-100 align-itens-center justify-content-center">
+                            <div className="d-flex w-100 align-itens-center justify-content-center d-none d-sm-none d-md-none d-lg-inline">
                                 <span className="align-middle px-3"> Qtd.: XX </span> 
                                 <span className="align-middle px-3"> Preço: R$10,00/un. </span> 
                             </div>
@@ -70,7 +70,7 @@ export default function AdminLogin() {
                             <div className="text-left px-3 w-100">
                                 <span className="align-middle"> Produto X </span>
                             </div>
-                            <div className="d-flex w-100 align-itens-center justify-content-center">
+                            <div className="d-flex w-100 align-itens-center justify-content-center d-none d-sm-none d-md-none d-lg-inline">
                                 <span className="align-middle px-3"> Qtd.: XX </span> 
                                 <span className="align-middle px-3"> Preço: R$10,00/un. </span> 
                             </div>
@@ -83,7 +83,7 @@ export default function AdminLogin() {
                             <div className="text-left px-3 w-100">
                                 <span className="align-middle"> Produto X </span>
                             </div>
-                            <div className="d-flex w-100 align-itens-center justify-content-center">
+                            <div className="d-flex w-100 align-itens-center justify-content-center d-none d-sm-none d-md-none d-lg-inline">
                                 <span className="align-middle px-3"> Qtd.: XX </span> 
                                 <span className="align-middle px-3"> Preço: R$10,00/un. </span> 
                             </div>
@@ -96,15 +96,15 @@ export default function AdminLogin() {
 
                 {/* ======================== USUÁRIOS ======================== */}
                 <div className="row py-5 text-left">
-                    <h2 className="adminText"> Usuários </h2>
+                    <h2 className="col adminText"> Usuários </h2>
                 </div>
-                <div className=" row bg-white shadow p-3 w-100">
-                    <ul className="adminList">
+                <div className=" row bg-white shadow mx-1 p-3 w-100">
+                    <ul className="col adminList">
                         <li className="adminProductListItem shadow d-flex align-itens-center justify-content-center p-3 my-3">
                             <div className="text-left px-3 w-50">
                                 <span className="align-middle"> Usuário X </span>
                             </div>
-                            <div className="d-flex w-100 align-itens-center justify-content-center">
+                            <div className="d-flex w-100 align-itens-center justify-content-center d-none d-sm-none d-md-none d-lg-inline">
                                 <span className="align-middle px-3"> Nome Sobrenome - CPF: 123.456.789-0 </span> 
                             </div>
                             <div className="d-flex w-50 justify-content-end">
@@ -116,7 +116,7 @@ export default function AdminLogin() {
                             <div className="text-left px-3 w-50">
                                 <span className="align-middle"> Usuário X </span>
                             </div>
-                            <div className="d-flex w-100 align-itens-center justify-content-center">
+                            <div className="d-flex w-100 align-itens-center justify-content-center d-none d-sm-none d-md-none d-lg-inline">
                                 <span className="align-middle px-3"> Nome Sobrenome - CPF: 123.456.789-0 </span> 
                             </div>
                             <div className="d-flex w-50 justify-content-end">
@@ -128,7 +128,7 @@ export default function AdminLogin() {
                             <div className="text-left px-3 w-50">
                                 <span className="align-middle"> Usuário X </span>
                             </div>
-                            <div className="d-flex w-100 align-itens-center justify-content-center">
+                            <div className="d-flex w-100 align-itens-center justify-content-center d-none d-sm-none d-md-none d-lg-inline">
                                 <span className="align-middle px-3"> Nome Sobrenome - CPF: 123.456.789-0 </span> 
                             </div>
                             <div className="d-flex w-50 justify-content-end">
@@ -140,7 +140,7 @@ export default function AdminLogin() {
                             <div className="text-left px-3 w-50">
                                 <span className="align-middle"> Usuário X </span>
                             </div>
-                            <div className="d-flex w-100 align-itens-center justify-content-center">
+                            <div className="d-flex w-100 align-itens-center justify-content-center d-none d-sm-none d-md-none d-lg-inline">
                                 <span className="align-middle px-3"> Nome Sobrenome - CPF: 123.456.789-0 </span> 
                             </div>
                             <div className="d-flex w-50 justify-content-end">
