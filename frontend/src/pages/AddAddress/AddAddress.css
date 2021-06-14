@@ -1,3 +1,11 @@
+.eggBackground{
+	background: url("../../images/background_egg.svg");
+	min-height: 80vh;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: right bottom;
+    background-size: 70vh;
+}
 
 .dataBox{
 	background: #FFCC65;
@@ -11,5 +19,18 @@
 
 .followPayment{
 	background: #FDE751;
-	border-radius: 25px;
+	border-radius: 17px;
+	color: black;
+	text-decoration: none;
+}
+.followPayment:hover{
+	color: black;
+}
+
+.shipping{
+	color: black;
+	text-decoration: none;
+}
+.shipping:hover{
+	color: black;
 }
