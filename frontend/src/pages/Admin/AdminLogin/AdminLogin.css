@@ -1,5 +1,5 @@
 .adminLoginBackground {
-    background-image: url("../../images/admin_login.svg");
+    background-image: url("../../../images/admin_login.svg");
     min-height: 85vh;
     background-repeat: no-repeat;
     background-attachment: fixed;

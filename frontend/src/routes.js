@@ -9,8 +9,9 @@ import ContactUs from './pages/ContactUs/ContactUs';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import NotFound from './pages/components/NotFound/NotFound'
-import AdminLogin from './pages/AdminLogin/AdminLogin';
 import AddAddress from './pages/AddAddress/AddAddress';
+import AdminLogin from './pages/Admin/AdminLogin/AdminLogin';
+import AdminEditProduct from './pages/Admin/AdminEditProduct/AdminEditProduct';
 
 export default function Routes() {
     return (
@@ -23,8 +24,9 @@ export default function Routes() {
                 <Route path={'/store'} exact component={Store}/>
                 <Route path={'/login'} exact component={Login}/>
                 <Route path={'/register'} exact component={Register}/>
-                <Route path={'/admin'} exact component={AdminLogin}/>
 				<Route path={'/add-address'} exact component={AddAddress}/>
+                <Route path={'/admin'} exact component={AdminLogin}/>
+                <Route path={'/admin/edit-product/:id'} exact component={AdminEditProduct}/>
                 <Route path={'/'} component={NotFound}/>
             </Switch>
         </BrowserRouter>
