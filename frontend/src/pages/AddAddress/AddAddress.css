@@ -7,14 +7,19 @@
     background-size: 70vh;
 }
 
+*:focus{
+	outline: none;
+}
+
 .dataBox{
 	background: #FFCC65;
-	border-radius: 60px;
+	border-radius: 50px;
+	border: none;
 }
 
 .inputData{
 	background: rgba(251, 255, 64, 0.53);
-	border-radius: 15.7576px;
+	border-radius: 10px;
 }
 
 .followPayment{
