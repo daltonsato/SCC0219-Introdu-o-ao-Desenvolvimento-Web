@@ -5,139 +5,100 @@ import HomeHeader from '../components/Headers/HomeHeader';
 import Footer from '../components/Footer/Footer';
 
 // Images
-
 import ovo from '../../images/ovos.png';
 import ovoPo from '../../images/ovoPo.png';
 
-
-
 export default function Store() {
+    let addToCart = (props) => {
+        let productID = props.target.parentNode.id;
+        if (window.shoppingCart[productID] === null || window.shoppingCart[productID] === undefined) {
+            window.shoppingCart[productID] = 1;
+        }
+        else {
+            window.shoppingCart[productID] += 1;
+        }
+        console.log("Item adicionado ao carrinho: " + productID + ", qtd. atual: ", window.shoppingCart[productID]);
+        console.log(window.shoppingCart);
+    }
+
+    const eggsCaipira = [];
+    const eggsBranco = [];
+    const eggsPo = [];
+
+    for (const [eggID, eggDetails] of Object.entries(window.productsList)) {
+        // src={require("./../../images/ovos.png")} -> not working...
+        //  Popper not working properly -> data-toggle="popover" data-content="Produto adicionado ao carrinho!"
+        if (eggDetails.category === "caipira") {
+            eggsCaipira.push(
+                <div key={"div_" + eggID} className= "d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
+                    <div className = "productContainer">
+                        <h6 > Ovo {eggDetails.category} </h6>
+                        <img className="img-fluid w-50 rounded mx-auto d-block py-4" src={ovo} alt="ovo" />
+                        <h6 className = "pb-2"> Preço: R$ {eggDetails.price} </h6>
+                        <div id={eggID} className = "storeBuyButton mx-auto w-50" onClick={addToCart}>
+                                <h6 className="py-2">Comprar</h6>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        else if (eggDetails.category === "branco") {
+            eggsBranco.push(
+                <div key={"div_" + eggID} className= "d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
+                    <div className = "productContainer">
+                        <h6 > Ovo {eggDetails.category} </h6>
+                        <img className="img-fluid w-50 rounded mx-auto d-block py-4" src={ovo} alt="ovo" />
+                        <h6 className = "pb-2"> Preço: R$ {eggDetails.price} </h6>
+                        <div id={eggID} className = "storeBuyButton mx-auto w-50" onClick={addToCart}>
+                                <h6 className="py-2">Comprar</h6>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        else if (eggDetails.category === "pó") {
+            eggsPo.push(
+                <div key={"div_" + eggID} className= "d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
+                    <div className = "productContainer">
+                        <h6 > Ovo {eggDetails.category} </h6>
+                        <img className="img-fluid w-50 rounded mx-auto d-block py-3" src={ovoPo} alt="ovo em pó" />
+                        <h6 className = "pb-2"> Preço: R$ {eggDetails.price} </h6>
+                        <div id={eggID} className = "storeBuyButton mx-auto w-50" onClick={addToCart}>
+                            <h6 className="py-2">Comprar</h6>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+    }
+
+
     return (
         <React.Fragment>
             <HomeHeader />
             <div className="backGround">
                 <div className = "container">
                     <div className="d-flex justify-content-end align-items-center pt-4">
-                            <h1 className = "py-3 col">Produtos</h1>
-                            <h5 className="py-3 col-3 text-center searchBar">Pesquisar produto</h5>
+                        <h1 className = "py-3 col">Produtos</h1>
+                        <h5 className="py-3 col-3 text-center searchBar">Pesquisar produto</h5>
                     </div>
 
                     <p>Conheça nosso catálogo</p>
   
-                    <h3 className = "pt-5 pb-5 d-flex justify-content-center category">Ovos caipira</h3>
+                    <h3 className = "pt-5 pb-5 d-flex justify-content-center category">Ovos caipira (dúzia de ovos)</h3>
                     <div className = "row d-flex justify-content-start align-items-start productBar pb-5">
-                        <div className= "d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div className = "productContainer">
-                                <h6 > Ovo caipira</h6>
-                                <img className="img-fluid w-50 rounded mx-auto d-block py-4" src={ovo} alt="ovo" />
-                                <h6 className = "pb-2"> Preço: R$ 1000,00 </h6>
-                                <div className = "buy mx-auto  w-50">
-                                        <h6 className = "py-2">Comprar</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div className= "d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div className = "productContainer">
-                                <h6 > Ovo caipira</h6>
-                                    <img className="img-fluid w-50 rounded mx-auto d-block py-4" src={ovo} alt="ovo" />
-                                <h6 className = "pb-2"> Preço: R$ 1000,00 </h6>
-                                <div className = "buy mx-auto  w-50">
-                                    <h6 className = "p-2">Comprar</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div className= "d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div className = "productContainer">
-                                <h6 > Ovo caipira</h6>
-                                <img className="img-fluid w-50 rounded mx-auto d-block py-4" src={ovo} alt="ovo" />
-                                <h6 className = "pb-2"> Preço: R$ 1000,00 </h6>
-                                <div className = "buy mx-auto  w-50">
-                                    <h6 className = "p-2">Comprar</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div className= "d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div className = "productContainer">
-                                <h6 > Ovo caipira</h6>
-                                <img className="img-fluid w-50 rounded mx-auto d-block py-4" src={ovo} alt="ovo" />
-                                <h6 className = "pb-2"> Preço: R$ 1000,00 </h6>
-                                <div className = "buy mx-auto  w-50">
-                                    <h6 className = "p-2">Comprar</h6>
-                                </div>
-                            </div>
-                        </div>
+                        {eggsCaipira}
                     </div>
 
 
-                    <h3 className = "pt-5 pb-5 d-flex justify-content-center category">Ovos Brancos</h3>
+                    <h3 className = "pt-5 pb-5 d-flex justify-content-center category">Ovos Brancos (dúzia de ovos)</h3>
                     <div className = "row d-flex justify-content-start align-items-start productBar pb-5">
-                        <div className ="d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div className = "productContainer">
-                                <h6 > Ovo branco</h6>
-                                <img className="img-fluid w-50 rounded mx-auto d-block py-4" src={ovo} alt="ovo" />
-                                <h6 className = "pb-2"> Preço: 1000 R$</h6>
-                                <div className = "buy mx-auto  w-50">
-                                        <h6 className = "p-2">Comprar</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div className ="d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div className = "productContainer">
-                                <h6 > Ovo branco</h6>
-                                <img className="img-fluid w-50 rounded mx-auto d-block py-4" src={ovo} alt="ovo" />
-                                <h6 className = "pb-2"> Preço: 1000 R$</h6>
-                                <div className = "buy mx-auto  w-50">
-                                    <h6 className = "p-2">Comprar</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div className ="d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div className = "productContainer">
-                                <h6 > Ovo branco</h6>
-                                <img className="img-fluid w-50 rounded mx-auto d-block py-4" src={ovo} alt="ovo" />
-                                <h6 className = "pb-2"> Preço: 1000 R$</h6>
-                                <div className = "buy mx-auto  w-50">
-                                    <h6 className = "p-2">Comprar</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div className ="d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div className = "productContainer">
-                                <h6 > Ovo branco</h6>
-                                <img className="img-fluid w-50 rounded mx-auto d-block py-4" src={ovo} alt="ovo" />
-                                <h6 className = "pb-2"> Preço: 1000 R$</h6>
-                                <div className = "buy mx-auto  w-50">
-                                    <h6 className = "p-2">Comprar</h6>
-                                </div>
-                            </div>
-                        </div>
+                        {eggsBranco}
                     </div>
 
-
-
-                
-                    <h3 className = "pt-5 pb-5 d-flex justify-content-center category">Ovos em pó</h3>
+                    <h3 className = "pt-5 pb-5 d-flex justify-content-center category">Ovos em pó (500g)</h3>
                     <div className = "row d-flex justify-content-start align-items-start productBar pb-5">
-                        <div className ="d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div className = "productContainer">
-                                <h6 > Ovo em Pó</h6>
-                                <img className="img-fluid w-50 rounded mx-auto d-block py-3" src={ovoPo} alt="ovo" />
-                                <h6 className = "pb-2"> Preço: 1000 R$</h6>
-                                <div className = "buy mx-auto  w-50">
-                                        <h6 className = "p-2">Comprar</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div className ="d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div className = "productContainer">
-                                <h6 > Ovo em Pó</h6>
-                                <img className="img-fluid w-50 rounded mx-auto d-block py-3" src={ovoPo} alt="ovo" />
-                                <h6 className = "pb-2"> Preço: 1000 R$</h6>
-                                <div className = "buy mx-auto  w-50">
-                                    <h6 className = "p-2">Comprar</h6>
-                                </div>
-                            </div>
-                        </div>
+                        {eggsPo}
                     </div>
 
                     

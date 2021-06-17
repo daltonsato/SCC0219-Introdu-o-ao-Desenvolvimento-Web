@@ -62,6 +62,10 @@ export default function AdminEditProduct() {
                             <input className="prodToEditTextArea w-50 py-1 px-3" type="text" name="suppliers" id="suppliers" defaultValue={product.suppliers}></input>
                         </div>
                         <div className="productToEditField d-flex justify-content-between py-2">
+                            <span> Categoria: </span>
+                            <input className="prodToEditTextArea w-50 py-1 px-3" type="text" name="suppliers" id="suppliers" defaultValue={product.category}></input>
+                        </div>
+                        <div className="productToEditField d-flex justify-content-between py-2">
                             <span> Descrição: </span>
                             <input className="prodToEditTextArea w-50 py-1 px-3" type="text" name="description" id="description" defaultValue={product.description}></input>
                         </div>                        

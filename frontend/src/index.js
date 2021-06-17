@@ -10,32 +10,52 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 // created for testing
 window.productsList = {
   "product_0" : {
-      "name" : "Produto 0",
+      "name" : "Ovo 0",
       "price" : 100,
       "quantity" : 14,
       "description" : "blablabla",
-      "suppliers" : "Empresa1, Empresa2"
+      "suppliers" : "Empresa1, Empresa2",
+      "category" : "caipira"
   },
   "product_1" : {
-      "name" : "Produto 1",
+      "name" : "Ovo 1",
       "price" : 85,
       "quantity" : 200,
       "description" : "blablabla",
-      "suppliers" : "Empresa1, Empresa2, Empresa3"
+      "suppliers" : "Empresa1, Empresa2, Empresa3",
+      "category" : "caipira"
   },
   "product_2" : {
-      "name" : "Produto 2",
+      "name" : "Ovo 2",
       "price" : 25,
       "quantity" : 30,
       "description" : "blablabla",
-      "suppliers" : "Empresa2"
+      "suppliers" : "Empresa2",
+      "category" : "branco"
   },
   "product_3" : {
-      "name" : "Produto 3",
+      "name" : "Ovo 3",
       "price" : 150,
       "quantity" : 44,
       "description" : "blablabla",
-      "suppliers" : "Empresa1, Empresa2, Empresa3"
+      "suppliers" : "Empresa1, Empresa2, Empresa3",
+      "category" : "pó"
+  },
+  "product_4" : {
+    "name" : "Ovo 4",
+    "price" : 130,
+    "quantity" : 111,
+    "description" : "blablabla",
+    "suppliers" : "Empresa1, Empresa2",
+    "category" : "caipira"
+  },
+  "product_5" : {
+    "name" : "Ovo 5",
+    "price" : 15,
+    "quantity" : 65,
+    "description" : "blablabla",
+    "suppliers" : "Empresa1",
+    "category" : "caipira"
   }
 };
 

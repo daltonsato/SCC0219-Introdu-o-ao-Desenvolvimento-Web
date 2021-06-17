@@ -20,10 +20,17 @@
     border-radius: 25px;
 }
 
-.buy{
+.storeBuyButton {
     background-color: #FFFFFF; 
     border-radius: 10px;
     font-family: Inter;
+    transition-duration: 0.3s;
+}
+
+.storeBuyButton:hover {
+    cursor: pointer;
+    transition-duration: 0.3s;
+    transform: scale(1.1);
 }
 
 .category{
