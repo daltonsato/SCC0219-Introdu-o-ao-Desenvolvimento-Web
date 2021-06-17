@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'jquery';
 import 'popper.js';
+import 'jquery';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 // created for testing
@@ -54,6 +54,9 @@ window.users = {
     "CPF" : "333.333.333-33"
   }
 };
+
+// created for testing
+window.shoppingCart = {};
 
 ReactDOM.render(
   <React.StrictMode>

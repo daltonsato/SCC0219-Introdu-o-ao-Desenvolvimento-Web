@@ -6,17 +6,12 @@
     background-color: #FFCC65; 
     width: 250px;
     height: 280px;
-    margin: 0px;
     padding-top: 30px;
     border-radius: 15px;
     text-align: center;
     -webkit-box-shadow: 1px 5px 14px 0px rgba(0,0,0,0.64); 
     box-shadow: 1px 5px 14px 0px rgba(0,0,0,0.64);
     font-family: Montserrat;
-}
-
-.backgroundColor{
-    background-color: #ffffff;
 }
 
 .searchBar{
@@ -29,10 +24,6 @@
     background-color: #FFFFFF; 
     border-radius: 10px;
     font-family: Inter;
-}
-
-.test{
-    background-color: #FFCC65; 
 }
 
 .category{
