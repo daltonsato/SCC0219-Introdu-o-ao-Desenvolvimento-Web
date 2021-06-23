@@ -12,12 +12,12 @@ export default function AddAddress() {
 			<h1 className="display-1 mx-5 my-5 px-5 py-5">Endereço de entrega</h1>
             <div className="container d-flex align-itens-center eggBackground">
 				<div className="col d-flex flex-column justify-content-center">
-					<div className="row d-flex flex-column col-4 dataBox align-self-center">
+					<div className="row d-flex flex-column col-sm-8 col-md-6 col-xl-4 col-6 dataBox align-self-center">
 						<form className="d-flex flex-column align-items-center justify-content-center">
-							<input className="inputData row col-8 my-4 mt-5 p-3" type="cidade" id="cidade" name="cidade" placeholder="Cidade" required></input>
-							<input className="inputData row col-8 my-4 p-3" type="cep" id="cep" name="cep" placeholder="CEP" required></input>
-							<input className="inputData row col-8 my-4 p-3" type="rua" id="rua" name="rua" placeholder="Rua" required></input>
-							<input className="inputData row col-8 my-4 p-3" type="referencia" id="referencia" placeholder="Referência"></input>
+							<input className="inputData row col-8 col-sm-8 col-md-8 my-4 mt-5 p-3" type="cidade" id="cidade" name="cidade" placeholder="Cidade" required></input>
+							<input className="inputData row col-8 col-sm-8 col-md-8 my-4 p-3" type="cep" id="cep" name="cep" placeholder="CEP" required></input>
+							<input className="inputData row col-8 col-sm-8 col-md-8 my-4 p-3" type="rua" id="rua" name="rua" placeholder="Rua" required></input>
+							<input className="inputData row col-8 col-sm-8 col-md-8 my-4 p-3" type="referencia" id="referencia" placeholder="Referência"></input>
 							<Link className="row mb-3 shipping">Calcular frete</Link>
 						</form>
 					</div>
