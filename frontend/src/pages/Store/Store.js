@@ -18,7 +18,20 @@ export default function Store() {
             window.shoppingCart[productID] += 1;
         }
         console.log("Item adicionado ao carrinho: " + productID + ", qtd. atual: ", window.shoppingCart[productID]);
-        console.log(window.shoppingCart);
+        
+        let popup = document.getElementById("addItemPopup");
+        let popupText = document.getElementById("popupText");
+        popupText.innerHTML += "Item adicionado ao carrinho!<br/>";
+
+        popup.classList.remove("d-none");
+
+        setTimeout(() => { 
+            popup.classList.add("d-none"); 
+            popupText.innerHTML = "";
+        }, 2500);
+
+        // must add: if something goes wrong, we must show message (in red)
+       
     }
 
     const eggsCaipira = [];
@@ -60,7 +73,7 @@ export default function Store() {
             eggsPo.push(
                 <div key={"div_" + eggID} className= "d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
                     <div className = "productContainer">
-                        <h6 > Ovo {eggDetails.category} </h6>
+                        <h6 > Ovo em {eggDetails.category} </h6>
                         <img className="img-fluid w-50 rounded mx-auto d-block py-3" src={ovoPo} alt="ovo em pó" />
                         <h6 className = "pb-2"> Preço: R$ {eggDetails.price} </h6>
                         <div id={eggID} className = "storeBuyButton mx-auto w-50" onClick={addToCart}>
@@ -99,10 +112,11 @@ export default function Store() {
                     <h3 className = "pt-5 pb-5 d-flex justify-content-center category">Ovos em pó (500g)</h3>
                     <div className = "row d-flex justify-content-start align-items-start productBar pb-5">
                         {eggsPo}
-                    </div>
-
-                    
+                    </div>                    
                 </div>
+                
+                <div id="addItemPopup" className="addedToCartPopup d-flex align-items-center justify-content-center text-center shadow d-none py-3"> <span id="popupText"></span> </div>
+
                 <Footer />
             </div>
         </React.Fragment>
