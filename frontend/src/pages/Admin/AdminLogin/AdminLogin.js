@@ -1,6 +1,6 @@
 import React from 'react';
 import Cookies from 'universal-cookie';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 import Footer from '../../components/Footer/Footer'
 
@@ -18,6 +18,12 @@ export default function AdminLogin() {
     var goToEditProdPage = (event) => {
         // console.log(event.target.id);
         history.push('/admin/edit-product/'+event.target.id); // redirects to /admin/product...   
+    };
+
+    // Trigger to see details about a user (should change when we have backend)
+    var goToEditUserPage = (event) => {
+        // console.log(event.target.id);
+        history.push('/admin/edit-user/'+event.target.id); // redirects to /admin/user...   
     };
 
     // Function to handle admin login (should change when we have the backend)
@@ -72,7 +78,7 @@ export default function AdminLogin() {
                         <span className="align-middle px-3"> {userDetails.name} - CPF: {userDetails.CPF} </span> 
                     </div>
                     <div className="d-flex w-50 justify-content-end">
-                        <input id={userID} className="adminProductListButton py-2 px-4" type="button" value="Ver mais"></input>
+                        <input id={userID} className="adminProductListButton py-2 px-4" type="button" value="Ver mais" onClick={goToEditUserPage}></input>
                     </div>
                 </li>
             );
@@ -83,6 +89,8 @@ export default function AdminLogin() {
                 <div className="row text-center py-5">
                     <h1 className="col adminText bg-white shadow mx-3 py-1"> Admin Dashboard </h1>
                 </div>
+
+                { /* ======================= PRODUTOS ====================== */ }
                 <div className="row py-5 text-left">
                     <h2 className="col adminText"> Produtos </h2>
                 </div>
@@ -100,6 +108,9 @@ export default function AdminLogin() {
                     <ul className="col adminList">
                        {usersDivs}
                     </ul>
+                </div>
+                <div className="row pt-4">
+                    <Link className="backToStoreButton" to="/"> Retornar à homepage </Link>
                 </div>
             </div>
         )

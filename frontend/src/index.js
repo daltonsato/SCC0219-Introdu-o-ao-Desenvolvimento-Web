@@ -63,15 +63,21 @@ window.productsList = {
 window.users = {
   "user_0" : {
       "name" : "Suero Tiffani",
-      "CPF" : "111.111.111-11"
+      "CPF" : "111.111.111-11",
+      "telContact" : "(11)1111-1111",
+      "email" : "suero_tiffani@email.com"
   },
   "user_1" : {
     "name" : "Bergljot Antelmo",
-    "CPF" : "222.222.222-22"
+    "CPF" : "222.222.222-22",
+    "telContact" : "(22)2222-2222",
+    "email" : "bergljot_antelmo@email.com"
   },
   "user_2" : {
     "name" : "Byelobog Anapa",
-    "CPF" : "333.333.333-33"
+    "CPF" : "333.333.333-33",
+    "telContact" : "(33)3333-3333",
+    "email" : "byelobog_anapa@email.com"
   }
 };
 

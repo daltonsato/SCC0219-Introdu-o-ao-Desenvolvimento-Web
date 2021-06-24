@@ -13,6 +13,7 @@ import NotFound from './pages/components/NotFound/NotFound'
 import AddAddress from './pages/AddAddress/AddAddress';
 import AdminLogin from './pages/Admin/AdminLogin/AdminLogin';
 import AdminEditProduct from './pages/Admin/AdminEditProduct/AdminEditProduct';
+import AdminEditUser from './pages/Admin/AdminEditUser/AdminEditUser';
 
 export default function Routes() {
     return (
@@ -29,6 +30,7 @@ export default function Routes() {
 				<Route path={'/add-address'} exact component={AddAddress}/>
                 <Route path={'/admin'} exact component={AdminLogin}/>
                 <Route path={'/admin/edit-product/:id'} exact component={AdminEditProduct}/>
+                <Route path={'/admin/edit-user/:id'} exact component={AdminEditUser}/>
                 <Route path={'/'} component={NotFound}/>
             </Switch>
         </BrowserRouter>
