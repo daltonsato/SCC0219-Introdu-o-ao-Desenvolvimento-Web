@@ -1,0 +1,13 @@
+.address{
+    height: 160px;
+    width: 320px;
+    border-radius: 18px;
+    background-color:  #FFCC65;
+    font-family: Montserrat;
+}
+
+.functionBox{
+    height: 50px;
+    border-radius: 18px;
+    background-color:  #FFCC65;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Homepage from './pages/Homepage/Homepage';
+import Userpage from './pages/Userpage/Userpage';
 import ShoppingCart from './pages/ShoppingCart/ShoppingCart';
 import Store from './pages/Store/Store';
 import Payment from './pages/Payment/Payment';
@@ -28,6 +29,7 @@ export default function Routes() {
                 <Route path={'/login'} exact component={Login}/>
                 <Route path={'/register'} exact component={Register}/>
 				<Route path={'/add-address'} exact component={AddAddress}/>
+                <Route path={'/user'} exact component={Userpage}/>
                 <Route path={'/admin'} exact component={AdminLogin}/>
                 <Route path={'/admin/edit-product/:id'} exact component={AdminEditProduct}/>
                 <Route path={'/admin/edit-user/:id'} exact component={AdminEditUser}/>
