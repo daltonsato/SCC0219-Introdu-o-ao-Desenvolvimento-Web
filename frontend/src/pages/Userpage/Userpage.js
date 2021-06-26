@@ -11,57 +11,92 @@ export default function Userpage() {
     return (
         <React.Fragment>
             <HomeHeader />
-            <div className="Container">
-               <div className = "d-flex justify-content-start row">
-                   <div className = "col-2 m-5">
-                        <div className = "address p-3">
-                            <h6> Rua Amaral Gama</h6>  
-                            <h6> Nº 369</h6>
-                            <h6> São Paulo/SP</h6>
-                            <h6> CEP: 12345-678</h6> 
-                            <div className = "d-flex justify-content-end">
-                                <input type = "radio" name = "main-address"></input>
-                            </div>
-                        </div>
-                   </div>
-                   <div className = "d-flex col-2 m-5">
-                        <div className = "address p-4">
-                            <h6> Av. Trab. São Carlense</h6>
-                            <h6> Nº 400</h6>
-                            <h6> São Carlos/SP</h6>
-                            <h6> CEP: 13566-590</h6>
-                            <div className = "d-flex justify-content-end">
-                                <input type = "radio" name = "main-address"></input>
-                            </div>
-                        </div>
-                   </div>
+            <div className="Container eggBackgroundUser">
+               <div className = "d-flex row pt-5">
 
-                   <div className = "col-6 d-flex justify-content-end p-3 m-5">
-                       <h5 className = "functionBox p-3  mx-2 text-center">Alterar E-mail</h5>
-                       <h5 className = "functionBox p-3  mx-2 text-center">Alterar Senha</h5> 
+                    <div className="col bg-white shadow mx-1 p-3 w-100">
+                        <ul className="History">
+                            <h2>Histórico de compras</h2>
+                            <li className="historyItem shadow d-flex align-itens-center justify-content-center p-3 my-3">
+                                <div className="text-left px-3 w-50">
+                                    <span className="align-middle"> Ovo caipira </span>
+                                </div>
+                                <div className="d-flex w-100 align-itens-center justify-content-center d-none d-sm-none d-md-none d-lg-inline">
+                                    <span className="align-middle px-3"> Qtd.: 1 </span> 
+                                    <span className="align-middle px-3"> Preço: R$ 100 </span>
+                                    <span className="align-middle px-3"> Data: 01/01/2021 </span> 
+                                    <span className="align-middle px-3"> CEP: 13560-572</span> 
+                                </div>
+                            </li>
+                            <li className="adminProductListItem shadow d-flex align-itens-center justify-content-center p-3 my-3">
+                                <div className="text-left px-3 w-50">
+                                    <span className="align-middle"> Ovo branco </span>
+                                </div>
+                                <div className="d-flex w-100 align-itens-center justify-content-center d-none d-sm-none d-md-none d-lg-inline">
+                                    <span className="align-middle px-3"> Qtd.: 2 </span> 
+                                    <span className="align-middle px-3"> Preço: R$ 85 </span>
+                                    <span className="align-middle px-3"> Data: 26/06/2021 </span> 
+                                    <span className="align-middle px-3"> CEP: 14570-581</span> 
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+
+                   <div className = "col-2 m-4">
+                        <div className = "address p-4">
+                            <h5> Rua Amaral Gama</h5>  
+                            <h5> Nº 369</h5>
+                            <h5> São Paulo/SP</h5>
+                            <h5> CEP: 12345-678</h5>
+                            <div className = "py-4">
+                                <input className="deleteButton" type="button" value="Excluir"></input>
+                                <div className = "mainAddress d-inline mx-4 p-2">Endereço padrão</div>
+                            </div>   
+                        </div>
+                   </div>
+                   <div className = "d-flex col-2 m-4">
+                        <div className = "address p-4">
+                            <h5> Av. Trab. São Carlense</h5>
+                            <h5> Nº 400</h5>
+                            <h5> São Carlos/SP</h5>
+                            <h5> CEP: 13566-590</h5>
+                            <div className = "py-4">
+                                <input className="deleteButton" type="button" value="Excluir"></input>
+                                <input className="deleteButton mx-4" type="button" value="Definir como padão"></input>
+                            </div>
+                        </div>
                    </div>
                 </div>
 
                 
-                <div className = "d-flex justify-content-start row">
-                   <div className = "col-2 m-5">
+                <div className = "d-flex justify-content-end row">
+                   <div className = "col-2 m-4">
                         <div className = "address p-4">
-                            <h6> Rua da Assembleia</h6>
-                            <h6> Nº 921</h6>
-                            <h6> Rio de Janeiro/RJ</h6>
-                            <h6> CEP: 11111-222</h6>
-                            <div className = "d-flex justify-content-end">
-                                <input type = "radio" name = "main-address"></input>
+                            <h5> Rua da Assembleia</h5>
+                            <h5> Nº 921</h5>
+                            <h5> Rio de Janeiro/RJ</h5>
+                            <h5> CEP: 11111-222</h5>
+                            <div className = "py-4">
+                                <input className="deleteButton" type="button" value="Excluir"></input>
+                                <input className="deleteButton mx-4" type="button" value="Definir como padão"></input>
                             </div>
                         </div>
                    </div>
-                   <div className = "d-flex col-2 m-5">
-                        <div className = "address p-2 text-center">
-                            <img className="img-fluid rounded mx-auto d-block py-4" src={add} alt="add" />
+                   <div className = "d-flex col-2 m-4">
+                        <div className = "address p-5 text-center">
+                            <img className="img-fluid rounded mx-auto d-block py-3" src={add} alt="add" />
                             <h2>Adicionar endereço</h2>
                         </div>
                    </div>
                 </div>
+                
+
+                    <div className = "d-flex justify-content-end  m-5 p-5">
+                        <h5 className = "col-2 functionBox p-3  mx-5 text-center">Relatar problema</h5>
+                        <h5 className = "col-1 functionBox p-3  mx-5 text-center">Log out</h5>
+                    </div>
+               
                 
             <Footer />
             </div>

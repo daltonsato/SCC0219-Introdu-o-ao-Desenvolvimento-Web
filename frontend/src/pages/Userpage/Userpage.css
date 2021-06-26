@@ -1,8 +1,21 @@
+.eggBackgroundUser{
+	background: url("../../images/background_egg.svg");
+	min-height: 80vh;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: bottom left 30%;
+    background-size: 70vh;
+}
+
+
+
 .address{
-    height: 160px;
-    width: 320px;
+    height: 230px;
+    width: 295px;
     border-radius: 18px;
     background-color:  #FFCC65;
+    box-shadow: 1px 5px 14px 0px rgba(0,0,0,0.64);
+    font-size: 22px;
     font-family: Montserrat;
 }
 
@@ -10,4 +23,23 @@
     height: 50px;
     border-radius: 18px;
     background-color:  #FFCC65;
+}
+
+.historyItem {
+    font-size: 22px;
+    background: #FFCC65;
+    border-radius: 10px;
+}
+
+.deleteButton{
+    font-size: 15px;
+    background: #FDE751;
+    border-radius: 10px;
+}
+
+
+.mainAddress{
+    font-size: 15px;
+    background: #ffff;
+    border-radius: 10px;
 }
