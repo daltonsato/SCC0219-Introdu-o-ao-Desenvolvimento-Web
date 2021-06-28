@@ -33,6 +33,17 @@ export default function AdminEditProduct() {
         window.productsList[params.id].suppliers = suppliers;
 
         console.log("Alteração feita com sucesso: ", window.productsList[params.id]);
+        
+        let popup = document.getElementById("saveChangesPopup");
+        let popupText = document.getElementById("popupText");
+        popupText.innerHTML += "Alterações salvas!<br/>";
+
+        popup.classList.remove("d-none");
+
+        setTimeout(() => { 
+            popup.classList.add("d-none"); 
+            popupText.innerHTML = "";
+        }, 2500);
     }
 
     if (!activeAdminSession.includes(cookies.get("ADMIN_SESSION"))) {
@@ -63,7 +74,7 @@ export default function AdminEditProduct() {
                         </div>
                         <div className="productToEditField d-flex justify-content-between py-2">
                             <span> Categoria: </span>
-                            <input className="prodToEditTextArea w-50 py-1 px-3" type="text" name="suppliers" id="suppliers" defaultValue={product.category}></input>
+                            <input className="prodToEditTextArea w-50 py-1 px-3" type="text" name="category" id="category" defaultValue={product.category}></input>
                         </div>
                         <div className="productToEditField d-flex justify-content-between py-2">
                             <span> Descrição: </span>
@@ -90,6 +101,7 @@ export default function AdminEditProduct() {
                 <div className="row">
                     <Link className="backToAdminButton" to="/admin"> Retornar à pagina de administrador </Link>
                 </div>
+                <div id="saveChangesPopup" className="changesOkPopup d-flex align-items-center justify-content-center text-center shadow d-none py-3"> <span id="popupText"></span> </div>
             </div>
             < Footer />
         </div>  

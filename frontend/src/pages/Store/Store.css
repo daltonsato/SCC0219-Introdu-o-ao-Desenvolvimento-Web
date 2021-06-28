@@ -15,6 +15,7 @@
 }
 
 .searchBar{
+    border: none;
     padding: 10px;
     background-color: #c4c4c4; 
     border-radius: 25px;
