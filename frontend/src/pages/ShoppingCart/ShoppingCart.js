@@ -1,14 +1,28 @@
 import React from 'react';
+import Cookies from 'universal-cookie';
+import { useHistory } from 'react-router-dom';
 
 import './ShoppingCart.css';
 import HomeHeader from '../components/Headers/HomeHeader';
 import Footer from '../components/Footer/Footer';
 
 export default function ShoppingCart() {
-    return (
-        <div className="gradiantMainContainer">
-            <HomeHeader />
-            <div className="container p-4">
+	const cookies = new Cookies();
+    let history = useHistory(); // used to redict user
+
+	let testCookie = "280E8410C4A05326EB815B577B05574FDFB4AE016C399ACF1B02CFE5C59D59FE"; // sha-256 -> ganeshtestlogin (used for testing)
+	let activeUserSession = [ testCookie ];
+
+	let shoppingCartComponent;
+	let itensList = [];
+
+	if (activeUserSession.includes(cookies.get("SESSION"))) {
+		for (const [prodName, prodDetails] of Object.entries(window.shoppingCart)) {
+			itensList.push( <div key={"div_"+prodName}> {prodName} - Quantidade: {prodDetails} </div> );
+		}
+
+		shoppingCartComponent = (
+			<div>
 				<div className="row d-flex justify-content-between py-4">
 					<div className="col">
 						<h1 className="shoppingCart text-center py-3 mb-3">Meu carrinho de compras</h1>
@@ -29,7 +43,9 @@ export default function ShoppingCart() {
 					</div>
 				</div>
 				<div className="row">
-					<div className="col generalBox"><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></div>
+					<div className="col shoppingCartItensList">
+						{ itensList }
+					</div>
 				</div>
 				<div className="row d-flex justify-content-end py-3">
 					<div className="col-3 totalPay p-3 text-left">Total a pagar:</div>
@@ -39,6 +55,21 @@ export default function ShoppingCart() {
 						FINALIZAR COMPRA
 					</div>
 				</div>
+			</div>
+		);
+	}
+	else {
+		shoppingCartComponent = (
+			<h1> Usuário não logado </h1>
+		);
+		history.push("/login");
+	}
+
+    return (
+        <div className="gradiantMainContainer">
+            <HomeHeader />
+            <div className="container p-4">
+				{ shoppingCartComponent }
 			</div>
 			<Footer />
 		</div>

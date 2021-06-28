@@ -45,7 +45,7 @@ export default function Store() {
             eggsCaipira.push(
                 <div key={"div_" + eggID} className= "d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
                     <div className = "productContainer">
-                        <h6 > Ovo {eggDetails.category} </h6>
+                        <h6 > {eggDetails.name} </h6>
                         <img className="img-fluid w-50 rounded mx-auto d-block py-4" src={ovo} alt="ovo" />
                         <h6 className = "pb-2"> Preço: R$ {eggDetails.price} </h6>
                         <div id={eggID} className = "storeBuyButton mx-auto w-50" onClick={addToCart}>
@@ -59,7 +59,7 @@ export default function Store() {
             eggsBranco.push(
                 <div key={"div_" + eggID} className= "d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
                     <div className = "productContainer">
-                        <h6 > Ovo {eggDetails.category} </h6>
+                        <h6 > {eggDetails.name} </h6>
                         <img className="img-fluid w-50 rounded mx-auto d-block py-4" src={ovo} alt="ovo" />
                         <h6 className = "pb-2"> Preço: R$ {eggDetails.price} </h6>
                         <div id={eggID} className = "storeBuyButton mx-auto w-50" onClick={addToCart}>
@@ -73,7 +73,7 @@ export default function Store() {
             eggsPo.push(
                 <div key={"div_" + eggID} className= "d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
                     <div className = "productContainer">
-                        <h6 > Ovo em {eggDetails.category} </h6>
+                        <h6 > {eggDetails.name} </h6>
                         <img className="img-fluid w-50 rounded mx-auto d-block py-3" src={ovoPo} alt="ovo em pó" />
                         <h6 className = "pb-2"> Preço: R$ {eggDetails.price} </h6>
                         <div id={eggID} className = "storeBuyButton mx-auto w-50" onClick={addToCart}>
@@ -93,7 +93,7 @@ export default function Store() {
                 <div className = "container">
                     <div className="d-flex justify-content-end align-items-center pt-4">
                         <h1 className = "py-3 col">Produtos</h1>
-                        <h5 className="py-3 col-3 text-center searchBar">Pesquisar produto</h5>
+                        <input type="text" className="py-3 col-3 text-center searchBar" placeholder="Pesquisar produto"></input>
                     </div>
 
                     <p>Conheça nosso catálogo</p>
