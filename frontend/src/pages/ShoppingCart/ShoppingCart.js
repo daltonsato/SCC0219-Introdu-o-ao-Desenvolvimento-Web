@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Cookies from 'universal-cookie';
 import { useHistory } from 'react-router-dom';
 
@@ -17,8 +18,14 @@ export default function ShoppingCart() {
 	let itensList = [];
 
 	if (activeUserSession.includes(cookies.get("SESSION"))) {
+		let totalApagar = 0;
 		for (const [prodName, prodDetails] of Object.entries(window.shoppingCart)) {
-			itensList.push( <div key={"div_"+prodName}> {prodName} - Quantidade: {prodDetails} </div> );
+			itensList.push( <div key={"div_"+prodName} className="row">
+				<div className="col p-1 atributteDisplay justify-content-center"> {prodDetails.prodName} </div>
+				<div className="col p-1 atributteDisplay justify-content-center"> {prodDetails.quantity} </div>
+				<div className="col p-1 atributteDisplay justify-content-center"> {prodDetails.price} </div>
+				<div className="col p-1 atributteDisplay justify-content-center"> {prodDetails.price*prodDetails.quantity} </div></div> );
+			totalApagar += prodDetails.price*prodDetails.quantity;
 		}
 
 		shoppingCartComponent = (
@@ -48,7 +55,7 @@ export default function ShoppingCart() {
 					</div>
 				</div>
 				<div className="row d-flex justify-content-end py-3">
-					<div className="col-3 totalPay p-3 text-left">Total a pagar:</div>
+					<div className="col-3 totalPay p-3 text-left">Total a pagar:   R${totalApagar}</div>
 				</div>
 				<div className="row finishShop text-center ">
 					<div className="col finishShopF py-3">

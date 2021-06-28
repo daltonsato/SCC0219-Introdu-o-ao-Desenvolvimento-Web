@@ -12,10 +12,12 @@ export default function Store() {
     let addToCart = (props) => {
         let productID = props.target.parentNode.id;
         if (window.shoppingCart[productID] === null || window.shoppingCart[productID] === undefined) {
-            window.shoppingCart[productID] = 1;
+            window.shoppingCart[productID] = {"prodName": window.productsList[productID].name, "quantity" : 1, "price" : window.productsList[productID].price};
+			console.log(window.shoppingCart[productID]);
         }
         else {
-            window.shoppingCart[productID] += 1;
+            window.shoppingCart[productID].quantity += 1;
+			console.log(window.shoppingCart[productID]);
         }
         console.log("Item adicionado ao carrinho: " + productID + ", qtd. atual: ", window.shoppingCart[productID]);
         
