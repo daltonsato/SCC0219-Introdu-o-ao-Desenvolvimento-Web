@@ -14,9 +14,11 @@ export default function ShoppingCart() {
 
 	const decrementCount = () => {
 		if(count > 0) setCount(count-1);
+		console.log("sub");
 	};
 	const incrementCount = () => {
 		setCount(count+1);
+		console.log("add");
 	};
 	
 	const cookies = new Cookies();
@@ -35,7 +37,7 @@ export default function ShoppingCart() {
 				<div className="col-3 p-3 atributteDisplay justify-content-center border primary-border"> {prodDetails.prodName} </div>
 
 				<div className="col-3 p-3 atributteDisplay justify-content-center border primary-border">
-				<input className="" type="number" name="clicks" value={prodDetails.quantity} onChange={(event) => {
+				<input className="Quantity" id="inputGroup-sizing-sm"  type="number" name="clicks" value={prodDetails.quantity} onChange={(event) => {
 					setCount(event.target.value);
 				}} /> 
 				<button className="col btn" onClick={incrementCount}>+</button>
