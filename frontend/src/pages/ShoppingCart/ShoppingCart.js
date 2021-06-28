@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Cookies from 'universal-cookie';
 import { useHistory } from 'react-router-dom';
@@ -7,7 +7,18 @@ import './ShoppingCart.css';
 import HomeHeader from '../components/Headers/HomeHeader';
 import Footer from '../components/Footer/Footer';
 
+
 export default function ShoppingCart() {
+
+	const [count, setCount] = useState(1);
+
+	const decrementCount = () => {
+		if(count > 0) setCount(count-1);
+	};
+	const incrementCount = () => {
+		setCount(count+1);
+	};
+	
 	const cookies = new Cookies();
     let history = useHistory(); // used to redict user
 
@@ -21,10 +32,18 @@ export default function ShoppingCart() {
 		let totalApagar = 0;
 		for (const [prodName, prodDetails] of Object.entries(window.shoppingCart)) {
 			itensList.push( <div key={"div_"+prodName} className="row">
-				<div className="col p-1 atributteDisplay justify-content-center"> {prodDetails.prodName} </div>
-				<div className="col p-1 atributteDisplay justify-content-center"> {prodDetails.quantity} </div>
-				<div className="col p-1 atributteDisplay justify-content-center"> {prodDetails.price} </div>
-				<div className="col p-1 atributteDisplay justify-content-center"> {prodDetails.price*prodDetails.quantity} </div></div> );
+				<div className="col-3 p-3 atributteDisplay justify-content-center border primary-border"> {prodDetails.prodName} </div>
+
+				<div className="col-3 p-3 atributteDisplay justify-content-center border primary-border">
+				<input className="" type="number" name="clicks" value={prodDetails.quantity} onChange={(event) => {
+					setCount(event.target.value);
+				}} /> 
+				<button className="col btn" onClick={incrementCount}>+</button>
+				<button className="col btn" onClick={decrementCount}>-</button>
+				</div>
+
+				<div className="col-3 p-3 atributteDisplay justify-content-center border primary-border"> {prodDetails.price} </div>
+				<div className="col-3 p-3 atributteDisplay justify-content-center border primary-border"> {prodDetails.price*prodDetails.quantity} </div></div> );
 			totalApagar += prodDetails.price*prodDetails.quantity;
 		}
 
@@ -34,16 +53,16 @@ export default function ShoppingCart() {
 					<div className="col">
 						<h1 className="shoppingCart text-center py-3 mb-3">Meu carrinho de compras</h1>
 						<div className="row d-flex justify-content-evenly py-1 generalBox">
-							<div className="col p-3 atributteDisplay justify-content-center">
+							<div className="col-3 p-3 atributteDisplay justify-content-center border primary-border">
 								Nome do produto
 							</div>
-							<div className="col p-3 atributteDisplay justify-content-center">
+							<div className="col-3 p-3 atributteDisplay justify-content-center border primary-border">
 								Quantidade
 							</div>
-							<div className="col p-3 atributteDisplay justify-content-center">
+							<div className="col-3 p-3 atributteDisplay justify-content-center border primary-border">
 								Preço unidade
 							</div>
-							<div className="col-2 p-3 atributteDisplay justify-content-center">
+							<div className="col-3 p-3 atributteDisplay justify-content-center border primary-border">
 								Total
 							</div>
 						</div>
