@@ -26,6 +26,9 @@ export default function Login() {
                 console.log(cookies.get('SESSION'));
                 history.push('/store');
             }
+            else {
+                document.getElementById("wrongCreds").classList.remove("d-none");
+            }
         }
         else
             document.getElementById("wrongCreds").classList.remove("d-none");

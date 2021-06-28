@@ -9,6 +9,31 @@ import ovo from '../../images/ovos.png';
 import ovoPo from '../../images/ovoPo.png';
 
 export default function Store() {
+
+    let handleSearch = (props) => {
+        if (props.key === 'Enter') {
+            let wordToSearch = props.target.value.toLowerCase();
+            
+            for (const [eggID, eggDetails] of Object.entries(window.productsList)) {
+                if (eggDetails.name.toLowerCase().includes(wordToSearch)) {
+                    // console.log(document.getElementById("div_"+eggID));
+                    document.getElementById("div_"+eggID).scrollIntoView({behavior: "smooth", block: "center"});
+                    document.getElementById("div_"+eggID).classList.add("bg-warning");
+                    document.getElementById("div_"+eggID).classList.add("rounded");
+                    document.getElementById("div_"+eggID).classList.add("py-2");
+
+                    setTimeout(() => { 
+                        document.getElementById("div_"+eggID).classList.remove("bg-warning");
+                        document.getElementById("div_"+eggID).classList.remove("rounded");
+                        document.getElementById("div_"+eggID).classList.remove("py-2");
+                    }, 2000);
+                    break;
+                }
+            }
+
+        }
+    };
+
     let addToCart = (props) => {
         let productID = props.target.parentNode.id;
         if (window.shoppingCart[productID] === null || window.shoppingCart[productID] === undefined) {
@@ -43,7 +68,7 @@ export default function Store() {
         //  Popper not working properly -> data-toggle="popover" data-content="Produto adicionado ao carrinho!"
         if (eggDetails.category === "caipira") {
             eggsCaipira.push(
-                <div key={"div_" + eggID} className= "d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
+                <div key={"div_" + eggID} id={"div_" + eggID} className= "d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
                     <div className = "productContainer">
                         <h6 > {eggDetails.name} </h6>
                         <img className="img-fluid w-50 rounded mx-auto d-block py-4" src={ovo} alt="ovo" />
@@ -57,7 +82,7 @@ export default function Store() {
         }
         else if (eggDetails.category === "branco") {
             eggsBranco.push(
-                <div key={"div_" + eggID} className= "d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
+                <div key={"div_" + eggID} id={"div_" + eggID} className= "d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
                     <div className = "productContainer">
                         <h6 > {eggDetails.name} </h6>
                         <img className="img-fluid w-50 rounded mx-auto d-block py-4" src={ovo} alt="ovo" />
@@ -71,7 +96,7 @@ export default function Store() {
         }
         else if (eggDetails.category === "pó") {
             eggsPo.push(
-                <div key={"div_" + eggID} className= "d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
+                <div key={"div_" + eggID} id={"div_" + eggID} className= "d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
                     <div className = "productContainer">
                         <h6 > {eggDetails.name} </h6>
                         <img className="img-fluid w-50 rounded mx-auto d-block py-3" src={ovoPo} alt="ovo em pó" />
@@ -93,7 +118,7 @@ export default function Store() {
                 <div className = "container">
                     <div className="d-flex justify-content-end align-items-center pt-4">
                         <h1 className = "py-3 col">Produtos</h1>
-                        <input type="text" className="py-3 col-3 text-center searchBar" placeholder="Pesquisar produto"></input>
+                        <input type="text" className="py-3 col-3 text-center searchBar" placeholder="Pesquisar produto" onKeyDown={handleSearch}></input>
                     </div>
 
                     <p>Conheça nosso catálogo</p>
