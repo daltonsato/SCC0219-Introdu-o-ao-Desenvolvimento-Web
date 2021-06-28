@@ -10,7 +10,7 @@ import Footer from '../components/Footer/Footer';
 
 export default function ShoppingCart() {
 
-	const [count, setCount] = useState(1);
+	const [count, setCount] = useState(0);
 
 	const decrementCount = () => {
 		if(count > 0) setCount(count-1);
@@ -35,18 +35,17 @@ export default function ShoppingCart() {
 		for (const [prodName, prodDetails] of Object.entries(window.shoppingCart)) {
 			itensList.push( <div key={"div_"+prodName} className="row">
 				<div className="col-3 p-3 atributteDisplay justify-content-center border primary-border"> {prodDetails.prodName} </div>
-
 				<div className="col-3 p-3 atributteDisplay justify-content-center border primary-border">
-				<input className="Quantity" id="inputGroup-sizing-sm"  type="number" name="clicks" value={prodDetails.quantity} onChange={(event) => {
+				<input className="Quantity" id="inputGroup-sizing-sm" type="number" name="clicks" value={prodDetails.quantity} onChange={(event) => {
 					setCount(event.target.value);
 				}} /> 
 				<button className="col btn" onClick={incrementCount}>+</button>
 				<button className="col btn" onClick={decrementCount}>-</button>
 				</div>
+				<div className="col-3 p-3 atributteDisplay justify-content-center border primary-border"> R$ {prodDetails.price} </div>
+				<div className="col-3 p-3 atributteDisplay justify-content-center border primary-border"> R$ {prodDetails.price*prodDetails.quantity} </div></div> );
 
-				<div className="col-3 p-3 atributteDisplay justify-content-center border primary-border"> {prodDetails.price} </div>
-				<div className="col-3 p-3 atributteDisplay justify-content-center border primary-border"> {prodDetails.price*prodDetails.quantity} </div></div> );
-			totalApagar += prodDetails.price*prodDetails.quantity;
+				totalApagar += prodDetails.price*prodDetails.quantity;
 		}
 
 		shoppingCartComponent = (
@@ -55,16 +54,16 @@ export default function ShoppingCart() {
 					<div className="col">
 						<h1 className="shoppingCart text-center py-3 mb-3">Meu carrinho de compras</h1>
 						<div className="row d-flex justify-content-evenly py-1 generalBox">
-							<div className="col-3 p-3 atributteDisplay justify-content-center border primary-border">
+							<div className="col-3 p-3 atributteDisplay justify-content-center">
 								Nome do produto
 							</div>
-							<div className="col-3 p-3 atributteDisplay justify-content-center border primary-border">
-								Quantidade
+							<div className="col-3 p-3 atributteDisplay justify-content-center">
+								Qtd
 							</div>
-							<div className="col-3 p-3 atributteDisplay justify-content-center border primary-border">
+							<div className="col-3 p-3 atributteDisplay justify-content-center">
 								Preço unidade
 							</div>
-							<div className="col-3 p-3 atributteDisplay justify-content-center border primary-border">
+							<div className="col-3 p-3 atributteDisplay justify-content-center">
 								Total
 							</div>
 						</div>
@@ -76,7 +75,7 @@ export default function ShoppingCart() {
 					</div>
 				</div>
 				<div className="row d-flex justify-content-end py-3">
-					<div className="col-3 totalPay p-3 text-left">Total a pagar:   R${totalApagar}</div>
+					<div className="col-3 totalPay py-4 text-left">Total a pagar:   R${totalApagar}</div>
 				</div>
 				<div className="row finishShop text-center ">
 					<div className="col finishShopF py-3">
