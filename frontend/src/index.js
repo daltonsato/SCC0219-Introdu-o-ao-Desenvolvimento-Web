@@ -9,7 +9,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 // created for testing
 window.productsList = {
-  "product_0" : {
+  "product0" : {
       "name" : "Ovo 0",
       "price" : 100,
       "quantity" : 14,
@@ -17,7 +17,7 @@ window.productsList = {
       "suppliers" : "Empresa1, Empresa2",
       "category" : "caipira"
   },
-  "product_1" : {
+  "product1" : {
       "name" : "Ovo 1",
       "price" : 85,
       "quantity" : 200,
@@ -25,7 +25,7 @@ window.productsList = {
       "suppliers" : "Empresa1, Empresa2, Empresa3",
       "category" : "caipira"
   },
-  "product_2" : {
+  "product2" : {
       "name" : "Ovo 2",
       "price" : 25,
       "quantity" : 30,
@@ -33,7 +33,7 @@ window.productsList = {
       "suppliers" : "Empresa2",
       "category" : "branco"
   },
-  "product_3" : {
+  "product3" : {
       "name" : "Ovo 3",
       "price" : 150,
       "quantity" : 44,
@@ -41,7 +41,7 @@ window.productsList = {
       "suppliers" : "Empresa1, Empresa2, Empresa3",
       "category" : "pó"
   },
-  "product_4" : {
+  "product4" : {
     "name" : "Ovo 4",
     "price" : 130,
     "quantity" : 111,
@@ -49,7 +49,7 @@ window.productsList = {
     "suppliers" : "Empresa1, Empresa2",
     "category" : "caipira"
   },
-  "product_5" : {
+  "product5" : {
     "name" : "Ovo 5",
     "price" : 15,
     "quantity" : 65,
@@ -61,19 +61,19 @@ window.productsList = {
 
 // created for testing
 window.users = {
-  "user_0" : {
+  "user0" : {
       "name" : "Suero Tiffani",
       "CPF" : "111.111.111-11",
       "telContact" : "(11)1111-1111",
-      "email" : "suero_tiffani@email.com"
+      "email" : "suerotiffani@email.com"
   },
-  "user_1" : {
+  "user1" : {
     "name" : "Bergljot Antelmo",
     "CPF" : "222.222.222-22",
     "telContact" : "(22)2222-2222",
     "email" : "bergljot_antelmo@email.com"
   },
-  "user_2" : {
+  "user2" : {
     "name" : "Byelobog Anapa",
     "CPF" : "333.333.333-33",
     "telContact" : "(33)3333-3333",

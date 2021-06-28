@@ -9,6 +9,16 @@ import ovo from '../../images/ovos.png';
 import ovoPo from '../../images/ovoPo.png';
 
 export default function Store() {
+    let showDescription = (props) => {
+        // console.log(props.target.parentNode.parentNode.id.split('_')[1]);
+        let productID = props.target.parentNode.parentNode.id.split('_')[1]; // getting the product ID from parents
+        let modalDescriptionBox = document.getElementById("modalBox_"+productID);
+        modalDescriptionBox.classList.remove("d-none");
+    };
+
+    let closeModalBox = (props) => {
+        props.target.parentNode.parentNode.classList.add("d-none");
+    }
 
     let handleSearch = (props) => {
         if (props.key === 'Enter') {
@@ -73,10 +83,17 @@ export default function Store() {
                 <div key={"div_" + eggID} id={"div_" + eggID} className= "d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
                     <div className = "productContainer">
                         <h6 > {eggDetails.name} </h6>
-                        <img className="img-fluid w-50 rounded mx-auto d-block py-4" src={ovo} alt="ovo" />
+                        <img className="storeImgHover img-fluid w-50 rounded mx-auto d-block py-4" src={ovo} alt="ovo" onClick={showDescription}/>
                         <h6 className = "pb-2"> Preço: R$ {eggDetails.price} </h6>
                         <div id={eggID} className = "storeBuyButton mx-auto w-50" onClick={addToCart}>
                                 <h6 className="py-2">Comprar</h6>
+                        </div>
+                    </div>
+                    <div id={"modalBox_"+eggID} className="modalBox d-none"> 
+                        <div className="modalBoxContent">
+                            <span className="closeModalButton" onClick={closeModalBox}>&times;</span>
+                            <h1> Descrição - {eggDetails.name}: </h1>
+                            <p> {eggDetails.description}</p>
                         </div>
                     </div>
                 </div>
@@ -87,10 +104,17 @@ export default function Store() {
                 <div key={"div_" + eggID} id={"div_" + eggID} className= "d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
                     <div className = "productContainer">
                         <h6 > {eggDetails.name} </h6>
-                        <img className="img-fluid w-50 rounded mx-auto d-block py-4" src={ovo} alt="ovo" />
+                        <img className="storeImgHover img-fluid w-50 rounded mx-auto d-block py-4" src={ovo} alt="ovo" onClick={showDescription}/>
                         <h6 className = "pb-2"> Preço: R$ {eggDetails.price} </h6>
                         <div id={eggID} className = "storeBuyButton mx-auto w-50" onClick={addToCart}>
                                 <h6 className="py-2">Comprar</h6>
+                        </div>
+                    </div>
+                    <div id={"modalBox_"+eggID} className="modalBox d-none"> 
+                        <div className="modalBoxContent">
+                            <span className="closeModalButton" onClick={closeModalBox}>&times;</span>
+                            <h1> Descrição - {eggDetails.name}: </h1>
+                            <p> {eggDetails.description}</p>
                         </div>
                     </div>
                 </div>
@@ -101,10 +125,17 @@ export default function Store() {
                 <div key={"div_" + eggID} id={"div_" + eggID} className= "d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
                     <div className = "productContainer">
                         <h6 > {eggDetails.name} </h6>
-                        <img className="img-fluid w-50 rounded mx-auto d-block py-3" src={ovoPo} alt="ovo em pó" />
+                        <img className="storeImgHover img-fluid w-50 rounded mx-auto d-block py-3" src={ovoPo} alt="ovo em pó" onClick={showDescription}/>
                         <h6 className = "pb-2"> Preço: R$ {eggDetails.price} </h6>
                         <div id={eggID} className = "storeBuyButton mx-auto w-50" onClick={addToCart}>
                             <h6 className="py-2">Comprar</h6>
+                        </div>
+                    </div>
+                    <div id={"modalBox_"+eggID} className="modalBox d-none"> 
+                        <div className="modalBoxContent">
+                            <span className="closeModalButton" onClick={closeModalBox}>&times;</span>
+                            <h1> Descrição - {eggDetails.name}: </h1>
+                            <p> {eggDetails.description}</p>
                         </div>
                     </div>
                 </div>
