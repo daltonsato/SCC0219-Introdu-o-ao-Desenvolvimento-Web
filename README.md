@@ -8,9 +8,7 @@
 
 ## Overview 
 
-This is a website developed for "SCC0219 - Introduction to Web Development" at the University of São Paulo (USP). Using Node.js, Bootstrap and the usual web development stack (HTML, CSS, Javascript), this is a website for a (fake) store that sells eggs (the most impressive and exotic ones!).
-
-For now, we're also using React.js, but we'll change for Vue.js in the future (this is a project requirement).
+This is a website developed for "SCC0219 - Introduction to Web Development" at the University of São Paulo (USP). Using Node.js, Bootstrap, React.js and the usual web development stack (HTML, CSS, Javascript), this is a website for a (fake) store that sells eggs (the most impressive and exotic ones!).
 
 ## Requirements
 The system has 2 types of users: Clients and Administrators
@@ -35,9 +33,9 @@ Functionalities yet to be implemented:
 - Contact the website's creators
 
 ## Project Description
-Our store is made with Javascript, CSS, Node.js and React (we'll change for Vue.js). When entering the main page (or running with `npm start`), you will see homepage welcoming the user, containing an opening message, a brief description about our products and an about us section, containing our history and a list of our contacts.
-Using React, we designed our screens, applying the Single Page Application style.
-Our pages will contain clickable buttons, and they will be used to navigate between other pages and also to do specific actions, like log-in and log-out, create an account, choose method payment, check history of purchases and manage the shopping cart. There will be also areas to input information, such as address to deliver the eggs, and insert personal information to manage the account.
+Our store is made with Javascript, CSS, Node.js and React. When entering the main page (or running with `npm start`), you will see homepage welcoming the user, containing an opening message, a brief description about our products and an about us section, containing our history and a list of our contacts.
+
+Using React, we designed our screens, applying the Single Page Application style. Our pages will contain clickable buttons, and they will be used to navigate between other pages and also to do specific actions, like log-in and log-out, create an account, choose method payment, check history of purchases and manage the shopping cart. There will be also areas to input information, such as address to deliver the eggs, and insert personal information to manage the account.
 
 ## Comments About the Code
 _// TO DO: Any comment you may want to add to help understand your code. This is good programming practice_
@@ -48,7 +46,7 @@ _// TO DO: Text describing the tests that will be performed. If an automatic tes
 ## Test Results
 _// TO DO: Text describing the test results. If an automatic test tool/framework is used, its output can be used_
 
-## Build Procedures
+## Build Procedures and other relevant information
 
 ### First milestone
 For now, to build and run the project, there's a standard guide [here](https://github.com/daltonsato/SCC0219-Introdu-o-ao-Desenvolvimento-Web/blob/master/frontend/README.md).
@@ -69,10 +67,31 @@ The pages that exist for now are:
 
 You can check the design for other pages in `mockup.pdf` (the raw idea is there, the details are or will be present in the HTML files) and a flow diagram (indicating the navigation flow) in `flowDiagram.png`.
 
-**Important: the current design is temporary. After finishing it, we decided changing  everything!! For the next milestone, we'll have a different mockup. Sorry for this "inconvenience"...**
+### Second milestone
+
+To build and run the project, this standard guide [here](https://github.com/daltonsato/SCC0219-Introdu-o-ao-Desenvolvimento-Web/blob/master/frontend/README.md) still works.
+
+As an alternative to the standard guide, if you are using Linux, what you can do is:
+1. Inside `/frontend`, run `npm install` to install all dependencies from the project (a folder `node_modules` will be created)
+2. Run `npm start` inside `/frontend` and you're done!
+3. Wait until the development server is up (check your terminal) and then visit `http://localhost:3000/`.
+
+_Obs.: for Windows, you can use WSL and follow these steps. However, it was tested with the latest avaible version of Ubuntu2 0.04 LTS, since Ubuntu 18.04 WSL version did not support node_
+
+Now, all pages are included in the project. You can navigate through most of them via `Homepage`. However, the `/admin` page is only accessible by typing in the URL: `http://localhost:3000/admin`. To see all the routes you can access, check the `routes.js` file [here](https://github.com/daltonsato/SCC0219-Introdu-o-ao-Desenvolvimento-Web/tree/master/frontend/src/routes.js).
+
+Default credentials to test the system (in the format `username:password`):
+- To access admin page: `admin:admin`
+- As a normal user: `test@test.com:test`
+
+The client side funcionality is implement and the user should be able to: login, add itens to the shopping cart and see it with information about price, quantity etc., add addresses and payment methods, buy eggs and navigate through the entire website.
+
+As an admin, you can also login, change the details of a product (name, price, description etc.) and remove users from the application.
+
+All the functionality is still under construction because there's no backend. For now, we are inserting **for testing** elements like list of products and list of users in the `window` component, so if you press `F5` or reload the page by typing a new URL instead of navigating using buttons from the website, all the modifications that you do (such as changing products and users) will be lost. The data we are using to show products, users, itens, addresses etc. are coming from lists ("JSON-like" components) inside the `index.js` file. Later, all of there information will be in the backend. In addition to that, we are using "hardcoded" cookies to test logged-in functionalities.
 
 ## Problems
-_// TO DO: List any major problems you had._
+- We've spent a lot of time on this, but the header is not working as it should on mobile phones (small screens). It looks like a problem with `popper.js`, but we didn't manage to solve it yet.
 
 ## Comments: 
 _// TO DO: Any comments you wish to add._
