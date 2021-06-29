@@ -9,8 +9,16 @@ import Footer from '../components/Footer/Footer';
 
 
 export default function ShoppingCart() {
-
+	const cookies = new Cookies();
+    let history = useHistory(); // used to redict user
 	const [count, setCount] = useState(0);
+
+	let goToAddressSel = (props) => {
+		let userCookie = cookies.get("SESSION");
+
+		window.purchaseCodes[userCookie] = "purchaseCodeExample";
+		history.push('/buy/select-address/purchaseCodeExample');
+	}
 
 	const decrementCount = () => {
 		if(count > 0) setCount(count-1);
@@ -20,9 +28,6 @@ export default function ShoppingCart() {
 		setCount(count+1);
 		console.log(count);
 	};
-	
-	const cookies = new Cookies();
-    let history = useHistory(); // used to redict user
 
 	let testCookie = "280E8410C4A05326EB815B577B05574FDFB4AE016C399ACF1B02CFE5C59D59FE"; // sha-256 -> ganeshtestlogin (used for testing)
 	let activeUserSession = [ testCookie ];
@@ -78,9 +83,9 @@ export default function ShoppingCart() {
 					<div className="col-3 totalPay py-4 text-left">Total a pagar:   R${totalApagar}</div>
 				</div>
 				<div className="row finishShop text-center ">
-					<div className="col finishShopF py-3">
+					<button className="col finishShopF py-3" onClick={goToAddressSel}>
 						FINALIZAR COMPRA
-					</div>
+					</button>
 				</div>
 			</div>
 		);

@@ -84,6 +84,10 @@ window.users = {
 // created for testing
 window.shoppingCart = {};
 
+// created for testing
+// codes that indicate that a purchase is happening and is related to the shopping cart of a user
+window.purchaseCodes = {}
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
