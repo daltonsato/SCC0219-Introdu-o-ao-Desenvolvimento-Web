@@ -12,6 +12,7 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import NotFound from './pages/components/NotFound/NotFound'
 import AddAddress from './pages/AddAddress/AddAddress';
+import SelectAddress from './pages/SelectAddress/SelectAddress';
 import AdminLogin from './pages/Admin/AdminLogin/AdminLogin';
 import AdminEditProduct from './pages/Admin/AdminEditProduct/AdminEditProduct';
 import AdminEditUser from './pages/Admin/AdminEditUser/AdminEditUser';
@@ -25,7 +26,8 @@ export default function Routes() {
                 <Route path={'/contact-us'} exact component={ContactUs}/>
 				<Route path={'/shopping-cart'} exact component={ShoppingCart}/>
                 <Route path={'/store'} exact component={Store}/>
-				<Route path={'/payment'} exact component={Payment}/>
+				<Route path={'/buy/payment'} exact component={Payment}/>
+                <Route path={'/buy/select-address'} exact component={SelectAddress}/>
                 <Route path={'/login'} exact component={Login}/>
                 <Route path={'/register'} exact component={Register}/>
 				<Route path={'/add-address'} exact component={AddAddress}/>

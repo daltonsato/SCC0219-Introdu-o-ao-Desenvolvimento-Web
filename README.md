@@ -86,6 +86,8 @@ Default credentials to test the system (in the format `username:password`):
 
 The client side funcionality is implement and the user should be able to: login, add itens to the shopping cart and see it with information about price, quantity etc., add addresses and payment methods, buy eggs and navigate through the entire website.
 
+We still need to make the part related to finalizing a purchase: selecting address, payment method and buying the item. For now, the pages exist and you can navigate through them, but can't selected address nor payment methods you've added.
+
 As an admin, you can also login, change the details of a product (name, price, description etc.) and remove users from the application.
 
 All the functionality is still under construction because there's no backend. For now, we are inserting **for testing** elements like list of products and list of users in the `window` component, so if you press `F5` or reload the page by typing a new URL instead of navigating using buttons from the website, all the modifications that you do (such as changing products and users) will be lost. The data we are using to show products, users, itens, addresses etc. are coming from lists ("JSON-like" components) inside the `index.js` file. Later, all of there information will be in the backend. In addition to that, we are using "hardcoded" cookies to test logged-in functionalities.

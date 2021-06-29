@@ -162,7 +162,7 @@ export default function Store() {
                     </div>
 
 
-                    <h3 className = "pt-5 pb-5 d-flex justify-content-center category">Ovos Brancos (dúzia de ovos)</h3>
+                    <h3 className = "pt-5 pb-5 d-flex justify-content-center category">Ovos brancos (dúzia de ovos)</h3>
                     <div className = "row d-flex justify-content-start align-items-start productBar pb-5">
                         {eggsBranco}
                     </div>
