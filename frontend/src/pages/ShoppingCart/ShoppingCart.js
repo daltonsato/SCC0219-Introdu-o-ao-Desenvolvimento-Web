@@ -14,11 +14,11 @@ export default function ShoppingCart() {
 
 	const decrementCount = () => {
 		if(count > 0) setCount(count-1);
-		console.log("sub");
+		console.log(count);
 	};
 	const incrementCount = () => {
 		setCount(count+1);
-		console.log("add");
+		console.log(count);
 	};
 	
 	const cookies = new Cookies();
