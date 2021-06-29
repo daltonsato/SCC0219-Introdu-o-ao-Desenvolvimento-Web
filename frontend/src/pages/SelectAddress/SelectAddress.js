@@ -1,5 +1,6 @@
 import React from 'react';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
+import Cookies from 'universal-cookie';
 
 import HomeHeader from '../components/Headers/HomeHeader';
 import Footer from '../components/Footer/Footer';
@@ -7,7 +8,11 @@ import Footer from '../components/Footer/Footer';
 import './SelectAddress.css';
 
 export default function SelectAddress() {
+    let params = useParams(); // params in URL (see routes.js)
     let history = useHistory();
+    const cookies = new Cookies();
+    
+    let purchaseCode = params.code;
 
     let handleAddressEntry = (props) => {
         
@@ -15,6 +20,13 @@ export default function SelectAddress() {
 
         history.push("/buy/payment");
     };
+
+    if (purchaseCode === null || purchaseCode === undefined) {
+        history.push("/store");
+    }
+    else if (window.purchaseCodes[cookies.get("SESSION")] !== purchaseCode) {
+        history.push("/store")
+    }
 
     return (
         <div className="">

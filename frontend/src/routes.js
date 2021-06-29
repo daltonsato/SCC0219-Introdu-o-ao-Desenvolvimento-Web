@@ -27,7 +27,7 @@ export default function Routes() {
 				<Route path={'/shopping-cart'} exact component={ShoppingCart}/>
                 <Route path={'/store'} exact component={Store}/>
 				<Route path={'/buy/payment'} exact component={Payment}/>
-                <Route path={'/buy/select-address'} exact component={SelectAddress}/>
+                <Route path={'/buy/select-address/:code'} exact component={SelectAddress}/>
                 <Route path={'/login'} exact component={Login}/>
                 <Route path={'/register'} exact component={Register}/>
 				<Route path={'/add-address'} exact component={AddAddress}/>

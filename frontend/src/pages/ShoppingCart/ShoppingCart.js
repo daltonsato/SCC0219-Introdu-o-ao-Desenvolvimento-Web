@@ -14,7 +14,10 @@ export default function ShoppingCart() {
 	const [count, setCount] = useState(0);
 
 	let goToAddressSel = (props) => {
-		history.push('./buy/select-address');
+		let userCookie = cookies.get("SESSION");
+
+		window.purchaseCodes[userCookie] = "purchaseCodeExample";
+		history.push('/buy/select-address/purchaseCodeExample');
 	}
 
 	const decrementCount = () => {
