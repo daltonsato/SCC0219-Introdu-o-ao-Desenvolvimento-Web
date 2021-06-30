@@ -20,17 +20,23 @@ Product records include, at least: name, id, photo, description, price, quantity
 Selling Products: Products are selected, their quantity chosen, and are included in a cart. Products are purchased using a credit card number (any number is accepted by the system), a debit card number or even a bank slip. The quantity of product sold is added to the quantity sold and subtracted form the stock. Carts are emptied only on payment or by customers.
 Product Management: Administrators can create/update/read/delete (crud) new products and services. For example, they can change the stock quantity.
 
-Functionalities yet to be implemented:
+Functionalities already implemented:
 - Easily buy eggs;
-- Register and login into an account;
-- Choose payment method;
+- Login into an account;
 - Insert addresses to deliver the eggs;
-- Change profile details (name, email, password, payment methods etc.);
 - Check and manage the shopping cart;
 - Check history of purchases;
 - Add eggs to shopping cart (and, if necessary, remove them);
 - Read about the company/store and its creators;
 - Contact the website's creators
+
+Functionalities yet to be implemented:
+- Register an account;
+- Choose payment method;
+- Change profile details (name, email, password, payment methods etc.);
+- Report a problem
+- Add a new address
+
 
 ## Project Description
 Our store is made with Javascript, CSS, Node.js and React. When entering the main page (or running with `npm start`), you will see homepage welcoming the user, containing an opening message, a brief description about our products and an about us section, containing our history and a list of our contacts.
@@ -41,10 +47,22 @@ Using React, we designed our screens, applying the Single Page Application style
 _// TO DO: Any comment you may want to add to help understand your code. This is good programming practice_
 
 ## Test Plan
-_// TO DO: Text describing the tests that will be performed. If an automatic test tool/framework is used (ex: Selenium, jUnit, Spock), the code for the tests can be used_
+Test 1:
+- Access /homepage
+- log in to test account (user: test@test.com; password: test)
+- Go to buy products (/store, or click in 'Comprar' buttom)
+- Choose any quantity of eggs you wish for
+- Access ShoppingCart (/shopping-cart, or cart buttom in header)
+- Control the exact quantities off eggs you wish to buy (the value and total value must change accordingly to the sum of price_{i_{th}} * quantity_{i_{th}}
+- Click 'FINALIZAR COMPRA'
+- Select address to send the package
+- Enter with payment data
+- Automatic return to homepage
+
 
 ## Test Results
-_// TO DO: Text describing the test results. If an automatic test tool/framework is used, its output can be used_
+Test 1:
+- ShoppingCart must be empty (payment done)
 
 ## Build Procedures and other relevant information
 
@@ -64,6 +82,14 @@ The pages that exist for now are:
 1. Homepage (source code [here](https://github.com/daltonsato/SCC0219-Introdu-o-ao-Desenvolvimento-Web/tree/master/frontend/src/pages/Homepage))
 2. ShoppingCart (source code [here](https://github.com/daltonsato/SCC0219-Introdu-o-ao-Desenvolvimento-Web/tree/master/frontend/src/pages/ShoppingCart))
 3. Store (source code [here](https://github.com/daltonsato/SCC0219-Introdu-o-ao-Desenvolvimento-Web/tree/master/frontend/src/pages/Store))
+4. About Us (source code [here](https://github.com/daltonsato/SCC0219-Introdu-o-ao-Desenvolvimento-Web/tree/master/frontend/src/pages/AboutUs))
+5. AddAddress (source code [here](https://github.com/daltonsato/SCC0219-Introdu-o-ao-Desenvolvimento-Web/tree/master/frontend/src/pages/AddAddress))
+6. Admin (source code [here](https://github.com/daltonsato/SCC0219-Introdu-o-ao-Desenvolvimento-Web/tree/master/frontend/src/pages/Admin))
+7. Login (source code [here](https://github.com/daltonsato/SCC0219-Introdu-o-ao-Desenvolvimento-Web/tree/master/frontend/src/pages/Login))
+8. Payment (source code [here](https://github.com/daltonsato/SCC0219-Introdu-o-ao-Desenvolvimento-Web/tree/master/frontend/src/pages/Payment))
+9. Register (source code [here](https://github.com/daltonsato/SCC0219-Introdu-o-ao-Desenvolvimento-Web/tree/master/frontend/src/pages/Register))
+10. SelectAddress (source code [here](https://github.com/daltonsato/SCC0219-Introdu-o-ao-Desenvolvimento-Web/tree/master/frontend/src/pages/SelectAddress))
+11. UserPage (source code [here](https://github.com/daltonsato/SCC0219-Introdu-o-ao-Desenvolvimento-Web/tree/master/frontend/src/pages/Userpage))
 
 You can check the design for other pages in `mockup.pdf` (the raw idea is there, the details are or will be present in the HTML files) and a flow diagram (indicating the navigation flow) in `flowDiagram.png`.
 
