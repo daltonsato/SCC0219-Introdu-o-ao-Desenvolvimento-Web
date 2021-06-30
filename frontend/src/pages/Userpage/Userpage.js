@@ -9,6 +9,7 @@ import { useParams } from "react-router";
 
 // Images
 import add from '../../images/Add.png';
+import { main } from '@popperjs/core';
 
 
 export default function Userpage() {
@@ -21,41 +22,46 @@ export default function Userpage() {
     function deleteAddr(props) {
        console.log(props.target.id);
        console.log(window.userAddress);
-        delete window.userAddress[props.target.id];
-        if(props.target.classList.contains("mainAddress")){
-            alert("ok");
-            let newMain = document.getElementsByClassName("toMain")[0];
-            newMain.classList = [];
-            newMain.innerHTML = "";
-            let element = document.createElement("input");
-            element.classList.add("mainAddress", "d-inline", "mx-4", "py-2", "px-1");
-            element.innerText = "Endereço principal";
-            newMain.appendChild(element);
+       if(window.userAddress[props.target.id].main == 1){
+           alert("Nao se pode excluir seu endereço padrão");
+           return;
         }
-
+        alert(".")
+        delete window.userAddress[props.target.id];
         history.push("/my-profile");
     }
     
    function setToMain(props){
-       console.log(props.target.parentNode);
+       console.log(props.target.id);
        if(props.target.classList.contains("mainAddress")){
            return;
        }
-       if(document.getElementsByClassName("mainAddress")[0] != undefined){
+       console.log(document.getElementsByClassName("mainAddress")[0]);
+       if(document.getElementsByClassName("mainAddress")[0]){
            let oldMain = document.getElementsByClassName("mainAddress")[0];
            oldMain.classList = [];
+           let oldMainID = oldMain.id;
+           oldMain.id = ""
            oldMain.innerText = "";
            oldMain.classList.add("d-inline");
            let element = document.createElement("input");
            element.classList.add("makeMain", "py-2", "mx-4");
+           element.id = oldMainID;
            element.value = 'Definir Padrão';
            element.type = "button";
            oldMain.appendChild(element);
+           window.userAddress[oldMainID].main = "0";
        }
+
+      console.log(document.getElementsByClassName("mainAddress")[0]);
       
        props.target.parentNode.classList = [];
        props.target.parentNode.classList.add("mainAddress", "d-inline", "mx-4", "py-2", "px-1");
+       props.target.parentNode.id = props.target.id;
        props.target.parentNode.innerText =  "Endereço Padrão";
+       window.userAddress[props.target.id].main = "1";
+
+       console.log(props.target);
    }
 
 
@@ -86,12 +92,12 @@ export default function Userpage() {
 
         if(addressDetails.main === "1"){
             setMain = (
-                 <div className = "mainAddress d-inline mx-4 py-2 px-1"  onClick = {setToMain}>Endereço padrão</div>
+                 <div id= {addressID} className = "mainAddress d-inline mx-4 py-2 px-1"  onClick = {setToMain}>Endereço padrão</div>
             );
         }else{
             setMain = (
-                <div  className = "d-inline toMain"  onClick = {setToMain}>
-                    <input className="makeMain py-2 mx-4" type="button" value="Definir Padrão"></input>
+                <div  className = "d-inline"  onClick = {setToMain}>
+                    <input  id= {addressID} className="makeMain py-2 mx-4" type="button" value="Definir Padrão"></input>
                 </div>
            );
         }

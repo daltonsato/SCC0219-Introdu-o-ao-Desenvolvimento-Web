@@ -147,6 +147,16 @@ window.userAddress = {
     "state" : "RJ",
     "CEP" : "11111-222",
     "main" : "1"
+  },
+  "addr2" : {
+    "nickname" : "Trabalho",
+    "street" : "Rua da Assembleia",
+    "number" : "921",
+    "complement" : "",
+    "city" : "Rio de janeiro",
+    "state" : "RJ",
+    "CEP" : "11111-222",
+    "main" : "0"
   }
 };
 
