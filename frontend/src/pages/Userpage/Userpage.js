@@ -11,9 +11,10 @@ import add from '../../images/Add.png';
 export default function Userpage() {
     
     
-    //document.getElementById("mainaddr0").addEventListener("click", setToMain("addr0"));
-    function deleteAddr() {
-        
+    function deleteAddr(props) {
+       console.log(props.target.id);
+       console.log(window.userAddress.addr0);
+       delete window.userAddress.addr0;
     }
     
    function setToMain(props){
@@ -64,11 +65,11 @@ export default function Userpage() {
 
         if(addressDetails.main === "1"){
             setMain = (
-                 <div id = {addressID} className = "mainAddress d-inline mx-4 py-2 px-1"  onClick = {setToMain}>Endereço padrão</div>
+                 <div className = "mainAddress d-inline mx-4 py-2 px-1"  onClick = {setToMain}>Endereço padrão</div>
             );
         }else{
             setMain = (
-                <div id = {addressID} className = "d-inline"  onClick = {setToMain}>
+                <div  className = "d-inline"  onClick = {setToMain}>
                     <input className="makeMain py-2 mx-4" type="button" value="Definir Padrão"></input>
                 </div>
            );
@@ -81,7 +82,7 @@ export default function Userpage() {
                 <h5>{addressDetails.city}</h5>
                 <h5> {addressDetails.CEP}</h5>
                 <div className = "py-4">
-                <input id= "delete" className="delete py-2 px-4" type="button" value="Excluir" onClick = {deleteAddr}></input>
+                <input id= {addressID} className="delete py-2 px-4" type="button" value="Excluir" onClick = {deleteAddr}></input>
                     {setMain}
                 </div>   
             </div>
