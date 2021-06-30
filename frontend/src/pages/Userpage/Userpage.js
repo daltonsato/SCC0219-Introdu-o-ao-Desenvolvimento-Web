@@ -3,18 +3,37 @@ import React from 'react';
 import './Userpage.css';
 import HomeHeader from '../components/Headers/HomeHeader';
 import Footer from '../components/Footer/Footer';
+import Cookies from 'universal-cookie';
+import { Link, useHistory } from 'react-router-dom';
+import { useParams } from "react-router";
 
 // Images
 import add from '../../images/Add.png';
 
 
 export default function Userpage() {
+
+    const cookies = new Cookies();
+    let history = useHistory(); // used to redict user
+    let params = useParams(); // params in URL (see routes.js)
     
     
     function deleteAddr(props) {
        console.log(props.target.id);
-       console.log(window.userAddress.addr0);
-       delete window.userAddress.addr0;
+       console.log(window.userAddress);
+        delete window.userAddress[props.target.id];
+        if(props.target.classList.contains("mainAddress")){
+            alert("ok");
+            let newMain = document.getElementsByClassName("toMain")[0];
+            newMain.classList = [];
+            newMain.innerHTML = "";
+            let element = document.createElement("input");
+            element.classList.add("mainAddress", "d-inline", "mx-4", "py-2", "px-1");
+            element.innerText = "Endereço principal";
+            newMain.appendChild(element);
+        }
+
+        history.push("/my-profile");
     }
     
    function setToMain(props){
@@ -22,15 +41,17 @@ export default function Userpage() {
        if(props.target.classList.contains("mainAddress")){
            return;
        }
-       let oldMain = document.getElementsByClassName("mainAddress")[0];
-       oldMain.classList = [];
-       oldMain.innerText = "";
-       oldMain.classList.add("d-inline");
-       let element = document.createElement("input");
-       element.classList.add("makeMain", "py-2", "mx-4");
-       element.value = 'Definir Padrão';
-       element.type = "button";
-       oldMain.appendChild(element);
+       if(document.getElementsByClassName("mainAddress")[0] != undefined){
+           let oldMain = document.getElementsByClassName("mainAddress")[0];
+           oldMain.classList = [];
+           oldMain.innerText = "";
+           oldMain.classList.add("d-inline");
+           let element = document.createElement("input");
+           element.classList.add("makeMain", "py-2", "mx-4");
+           element.value = 'Definir Padrão';
+           element.type = "button";
+           oldMain.appendChild(element);
+       }
       
        props.target.parentNode.classList = [];
        props.target.parentNode.classList.add("mainAddress", "d-inline", "mx-4", "py-2", "px-1");
@@ -69,14 +90,14 @@ export default function Userpage() {
             );
         }else{
             setMain = (
-                <div  className = "d-inline"  onClick = {setToMain}>
+                <div  className = "d-inline toMain"  onClick = {setToMain}>
                     <input className="makeMain py-2 mx-4" type="button" value="Definir Padrão"></input>
                 </div>
            );
         }
         addresses.push(
    
-            <div className = "address p-4">
+            <div className = "address p-4"> 
                 <h5> {addressDetails.street} </h5>  
                 <h5>{addressDetails.number}</h5>
                 <h5>{addressDetails.city}</h5>
