@@ -1,4 +1,5 @@
 import React from 'react';
+import Cookies from 'universal-cookie';
 
 import './Store.css';
 import HomeHeader from '../components/Headers/HomeHeader';
@@ -9,6 +10,10 @@ import ovo from '../../images/ovos.png';
 import ovoPo from '../../images/ovoPo.png';
 
 export default function Store() {
+    let testCookie = "280E8410C4A05326EB815B577B05574FDFB4AE016C399ACF1B02CFE5C59D59FE"; // sha-256 -> ganeshtestlogin (used for testing)
+	let activeUserSession = [ testCookie ];
+    const cookies = new Cookies();
+
     let showDescription = (props) => {
         // console.log(props.target.parentNode.parentNode.id.split('_')[1]);
         let productID = props.target.parentNode.parentNode.id.split('_')[1]; // getting the product ID from parents
@@ -45,6 +50,22 @@ export default function Store() {
     };
 
     let addToCart = (props) => {
+        if (!activeUserSession.includes(cookies.get("SESSION"))) {
+            let popup = document.getElementById("addItemPopup");
+            let popupText = document.getElementById("popupText");
+            popupText.innerHTML = "Você precisa estar logado para adicionar itens ao carrinho!";
+
+            popup.classList.remove("d-none");
+            popup.classList.add("bg-danger");
+
+            setTimeout(() => { 
+                popup.classList.add("d-none");
+                popup.classList.remove("bg-danger");
+                popupText.innerHTML = "";
+            }, 2500);
+
+            return;
+        }
         let productID = props.target.parentNode.id;
         if (window.shoppingCart[productID] === null || window.shoppingCart[productID] === undefined) {
             window.shoppingCart[productID] = {"prodName": window.productsList[productID].name, "quantity" : 1, "price" : window.productsList[productID].price};
