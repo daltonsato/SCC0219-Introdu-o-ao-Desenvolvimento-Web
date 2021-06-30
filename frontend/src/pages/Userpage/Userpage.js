@@ -8,35 +8,43 @@ import Footer from '../components/Footer/Footer';
 import add from '../../images/Add.png';
 
 
-
-
-function deleteAddr() {
-    let tmp;
-    tmp = document.getElementsByClassName("address");
-    console.log(tmp[0].innerHTML);
-    document.getElementsByClassName("address")
-}
-
-function setToMain() {
-    console.log(document.getElementById("addr0"));
-    let str =  <div className = "mainAddress d-inline mx-4 py-2 px-1">Endereço padrão</div>;
-    document.getElementById("addr0").innerHTML = str ;
-}
-
 export default function Userpage() {
     
     
+    function deleteAddr(props) {
+       console.log(props.target.id);
+       console.log(window.userAddress.addr0);
+       delete window.userAddress.addr0;
+    }
+    
+   function setToMain(props){
+       console.log(props.target.parentNode);
+       if(props.target.classList.contains("mainAddress")){
+           return;
+       }
+       let oldMain = document.getElementsByClassName("mainAddress")[0];
+       oldMain.classList = [];
+       oldMain.innerText = "";
+       oldMain.classList.add("d-inline");
+       let element = document.createElement("input");
+       element.classList.add("makeMain", "py-2", "mx-4");
+       element.value = 'Definir Padrão';
+       element.type = "button";
+       oldMain.appendChild(element);
+      
+       props.target.parentNode.classList = [];
+       props.target.parentNode.classList.add("mainAddress", "d-inline", "mx-4", "py-2", "px-1");
+       props.target.parentNode.innerText =  "Endereço Padrão";
+   }
+
+
     const purchases = [];
     const addresses = [];
-    
-    //  const obj = window.purchaseHistory;
-    //  obj["purchase0"].name = "UWU";
-    //  console.log(obj["purchase0"]);
-
+  
     for (const [purchaseID, purchaseDetails] of Object.entries(window.purchaseHistory)) {
 
         purchases.push(
-            <li className="historyItem shadow d-flex align-itens-center justify-content-center p-3 my-3">
+            <li key = {"li_"+purchaseID} className = "historyItem shadow d-flex align-itens-center justify-content-center p-3 my-3">
                 <div className="text-left px-3 w-50">
                     <span className="align-middle"> {purchaseDetails.name} </span>
                 </div>
@@ -57,12 +65,12 @@ export default function Userpage() {
 
         if(addressDetails.main === "1"){
             setMain = (
-                 <div className = "mainAddress d-inline mx-4 py-2 px-1">Endereço padrão</div>
+                 <div className = "mainAddress d-inline mx-4 py-2 px-1"  onClick = {setToMain}>Endereço padrão</div>
             );
         }else{
             setMain = (
-                <div id = {addressID} className = "d-inline">
-                    <input id= "setMain" className="makeMain py-2 mx-4" type="button" value="Definir Padrão" onClick = {setToMain}></input>
+                <div  className = "d-inline"  onClick = {setToMain}>
+                    <input className="makeMain py-2 mx-4" type="button" value="Definir Padrão"></input>
                 </div>
            );
         }
@@ -74,7 +82,7 @@ export default function Userpage() {
                 <h5>{addressDetails.city}</h5>
                 <h5> {addressDetails.CEP}</h5>
                 <div className = "py-4">
-                <input id= "delete" className="delete py-2 px-4" type="button" value="Excluir" onClick = {deleteAddr}></input>
+                <input id= {addressID} className="delete py-2 px-4" type="button" value="Excluir" onClick = {deleteAddr}></input>
                     {setMain}
                 </div>   
             </div>
@@ -147,3 +155,4 @@ export default function Userpage() {
             </React.Fragment>
     );
 }
+
