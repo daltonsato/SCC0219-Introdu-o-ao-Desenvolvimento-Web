@@ -20,6 +20,8 @@ export default function Payment() {
             popup.classList.add("d-none"); 
             popupText.innerHTML = "";
         }, 2500);
+
+		window.shoppingCart = {};
     }
 
     return (
