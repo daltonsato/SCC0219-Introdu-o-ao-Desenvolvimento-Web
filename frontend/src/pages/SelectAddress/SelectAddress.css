@@ -13,11 +13,22 @@
     padding-right: 25px;
 }
 
-.selectAddressButton {
+.selectAddressLink {
+    text-decoration: none;
+    color: black;
     border: none;
     background: #FDE751;
     border-radius: 10px;
     font-size: 18px;
+}
+
+.selectAddressLink:hover {
+    color: black;
+}
+
+.disabledCursor { 
+    background-color: white;
+    cursor: default;
 }
 
 .selectAddressTextBox {
@@ -39,4 +50,14 @@
     transition-duration: 0.4s;
     transform: scale(1.05);
     background-color: #fff494;
+}
+
+.addrLimitParag {
+    background-color: #E27F86;
+    border-radius: 5px;
+}
+
+.selectAddressWarningMessage {
+    font-weight: bold;
+    font-size: 24px;
 }

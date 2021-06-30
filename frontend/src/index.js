@@ -10,7 +10,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 // created for testing
 window.productsList = {
   "product0" : {
-      "name" : "Ovo 0",
+      "name" : "Ovo de galinha",
       "price" : 100,
       "quantity" : 14,
       "description" : "blablabla",
@@ -18,7 +18,7 @@ window.productsList = {
       "category" : "caipira"
   },
   "product1" : {
-      "name" : "Ovo 1",
+      "name" : "Ovo de codorna",
       "price" : 85,
       "quantity" : 200,
       "description" : "blablabla",
@@ -26,7 +26,7 @@ window.productsList = {
       "category" : "caipira"
   },
   "product2" : {
-      "name" : "Ovo 2",
+      "name" : "Ovo de codorna",
       "price" : 25,
       "quantity" : 30,
       "description" : "blablabla",
@@ -34,7 +34,7 @@ window.productsList = {
       "category" : "branco"
   },
   "product3" : {
-      "name" : "Ovo 3",
+      "name" : "Ovo de avestruz",
       "price" : 150,
       "quantity" : 44,
       "description" : "blablabla",
@@ -42,7 +42,7 @@ window.productsList = {
       "category" : "pó"
   },
   "product4" : {
-    "name" : "Ovo 4",
+    "name" : "Ovo de T-Rex",
     "price" : 130,
     "quantity" : 111,
     "description" : "blablabla",
@@ -50,7 +50,7 @@ window.productsList = {
     "category" : "caipira"
   },
   "product5" : {
-    "name" : "Ovo 5",
+    "name" : "Ovo de jacaré",
     "price" : 15,
     "quantity" : 65,
     "description" : "blablabla",
@@ -129,25 +129,24 @@ window.purchaseHistory = {
 
 window.userAddress = {
   "addr0" : {
+    "nickname" : "Minha casa",
     "street" : "Av. Trab. São Carlense",
     "number" : "400",
-    "city" : "São Carlos/SP",
+    "complement" : "Apto. 301",
+    "city" : "São Carlos",
+    "state" : "SP",
     "CEP" : "13566-590",
     "main" : "0"
   },
   "addr1" : {
+    "nickname" : "Trabalho",
     "street" : "Rua da Assembleia",
     "number" : "921",
-    "city" : "Rio de janeiro/RJ",
+    "complement" : "",
+    "city" : "Rio de janeiro",
+    "state" : "RJ",
     "CEP" : "11111-222",
     "main" : "1"
-  },
-  "addr2" : {
-   "street" : "Av Paulista",
-    "number" : "1520",
-    "city" : "São Paulo/SP",
-    "CEP" : "23251-001",
-    "main" : "0"
   }
 };
 
