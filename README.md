@@ -53,7 +53,7 @@ Test 1:
 - Go to buy products (/store, or click in 'Comprar' buttom)
 - Choose any quantity of eggs you wish for
 - Access ShoppingCart (/shopping-cart, or cart buttom in header)
-- Control the exact quantities off eggs you wish to buy (the value and total value must change accordingly to the sum of price_{i_{th}} * quantity_{i_{th}}
+- Control the exact quantities off eggs you wish to buy (the value and total value must change accordingly to the sum of prices times the quantities
 - Click 'FINALIZAR COMPRA'
 - Select address to send the package
 - Enter with payment data
