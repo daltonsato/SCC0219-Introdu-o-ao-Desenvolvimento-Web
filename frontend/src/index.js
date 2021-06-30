@@ -129,25 +129,24 @@ window.purchaseHistory = {
 
 window.userAddress = {
   "addr0" : {
+    "nickname" : "Minha casa",
     "street" : "Av. Trab. São Carlense",
     "number" : "400",
-    "city" : "São Carlos/SP",
+    "complement" : "Apto. 301",
+    "city" : "São Carlos",
+    "state" : "SP",
     "CEP" : "13566-590",
     "main" : "0"
   },
   "addr1" : {
+    "nickname" : "Trabalho",
     "street" : "Rua da Assembleia",
     "number" : "921",
-    "city" : "Rio de janeiro/RJ",
+    "complement" : "",
+    "city" : "Rio de janeiro",
+    "state" : "RJ",
     "CEP" : "11111-222",
     "main" : "1"
-  },
-  "addr2" : {
-   "street" : "Av Paulista",
-    "number" : "1520",
-    "city" : "São Paulo/SP",
-    "CEP" : "23251-001",
-    "main" : "0"
   }
 };
 
