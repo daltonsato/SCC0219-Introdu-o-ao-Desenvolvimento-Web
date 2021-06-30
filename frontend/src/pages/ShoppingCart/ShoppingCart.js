@@ -19,15 +19,39 @@ export default function ShoppingCart() {
 		window.purchaseCodes[userCookie] = "purchaseCodeExample";
 		history.push('/buy/select-address/purchaseCodeExample');
 	}
-
-	const decrementCount = () => {
-		if(count > 0) setCount(count-1);
-		console.log("sub");
+/*
+	const decrementCount = (name) => {
+		for(const [prodName, prodDetails] of Object.entries(window.shoppingCart)){
+			if(name === prodName){
+				if(count > 0) setCount(count-1);
+				console.log(count);
+			}
+		}
 	};
-	const incrementCount = () => {
-		setCount(count+1);
-		console.log("add");
-	};
+	const incrementCount = (name) => {
+		for(const [prodName, prodDetails] of Object.entries(window.shoppingCart)){
+			if(name === prodName){
+				setCount(count+1);
+				console.log(count);
+			}
+		}
+	};*/
+	function increase(name){
+		for(const [prodName, prodDetails] of Object.entries(window.shoppingCart)){
+			if(name === prodName){
+				prodDetails.quantity += 1;
+				console.log(prodDetails.quantity);
+			}
+		}
+	}
+	function decrease(name){
+		for(const [prodName, prodDetails] of Object.entries(window.shoppingCart)){
+			if(name === prodName){
+				if(prodDetails.quantity > 0)prodDetails.quantity -= 1;
+				console.log(prodDetails.quantity);
+			}
+		}
+	}
 
 	let testCookie = "280E8410C4A05326EB815B577B05574FDFB4AE016C399ACF1B02CFE5C59D59FE"; // sha-256 -> ganeshtestlogin (used for testing)
 	let activeUserSession = [ testCookie ];
@@ -44,8 +68,8 @@ export default function ShoppingCart() {
 				<input className="Quantity" id="inputGroup-sizing-sm" type="number" name="clicks" value={prodDetails.quantity} onChange={(event) => {
 					setCount(event.target.value);
 				}} /> 
-				<button className="col btn" onClick={incrementCount}>+</button>
-				<button className="col btn" onClick={decrementCount}>-</button>
+				<button className="col btn" onClick={increase(prodName)}>+</button>
+				<button className="col btn" onClick={decrease(prodName)}>-</button>
 				</div>
 				<div className="col-3 p-3 atributteDisplay justify-content-center border primary-border"> R$ {prodDetails.price} </div>
 				<div className="col-3 p-3 atributteDisplay justify-content-center border primary-border"> R$ {prodDetails.price*prodDetails.quantity} </div></div> );
