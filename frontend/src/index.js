@@ -81,12 +81,83 @@ window.users = {
   }
 };
 
+//created for testing
+window.purchaseHistory = {
+  "purchase0" : {
+    "name" : "Ovo caipira",
+    "price" : 100,
+    "quantity" : 4,
+    "data" : "27/06/2021",
+    "address" : "13566-590"
+  },
+  "purchase1" : {
+    "name" : "Ovo Branco",
+    "price" : 50,
+    "quantity" : 2,
+    "data" : "26/06/2021",
+    "address" : "13566-590"
+  },
+  "purchase2" : {
+    "name" : "Ovo em pó",
+    "price" : 25,
+    "quantity" : 1,
+    "data" : "26/05/2021",
+    "address" : "11111-222"
+  },
+  "purchase3" : {
+    "name" : "Ovo em pó",
+    "price" : 25,
+    "quantity" : 1,
+    "data" : "26/05/2021",
+    "address" : "11111-222"
+  },
+  "purchase4" : {
+    "name" : "Ovo em pó",
+    "price" : 25,
+    "quantity" : 1,
+    "data" : "26/05/2021",
+    "address" : "11111-222"
+  },
+  "purchase5" : {
+    "name" : "Ovo em pó",
+    "price" : 25,
+    "quantity" : 1,
+    "data" : "26/05/2021",
+    "address" : "11111-222"
+  },
+};
+
+window.userAddress = {
+  "addr0" : {
+    "street" : "Av. Trab. São Carlense",
+    "number" : "400",
+    "city" : "São Carlos/SP",
+    "CEP" : "13566-590",
+    "main" : "0"
+  },
+  "addr1" : {
+    "street" : "Rua da Assembleia",
+    "number" : "921",
+    "city" : "Rio de janeiro/RJ",
+    "CEP" : "11111-222",
+    "main" : "1"
+  },
+  "addr2" : {
+   "street" : "Av Paulista",
+    "number" : "1520",
+    "city" : "São Paulo/SP",
+    "CEP" : "23251-001",
+    "main" : "0"
+  }
+};
+
 // created for testing
 window.shoppingCart = {};
 
 // created for testing
 // codes that indicate that a purchase is happening and is related to the shopping cart of a user
-window.purchaseCodes = {}
+window.purchaseCodes = {};
+
 
 ReactDOM.render(
   <React.StrictMode>

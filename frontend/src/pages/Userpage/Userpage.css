@@ -25,6 +25,11 @@
     background-color:  #FFCC65;
 }
 
+.functionBox:hover {
+    -webkit-transition: 0.3s;
+    transform: scale(1.05);
+}
+
 .historyItem {
     font-size: 22px;
     background: #FFCC65;
@@ -41,5 +46,39 @@
 .mainAddress{
     font-size: 15px;
     background: #ffff;
-    border-radius: 10px;
+    border-radius: 7px;
+    font-size: 14px;
+}
+
+
+.delete{
+    background: #FDE751;
+    border-radius: 7px;
+    border: none;
+    font-size: 14px;
+    padding: 8px;
+    transition-duration: 0.5s;
+}
+.delete:hover {
+    background-color: #ffff;
+    transition-duration: 0.5s;
+}
+
+.makeMain{
+    background: #FDE751;
+    border-radius: 7px;
+    border: none;
+    font-size: 14px;
+    padding: 8px;
+    transition-duration: 0.5s;
+}
+
+.makeMain:hover {
+    background-color: #ffff;
+    transition-duration: 0.5s;
+}
+
+.addAddress:hover {
+    -webkit-transition: 0.2s;
+    transform: scale(1.05);
 }
