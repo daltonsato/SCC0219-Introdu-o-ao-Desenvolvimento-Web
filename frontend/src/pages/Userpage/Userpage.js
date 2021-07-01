@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React, { useState } from 'react';
 
 import './Userpage.css';
 import HomeHeader from '../components/Headers/HomeHeader';
@@ -9,7 +9,6 @@ import { Link, useHistory } from 'react-router-dom';
 
 // Images
 import add from '../../images/Add.png';
-import { main } from '@popperjs/core';
 
 
 export default function Userpage() {
@@ -17,19 +16,21 @@ export default function Userpage() {
     const cookies = new Cookies();
     let history = useHistory(); // used to redict user
    
-    
-    
+    let testCookie = "280E8410C4A05326EB815B577B05574FDFB4AE016C399ACF1B02CFE5C59D59FE"; // sha-256 -> ganeshtestlogin (used for testing)
+	let activeUserSession = [ testCookie ];
+
+    const [,setValue] = useState();    
+
     function deleteAddr(props) {
      
-       if(window.userAddress[props.target.id].main == 1){
+       if(window.userAddress[props.target.id].main === "1"){
            alert("Nao se pode excluir seu endereço padrão");
            return;
         }
        
         delete window.userAddress[props.target.id];
 		console.log(window.userAddress);
-        //alert(); //chega até aqui
-        history.push("/my-profile");
+        setValue({}); // needed to re-render elements of page (and remove the deleted element)
     }
     
    function setToMain(props){
@@ -67,33 +68,33 @@ export default function Userpage() {
         console.log(props.target);
    }
 
-   function addAddr(props){
+    function addAddr(props){
         //console.log(props.target.Children);
 
         if(props.target.classList.contains("inputPhase")){
             //alert();
-           return;
-       }
+            return;
+        }
 
         let element1 = document.createElement("input");
         element1.classList.add("newAddress", "m-2", "inputPhase", "street");
         element1.type = "text";
-		element1.placeholder = "Rua";
+        element1.placeholder = "Rua";
 
         let element2 = document.createElement("input");
         element2.classList.add("newAddress", "m-2", "inputPhase");
         element2.type = "text";
-		element2.placeholder = "Número";
+        element2.placeholder = "Número";
 
         let element3 = document.createElement("input");
         element3.classList.add("newAddress", "m-2", "inputPhase");
         element3.type = "text";
-		element3.placeholder = "Cidade";
+        element3.placeholder = "Cidade";
 
         let element4 = document.createElement("input");
         element4.classList.add("newAddress", "m-2", "inputPhase");
         element4.type = "text";
-		element4.placeholder = "CEP";
+        element4.placeholder = "CEP";
 
         let elementBtn = document.createElement("input");
         elementBtn.classList.add("saveAddr", "mx-5", "px-4", "py-1", "inputPhase");
@@ -108,11 +109,15 @@ export default function Userpage() {
         props.target.appendChild(element3);
         props.target.appendChild(element4);
         props.target.appendChild(elementBtn);   
-       
+        
         let street = document.getElementsByClassName("street")[0].value;
         console.log(street);
-   }
+    }
 
+    if (!activeUserSession.includes(cookies.get("SESSION"))) {
+        history.push("/store");
+        return (<div>Você precisa estar logado para ver essa página</div>);
+    }
 
     const purchases = [];
     const addresses = [];
@@ -188,43 +193,32 @@ export default function Userpage() {
     return (
         <React.Fragment>
             <HomeHeader />
-            <div className="Container eggBackgroundUser">
-               <div className = "d-flex row-3 pt-5">
+            <div className="container-fluid eggBackgroundUser">
+               <div className = "row d-flex pt-5">
 
-                    <div className="col bg-white shadow mx-1 p-3">
+                    <div className="col-12 col-md-6 bg-white shadow p-3">
                         <ul className="History">
                             <h2>Histórico de compras</h2>
                             {purchases}
                         </ul>
                     </div>
                     
-                    <div className = "col-2 m-4">
-                        {addresses[0]}
-                        <div className = "d-flex row-3 pt-5">
-                            <div className = "col">
-                            {addresses[2]}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className = "col-2 m-4">
-                        {addresses[1]}
-                        <div className = "d-flex row-3 pt-5">
-                            <div className = "col">
-                            {addresses[3]}
-                            </div>
+                    <div className = "col-12 col-md-6 py-3">
+                        <div className="row d-flex align-items-center justify-content-center">
+                            <div className="col col-xl-6 my-2 d-flex align-items-center justify-content-center">{addresses[0]}</div>
+                            <div className="col col-xl-6 my-2 d-flex align-items-center justify-content-center">{addresses[1]}</div>
+                            <div className="col col-xl-6 my-2 d-flex align-items-center justify-content-center">{addresses[2]}</div>
+                            <div className="col col-xl-6 my-2 d-flex align-items-center justify-content-center">{addresses[3]}</div>
                         </div>
                     </div>
 
                     
                 </div>
 
-                
-
-                    <div className = "d-flex justify-content-end  m-5 p-5">
-                        <Link className = "col-2 h5 functionBox p-3 reportProb mx-5 text-center" to="/contact-us">Relatar problema</Link>
-                        <h5 className = "col-1 functionBox p-3  mx-5 text-center">Log out</h5>
-                    </div>
+                <div className = "row d-flex justify-content-end m-5 p-5">
+                    <Link className = "functionBox reportProb col-12 col-sm-6 col-xl-3 h5 p-3 mx-5 text-center" to="/contact-us">Relatar problema</Link>
+                    <h5 className = "functionBox col-12 col-sm-6 col-xl-3 h5 p-3 mx-5 text-center">Log out</h5>
+                </div>
                
                 
             <Footer />

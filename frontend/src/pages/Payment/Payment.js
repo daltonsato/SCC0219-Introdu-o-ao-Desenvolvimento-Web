@@ -8,7 +8,7 @@ import Footer from '../components/Footer/Footer';
 export default function Payment() {
 
 	let confirmPayment = (props) => {
-        let productID = props.target.parentNode.id;
+        // let productID = props.target.parentNode.id;
         
         let popup = document.getElementById("confirmedPayment");
         let popupText = document.getElementById("popupText");

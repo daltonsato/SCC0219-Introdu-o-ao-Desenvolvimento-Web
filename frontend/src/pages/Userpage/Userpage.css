@@ -11,7 +11,7 @@
 
 .address{
     height: 230px;
-    width: 295px;
+    width: 290px;
     border-radius: 18px;
     background-color:  #FFCC65;
     box-shadow: 1px 5px 14px 0px rgba(0,0,0,0.64);
@@ -22,11 +22,15 @@
 .functionBox{
     border-radius: 18px;
     background-color:  #FFCC65;
+    text-decoration: none;
+    color: black;
 }
 
 .functionBox:hover {
     -webkit-transition: 0.3s;
     transform: scale(1.05);
+    color: black;
+    cursor: pointer;
 }
 
 .historyItem {
@@ -100,10 +104,4 @@
 .saveAddr:hover {
     background-color: #ffff;
     transition-duration: 0.5s;
-}
-
-.reportProb{
-	color: black;
-	text-decoration: none;
-	font-size: 20px;
 }
