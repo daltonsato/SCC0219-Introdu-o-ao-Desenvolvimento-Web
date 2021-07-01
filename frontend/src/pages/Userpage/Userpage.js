@@ -137,6 +137,13 @@ export default function Userpage() {
         return (<div>Você precisa estar logado para ver essa página</div>);
     }
 
+	function logOut(props){
+		if(activeUserSession.includes(cookies.get("SESSION"))){
+			cookies.remove("SESSION", {path: "/", domain: "localhost"});
+			history.push("/");
+		}
+	}
+
     const purchases = [];
     const addresses = [];
   
@@ -235,7 +242,7 @@ export default function Userpage() {
 
                 <div className = "row d-flex justify-content-end m-5 p-5">
                     <Link className = "functionBox reportProb col-12 col-sm-6 col-xl-3 h5 p-3 mx-5 text-center" to="/contact-us">Relatar problema</Link>
-                    <h5 className = "functionBox col-12 col-sm-6 col-xl-3 h5 p-3 mx-5 text-center">Log out</h5>
+                    <h5 className = "functionBox col-12 col-sm-6 col-xl-3 h5 p-3 mx-5 text-center" onClick={logOut}>Log out</h5>
                 </div>
                
                 
