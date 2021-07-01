@@ -11,7 +11,7 @@ import Footer from '../components/Footer/Footer';
 export default function ShoppingCart() {
 	const cookies = new Cookies();
     let history = useHistory(); // used to redict user
-	const [count, setCount] = useState(0);
+	var [totalApagar, setTotalApagar] = useState(0);
 
 	let goToAddressSel = (props) => {
 		let userCookie = cookies.get("SESSION");
@@ -25,7 +25,7 @@ export default function ShoppingCart() {
 
 		window.shoppingCart[productID].quantity += 1;
 		props.target.parentNode.childNodes[0].value = window.shoppingCart[productID].quantity;
-		setCount(props.target.parentNode.childNodes[0].value);
+		setTotalApagar(totalApagar + window.shoppingCart[productID].price);
 	}
 
 	let decrease = (props) =>{
@@ -34,7 +34,7 @@ export default function ShoppingCart() {
 		if(window.shoppingCart[productID].quantity > 0){
 			window.shoppingCart[productID].quantity -= 1;
 			props.target.parentNode.childNodes[0].value = window.shoppingCart[productID].quantity;
-			setCount(props.target.parentNode.childNodes[0].value);
+			setTotalApagar(totalApagar - window.shoppingCart[productID].price);
 		}
 	}
 
@@ -45,13 +45,12 @@ export default function ShoppingCart() {
 	let itensList = [];
 
 	if (activeUserSession.includes(cookies.get("SESSION"))) {
-		let totalApagar = 0;
+		totalApagar = 0;
 		for (const [prodName, prodDetails] of Object.entries(window.shoppingCart)) {
 			itensList.push( <div key={"div_"+prodName} className="row">
 				<div className="col-3 p-3 atributteDisplay justify-content-center"> {prodDetails.prodName} </div>
 				<div className="col-3 p-3 atributteDisplay justify-content-center" id={prodName}>
-					<input className="Quantity" id="inputGroup-sizing-sm" type="number" name="clicks" value={prodDetails.quantity} onChange={(event) => {
-					}} /> 
+					<input className="Quantity" id="inputGroup-sizing-sm" type="number" name="clicks" value={prodDetails.quantity} onChange={(event) => {}} /> 
 					<button className="col btn" onClick={increase}>+</button>
 					<button className="col btn" onClick={decrease}>-</button>
 				</div>

@@ -124,6 +124,7 @@ All the functionality is still under construction because there's no backend. Fo
 ## Comments: 
 _// TO DO: Any comments you wish to add._
 ### Next Steps:
+- Add more modularization, remove redundancies
 - Develop back-end using Node.js
 - Use Passport to authenticate users
 - Start using a real database to store users, products, shopping carts etc.
