@@ -20,7 +20,6 @@
 }
 
 .functionBox{
-    height: 50px;
     border-radius: 18px;
     background-color:  #FFCC65;
 }
@@ -101,4 +100,10 @@
 .saveAddr:hover {
     background-color: #ffff;
     transition-duration: 0.5s;
+}
+
+.reportProb{
+	color: black;
+	text-decoration: none;
+	font-size: 20px;
 }

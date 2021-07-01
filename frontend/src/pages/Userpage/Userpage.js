@@ -26,6 +26,7 @@ export default function Userpage() {
            return;
         }
         delete window.userAddress[props.target.id];
+		console.log(window.userAddress);
         //alert(); //chega até aqui
         history.push("/my-profile");
     }
@@ -40,20 +41,21 @@ export default function Userpage() {
       
         let oldMain = document.getElementsByClassName("mainAddress")[0];
         oldMain.classList = [];
+
         let oldMainID = oldMain.id;
         oldMain.id = ""
         oldMain.innerText = "";
         oldMain.classList.add("d-inline");
+
         let element = document.createElement("input");
         element.classList.add("makeMain", "py-2", "mx-4");
         element.id = oldMainID;
         element.value = 'Definir Padrão';
         element.type = "button";
+
         oldMain.appendChild(element);
         window.userAddress[oldMainID].main = "0";
      
-
-        
         props.target.parentNode.classList = [];
         props.target.parentNode.classList.add("mainAddress", "d-inline", "mx-4", "py-2", "px-1");
         props.target.parentNode.id = props.target.id;
@@ -75,24 +77,27 @@ export default function Userpage() {
         let element1 = document.createElement("input");
         element1.classList.add("newAddress", "m-2", "inputPhase");
         element1.type = "text";
+		element1.placeholder = "Rua";
 
         let element2 = document.createElement("input");
         element2.classList.add("newAddress", "m-2", "inputPhase");
         element2.type = "text";
+		element2.placeholder = "Número";
 
         let element3 = document.createElement("input");
         element3.classList.add("newAddress", "m-2", "inputPhase");
         element3.type = "text";
+		element3.placeholder = "Cidade";
 
         let element4 = document.createElement("input");
         element4.classList.add("newAddress", "m-2", "inputPhase");
         element4.type = "text";
+		element4.placeholder = "CEP";
 
         let elementBtn = document.createElement("input");
         elementBtn.classList.add("saveAddr", "mx-5", "px-4", "py-1", "inputPhase");
         elementBtn.type = "button";
         elementBtn.value = "Salvar"
-        elementBtn.type = "button";
 
         props.target.innerText = "";
         props.target.classList = []
@@ -216,7 +221,7 @@ export default function Userpage() {
                 
 
                     <div className = "d-flex justify-content-end  m-5 p-5">
-                        <h5 className = "col-2 functionBox p-3  mx-5 text-center">Relatar problema</h5>
+                        <Link className = "col-2 h5 functionBox p-3 reportProb mx-5 text-center" to="/contact-us">Relatar problema</Link>
                         <h5 className = "col-1 functionBox p-3  mx-5 text-center">Log out</h5>
                     </div>
                
