@@ -76,29 +76,34 @@ export default function Userpage() {
        }
 
         let element1 = document.createElement("input");
-        element1.classList.add("newAddress", "m-2", "inputPhase", "street");
+        element1.id = "street";
+        element1.classList.add("newAddress", "m-2", "inputPhase");
         element1.type = "text";
 		element1.placeholder = "Rua";
 
         let element2 = document.createElement("input");
         element2.classList.add("newAddress", "m-2", "inputPhase");
+        element2.id = "number";
         element2.type = "text";
 		element2.placeholder = "Número";
 
         let element3 = document.createElement("input");
         element3.classList.add("newAddress", "m-2", "inputPhase");
+        element3.id = "city";
         element3.type = "text";
 		element3.placeholder = "Cidade";
 
         let element4 = document.createElement("input");
         element4.classList.add("newAddress", "m-2", "inputPhase");
+        element4.id = "CEP";
         element4.type = "text";
 		element4.placeholder = "CEP";
 
         let elementBtn = document.createElement("input");
         elementBtn.classList.add("saveAddr", "mx-5", "px-4", "py-1", "inputPhase");
         elementBtn.type = "button";
-        elementBtn.value = "Salvar"
+        elementBtn.value = "Salvar";
+        elementBtn.id = "saveChanges";
 
         props.target.innerText = "";
         props.target.classList = []
@@ -108,9 +113,29 @@ export default function Userpage() {
         props.target.appendChild(element3);
         props.target.appendChild(element4);
         props.target.appendChild(elementBtn);   
-       
-        let street = document.getElementsByClassName("street")[0].value;
-        console.log(street);
+
+
+        document.getElementById("saveChanges").addEventListener("click", saveAddr);
+    }
+    
+    function saveAddr(props){
+        console.log(document.getElementById("street").value);
+        console.log(props.target);
+        if(props.target.id === "saveChanges"){
+            alert();
+
+            window.userAddress["addr2"] = {
+                "nickname" : "",
+                "street" : document.getElementById("street").value,
+                "number" : document.getElementById("number").value,
+                "complement" : "",
+                "city" :  document.getElementById("city").value,
+                "state" : "",
+                "CEP" : document.getElementById("CEP").value,
+                "main" : "0"
+            }
+            //history.push("/my-profile");
+       }
    }
 
 

@@ -148,16 +148,7 @@ window.userAddress = {
     "CEP" : "11111-222",
     "main" : "1"
   },
-  "addr2" : {
-    "nickname" : "Trabalho",
-    "street" : "Av paulista",
-    "number" : "42",
-    "complement" : "",
-    "city" : "Sâo Paulo",
-    "state" : "SP",
-    "CEP" : "1311-222",
-    "main" : "0"
-  }
+
 };
 
 // created for testing
