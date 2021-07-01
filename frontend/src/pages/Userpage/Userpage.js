@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Children } from 'react';
 
 import './Userpage.css';
 import HomeHeader from '../components/Headers/HomeHeader';
 import Footer from '../components/Footer/Footer';
 import Cookies from 'universal-cookie';
 import { Link, useHistory } from 'react-router-dom';
-import { useParams } from "react-router";
+
 
 // Images
 import add from '../../images/Add.png';
@@ -16,52 +16,95 @@ export default function Userpage() {
 
     const cookies = new Cookies();
     let history = useHistory(); // used to redict user
-    let params = useParams(); // params in URL (see routes.js)
+   
     
     
     function deleteAddr(props) {
-       console.log(props.target.id);
-       console.log(window.userAddress);
+     
        if(window.userAddress[props.target.id].main == 1){
            alert("Nao se pode excluir seu endereço padrão");
            return;
         }
-        alert(".")
         delete window.userAddress[props.target.id];
+        //alert(); //chega até aqui
         history.push("/my-profile");
     }
     
    function setToMain(props){
        console.log(props.target.id);
+       console.log(document.getElementsByClassName("mainAddress")[0]);
+
        if(props.target.classList.contains("mainAddress")){
            return;
        }
-       console.log(document.getElementsByClassName("mainAddress")[0]);
-       if(document.getElementsByClassName("mainAddress")[0]){
-           let oldMain = document.getElementsByClassName("mainAddress")[0];
-           oldMain.classList = [];
-           let oldMainID = oldMain.id;
-           oldMain.id = ""
-           oldMain.innerText = "";
-           oldMain.classList.add("d-inline");
-           let element = document.createElement("input");
-           element.classList.add("makeMain", "py-2", "mx-4");
-           element.id = oldMainID;
-           element.value = 'Definir Padrão';
-           element.type = "button";
-           oldMain.appendChild(element);
-           window.userAddress[oldMainID].main = "0";
+      
+        let oldMain = document.getElementsByClassName("mainAddress")[0];
+        oldMain.classList = [];
+        let oldMainID = oldMain.id;
+        oldMain.id = ""
+        oldMain.innerText = "";
+        oldMain.classList.add("d-inline");
+        let element = document.createElement("input");
+        element.classList.add("makeMain", "py-2", "mx-4");
+        element.id = oldMainID;
+        element.value = 'Definir Padrão';
+        element.type = "button";
+        oldMain.appendChild(element);
+        window.userAddress[oldMainID].main = "0";
+     
+
+        
+        props.target.parentNode.classList = [];
+        props.target.parentNode.classList.add("mainAddress", "d-inline", "mx-4", "py-2", "px-1");
+        props.target.parentNode.id = props.target.id;
+        props.target.parentNode.innerText =  "Endereço Padrão";
+        window.userAddress[props.target.id].main = "1";
+        
+        console.log(document.getElementsByClassName("mainAddress")[0]);
+        console.log(props.target);
+   }
+
+   function addAddr(props){
+        console.log(props.target.Children);
+
+        if(props.target.classList.contains("inputPhase")){
+            //alert();
+           return;
        }
 
-      console.log(document.getElementsByClassName("mainAddress")[0]);
-      
-       props.target.parentNode.classList = [];
-       props.target.parentNode.classList.add("mainAddress", "d-inline", "mx-4", "py-2", "px-1");
-       props.target.parentNode.id = props.target.id;
-       props.target.parentNode.innerText =  "Endereço Padrão";
-       window.userAddress[props.target.id].main = "1";
+        let element1 = document.createElement("input");
+        element1.classList.add("newAddress", "m-2", "inputPhase");
+        element1.type = "text";
 
-       console.log(props.target);
+        let element2 = document.createElement("input");
+        element2.classList.add("newAddress", "m-2", "inputPhase");
+        element2.type = "text";
+
+        let element3 = document.createElement("input");
+        element3.classList.add("newAddress", "m-2", "inputPhase");
+        element3.type = "text";
+
+        let element4 = document.createElement("input");
+        element4.classList.add("newAddress", "m-2", "inputPhase");
+        element4.type = "text";
+
+        let elementBtn = document.createElement("input");
+        elementBtn.classList.add("saveAddr", "mx-5", "px-4", "py-1", "inputPhase");
+        elementBtn.type = "button";
+        elementBtn.value = "Salvar"
+        elementBtn.type = "button";
+
+        props.target.innerText = "";
+        props.target.classList = []
+        props.target.classList.add("address", "text-center", "inputPhase");
+        props.target.appendChild(element1);
+        props.target.appendChild(element2);
+        props.target.appendChild(element3);
+        props.target.appendChild(element4);
+        props.target.appendChild(elementBtn);
+        
+        
+        //console.log(props.target.Children);
    }
 
 
@@ -118,7 +161,8 @@ export default function Userpage() {
     }
     if(addresses.length < 3){
         addresses.push(
-                <div className = "address p-5 text-center addAddress">
+            //todos os elementos dentro da div possuem o onClick
+                <div className = "address p-5 text-center addAddress" onClick = {addAddr}>
                     <img className="img-fluid rounded mx-auto d-block py-3" src={add} alt="add" />
                     <h2 >Adicionar endereço</h2>
                 </div> 

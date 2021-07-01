@@ -82,3 +82,23 @@
     -webkit-transition: 0.2s;
     transform: scale(1.05);
 }
+
+.newAddress{
+    background: #FDE751;
+    border-radius: 7px;
+    border: none;
+    font-size: 14px;
+    padding: 5px;
+}
+
+.saveAddr{
+    background: #FDE751;
+    border-radius: 7px;
+    border: none;
+    font-size: 14px;
+}
+
+.saveAddr:hover {
+    background-color: #ffff;
+    transition-duration: 0.5s;
+}
