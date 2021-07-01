@@ -30,42 +30,24 @@ export default function Userpage() {
        
         delete window.userAddress[props.target.id];
 		console.log(window.userAddress);
-        setValue({}); // needed to re-render elements of page (and remove the deleted element)
+        history.push("/my-profile");
+        //setValue({}); // needed to re-render elements of page (and remove the deleted element)
     }
     
    function setToMain(props){
-       console.log(props.target.id);
-       console.log(document.getElementsByClassName("mainAddress")[0]);
+       //console.log(props.target.id);
+       //console.log(document.getElementsByClassName("mainAddress")[0]);
 
        if(props.target.classList.contains("mainAddress")){
            return;
        }
       
-        let oldMain = document.getElementsByClassName("mainAddress")[0];
-        oldMain.classList = [];
+        let oldMain = document.getElementsByClassName("mainAddress")[0].id;
 
-        let oldMainID = oldMain.id;
-        oldMain.id = ""
-        oldMain.innerText = "";
-        oldMain.classList.add("d-inline");
-
-        let element = document.createElement("input");
-        element.classList.add("makeMain", "py-2", "mx-4");
-        element.id = oldMainID;
-        element.value = 'Definir Padrão';
-        element.type = "button";
-
-        oldMain.appendChild(element);
-        window.userAddress[oldMainID].main = "0";
-     
-        props.target.parentNode.classList = [];
-        props.target.parentNode.classList.add("mainAddress", "d-inline", "mx-4", "py-2", "px-1");
-        props.target.parentNode.id = props.target.id;
-        props.target.parentNode.innerText =  "Endereço Padrão";
+        window.userAddress[oldMain].main = "0";
         window.userAddress[props.target.id].main = "1";
-        
-        console.log(document.getElementsByClassName("mainAddress")[0]);
-        console.log(props.target);
+        history.push("/my-profile");
+      
    }
 
     function addAddr(props){
@@ -120,26 +102,34 @@ export default function Userpage() {
     }
     
     function saveAddr(props){
-        console.log(document.getElementById("street").value);
-        console.log(props.target);
+        //console.log(document.getElementById("street").value);
+        //console.log(props.target);
         if(props.target.id === "saveChanges"){
-            alert();
 
-            window.userAddress["addr2"] = {
-                "nickname" : "",
-                "street" : document.getElementById("street").value,
-                "number" : document.getElementById("number").value,
-                "complement" : "",
-                "city" :  document.getElementById("city").value,
-                "state" : "",
-                "CEP" : document.getElementById("CEP").value,
-                "main" : "0"
+            if(document.getElementById("street").value !== "" && document.getElementById("number").value !== "" && document.getElementById("city").value !== "" && document.getElementById("CEP").value !== ""){
+                let newProdId;
+                do {
+                    newProdId = "addr" + Math.floor(Math.random() * 1001); // random from 0 to 1000
+                } while (newProdId in window.userAddress);
+    
+                window.userAddress[newProdId] = {
+                    "nickname" : "",
+                    "street" : document.getElementById("street").value,
+                    "number" : document.getElementById("number").value,
+                    "complement" : "",
+                    "city" :  document.getElementById("city").value,
+                    "state" : "",
+                    "CEP" : document.getElementById("CEP").value,
+                    "main" : "0"
+                }
+               //setValue({});
+            }else{
+                alert("Preencha todos os campos");
             }
-            //history.push("/my-profile");
+
+         
        }
         
-        let street = document.getElementsByClassName("street")[0].value;
-        console.log(street);
     }
 
     if (!activeUserSession.includes(cookies.get("SESSION"))) {
@@ -191,7 +181,7 @@ export default function Userpage() {
                 <h5>{addressDetails.city}</h5>
                 <h5> {addressDetails.CEP}</h5>
                 <div className = "py-4">
-                <input id= {addressID} className="delete py-2 px-4" type="button" value="Excluir" onClick = {deleteAddr}></input>
+                <input id= {addressID} className="delete py-2 px-4 " type="button" value="Excluir" onClick = {deleteAddr}></input>
                     {setMain}
                 </div>   
             </div>
