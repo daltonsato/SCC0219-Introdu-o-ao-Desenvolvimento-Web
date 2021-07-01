@@ -30,8 +30,8 @@ export default function Userpage() {
        
         delete window.userAddress[props.target.id];
 		console.log(window.userAddress);
-        history.push("/my-profile");
-        //setValue({}); // needed to re-render elements of page (and remove the deleted element)
+        //history.push("/my-profile");
+        setValue({}); // needed to re-render elements of page (and remove the deleted element)
     }
     
    function setToMain(props){
@@ -46,7 +46,9 @@ export default function Userpage() {
 
         window.userAddress[oldMain].main = "0";
         window.userAddress[props.target.id].main = "1";
-        history.push("/my-profile");
+        props.target.id = "";
+        //history.push("/my-profile");
+        setValue({});
       
    }
 
@@ -88,24 +90,21 @@ export default function Userpage() {
         elementBtn.value = "Salvar";
         elementBtn.id = "saveChanges";
 
-        props.target.innerText = "";
-        props.target.classList = []
-        props.target.classList.add("address", "text-center", "inputPhase");
-        props.target.appendChild(element1);
-        props.target.appendChild(element2);
-        props.target.appendChild(element3);
-        props.target.appendChild(element4);
-        props.target.appendChild(elementBtn);   
+        let newAddr = document.getElementsByClassName("addAddress")[0];
+       newAddr.innerText = "";
+       newAddr.classList = []
+       newAddr.classList.add("address", "text-center", "inputPhase");
+       newAddr.appendChild(element1);
+       newAddr.appendChild(element2);
+       newAddr.appendChild(element3);
+       newAddr.appendChild(element4);
+       newAddr.appendChild(elementBtn);   
 
-
-        document.getElementById("saveChanges").addEventListener("click", saveAddr);
+        document.getElementById("saveChanges").addEventListener("click", saveAddr, false);
     }
     
     function saveAddr(props){
-        //console.log(document.getElementById("street").value);
-        //console.log(props.target);
-        if(props.target.id === "saveChanges"){
-
+       
             if(document.getElementById("street").value !== "" && document.getElementById("number").value !== "" && document.getElementById("city").value !== "" && document.getElementById("CEP").value !== ""){
                 let newProdId;
                 do {
@@ -122,13 +121,13 @@ export default function Userpage() {
                     "CEP" : document.getElementById("CEP").value,
                     "main" : "0"
                 }
-               //setValue({});
-            }else{
-                alert("Preencha todos os campos");
-            }
+                history.push("");
+                history.push("my-profile");
+           }else{
+               alert("Preencha todos os campos");
+           }
 
          
-       }
         
     }
 
