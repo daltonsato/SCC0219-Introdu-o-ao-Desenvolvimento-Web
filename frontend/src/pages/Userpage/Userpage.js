@@ -25,6 +25,7 @@ export default function Userpage() {
            alert("Nao se pode excluir seu endereço padrão");
            return;
         }
+       
         delete window.userAddress[props.target.id];
 		console.log(window.userAddress);
         //alert(); //chega até aqui
@@ -67,7 +68,7 @@ export default function Userpage() {
    }
 
    function addAddr(props){
-        console.log(props.target.Children);
+        //console.log(props.target.Children);
 
         if(props.target.classList.contains("inputPhase")){
             //alert();
@@ -75,7 +76,7 @@ export default function Userpage() {
        }
 
         let element1 = document.createElement("input");
-        element1.classList.add("newAddress", "m-2", "inputPhase");
+        element1.classList.add("newAddress", "m-2", "inputPhase", "street");
         element1.type = "text";
 		element1.placeholder = "Rua";
 
@@ -106,10 +107,10 @@ export default function Userpage() {
         props.target.appendChild(element2);
         props.target.appendChild(element3);
         props.target.appendChild(element4);
-        props.target.appendChild(elementBtn);
-        
-        
-        //console.log(props.target.Children);
+        props.target.appendChild(elementBtn);   
+       
+        let street = document.getElementsByClassName("street")[0].value;
+        console.log(street);
    }
 
 
@@ -168,8 +169,8 @@ export default function Userpage() {
         addresses.push(
             //todos os elementos dentro da div possuem o onClick
                 <div className = "address p-5 text-center addAddress" onClick = {addAddr}>
-                    <img className="img-fluid rounded mx-auto d-block py-3" src={add} alt="add" />
-                    <h2 >Adicionar endereço</h2>
+                    <img className="img-fluid rounded mx-auto d-block py-3 inputPhase" src={add} alt="add" />
+                    <h2 className = "inputPhase">Adicionar endereço</h2>
                 </div> 
         );
     }else{
