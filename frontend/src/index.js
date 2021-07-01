@@ -150,12 +150,12 @@ window.userAddress = {
   },
   "addr2" : {
     "nickname" : "Trabalho",
-    "street" : "Rua da Assembleia",
-    "number" : "921",
+    "street" : "Av paulista",
+    "number" : "42",
     "complement" : "",
-    "city" : "Rio de janeiro",
-    "state" : "RJ",
-    "CEP" : "11111-222",
+    "city" : "Sâo Paulo",
+    "state" : "SP",
+    "CEP" : "1311-222",
     "main" : "0"
   }
 };
