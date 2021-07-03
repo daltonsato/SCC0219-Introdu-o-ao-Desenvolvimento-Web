@@ -1,5 +1,8 @@
+// Page used by the admin to edit the details of a product
+
 import React from 'react';
-import Cookies from 'universal-cookie';
+import Cookies from 'universal-cookie'; // temporary, just to test login and cookies 
+
 import { Link, useHistory } from 'react-router-dom';
 import { useParams } from "react-router";
 
@@ -12,11 +15,13 @@ export default function AdminEditProduct() {
     let history = useHistory(); // used to redict user
     let params = useParams(); // params in URL (see routes.js)
 
+    // used to test cookies (repeated throughout pages...)
     let testCookieAdmin = "3D6C9103FE7C1073E52A94212A82EC95C87F35F37C697B2C338A5CB31458A66A"; // sha-256 -> ganeshadmin (used for testing)
     let activeAdminSession = [ testCookieAdmin ];
 
-    let productComponent;
+    let productComponent; // element that contains details about the product that will be edited
 
+    // Function to save changes made to the product that was being modified
     var saveProductChanges = () => {
         let name = document.getElementById("name").value;
         let price = document.getElementById("price").value;
@@ -24,16 +29,18 @@ export default function AdminEditProduct() {
         let description = document.getElementById("description").value;
         let suppliers = document.getElementById("suppliers").value;
 
-        console.log("Antes da alteração: ", window.productsList[params.id])
+        // console.log("Antes da alteração: ", window.productsList[params.id])
 
+        // (temporary) changing the details about the product to the new values set
         window.productsList[params.id].name = name;
         window.productsList[params.id].price = price;
         window.productsList[params.id].quantity = quantity;
         window.productsList[params.id].description = description;
         window.productsList[params.id].suppliers = suppliers;
 
-        console.log("Alteração feita com sucesso: ", window.productsList[params.id]);
+        // console.log("Alteração feita com sucesso: ", window.productsList[params.id]);
         
+        // Shows popup to admin telling that the modifications were made
         let popup = document.getElementById("saveChangesPopup");
         let popupText = document.getElementById("popupText");
         popupText.innerHTML += "Alterações salvas!<br/>";
@@ -46,11 +53,13 @@ export default function AdminEditProduct() {
         }, 2500);
     }
 
+    // If user is not logged as admin (doesn't have admin cookies), user can't access page
     if (!activeAdminSession.includes(cookies.get("ADMIN_SESSION"))) {
         history.push("/admin"); // not an admin, can't access this page
         return (<div> Redirecting... </div>);
     }
     else {
+        // Checks if the product ID passed in the URL is related to a product (if so, shows details about the product)
         if (window.productsList[params.id] !== undefined && window.productsList[params.id] !== null) {
             let product = window.productsList[params.id]
             productComponent = (
@@ -96,7 +105,7 @@ export default function AdminEditProduct() {
                     <Link to="/admin" style={{"textDecoration" : "none"}}> <h1 className="col adminText bg-white shadow mx-3 py-1"> Admin Dashboard </h1> </Link>
                 </div>
                 <div className="row">
-                    {productComponent}
+                    {productComponent /* details about the product to edit*/} 
                 </div>
                 <div className="row">
                     <Link className="backToAdminButton" to="/admin"> Retornar à pagina de administrador </Link>

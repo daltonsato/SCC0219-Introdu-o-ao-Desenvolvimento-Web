@@ -1,7 +1,9 @@
 import React from 'react';
-import Cookies from 'universal-cookie';
+import Cookies from 'universal-cookie'; // cookies used for testing
 
+// CSS
 import './Store.css';
+
 import HomeHeader from '../components/Headers/HomeHeader';
 import Footer from '../components/Footer/Footer';
 
@@ -10,10 +12,12 @@ import ovo from '../../images/ovos.png';
 import ovoPo from '../../images/ovoPo.png';
 
 export default function Store() {
+    // Cookies used for testing
     let testCookie = "280E8410C4A05326EB815B577B05574FDFB4AE016C399ACF1B02CFE5C59D59FE"; // sha-256 -> ganeshtestlogin (used for testing)
 	let activeUserSession = [ testCookie ];
     const cookies = new Cookies();
 
+    // Function that shows the description of a product (triggered when user click on the item's image)
     let showDescription = (props) => {
         // console.log(props.target.parentNode.parentNode.id.split('_')[1]);
         let productID = props.target.parentNode.parentNode.id.split('_')[1]; // getting the product ID from parents
@@ -21,10 +25,13 @@ export default function Store() {
         modalDescriptionBox.classList.remove("d-none");
     };
 
+    // Function to stop showing the modal box with description
     let closeModalBox = (props) => {
         props.target.parentNode.parentNode.classList.add("d-none");
     }
 
+    // Function that searches for a string passed by the user over the products showed in the page
+    // If found, product is highlighted and item is scrolled in to view smoothly
     let handleSearch = (props) => {
         if (props.key === 'Enter') {
             let wordToSearch = props.target.value.toLowerCase();
@@ -49,6 +56,8 @@ export default function Store() {
         }
     };
 
+    // Function that adds an item to the user's shopping cart
+    // A message is shown to alert the user about the action
     let addToCart = (props) => {
         if (!activeUserSession.includes(cookies.get("SESSION"))) {
             let popup = document.getElementById("addItemPopup");
@@ -95,6 +104,8 @@ export default function Store() {
     const eggsCaipira = [];
     const eggsBranco = [];
     const eggsPo = [];
+
+    // Loading all eggs to the page (3 categories)
 
     for (const [eggID, eggDetails] of Object.entries(window.productsList)) {
         // src={require("./../../images/ovos.png")} -> not working...

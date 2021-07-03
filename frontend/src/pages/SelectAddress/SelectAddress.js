@@ -1,16 +1,21 @@
+// Page used by the user to select the address where he/she wants the products to be delivered to
+// Can only be accessed if the user is logged in and click on "Finalizar Compra" in the Shopping Cart page
+
+
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import Cookies from 'universal-cookie';
+import Cookies from 'universal-cookie'; // (temporary) used to test cookes
 
 import HomeHeader from '../components/Headers/HomeHeader';
 import Footer from '../components/Footer/Footer';
 
+// CSS
 import './SelectAddress.css';
 
 export default function SelectAddress() {
     let params = useParams(); // params in URL (see routes.js)
-    let history = useHistory();
+    let history = useHistory(); // used to redirect user
     const cookies = new Cookies();
     
     let purchaseCode = params.code;
@@ -27,23 +32,25 @@ export default function SelectAddress() {
     let handleSubmit = (event) => {
         event.preventDefault();
 
-        // should send data to server
+        // should send data to server (not implemented for now because there's no backend)
         history.push("/buy/payment");
     };
 
+    // checks if the user can add a now address to his/her profile (max. of 4)
     let addAddrToProfile = () => {
         if(Object.keys(window.userAddress).length >= 3) { 
             // console.log("Limite de endereços atingidos");
-            setMessage("Limite de endereços já atingidos!");
+            setMessage("Limite de endereços já atingidos!"); 
             return;
         }
 
-        let newProdId;
+        // Sets an ID for the new product and inserts it in the list of addresses
+        let newAddrId;
         do {
-            newProdId = "addr" + Math.floor(Math.random() * 1001); // random from 0 to 1000
-        } while (newProdId in window.userAddress);
+            newAddrId = "addr" + Math.floor(Math.random() * 1001); // random from 0 to 1000
+        } while (newAddrId in window.userAddress);
         
-        window.userAddress[newProdId] = {
+        window.userAddress[newAddrId] = {
             "nickname" : nickname,
             "street" : street,
             "number" : number,
@@ -58,13 +65,16 @@ export default function SelectAddress() {
         // console.log(window.userAddress);
     }
 
-    if (purchaseCode === null || purchaseCode === undefined) {
+    // If there's no purchase code (passed in the URL and checked by the server), the user can't access this page
+    if (purchaseCode === null || purchaseCode === undefined) { 
         history.push("/store");
     }
+    // If the user entered a code that doesn't belongs to him/her, they can't procced
     else if (window.purchaseCodes[cookies.get("SESSION")] !== purchaseCode) {
         history.push("/store")
     }
 
+    // Loading user addresses to show in the page
     var userAddresses = [];
     for (const [addrID, addrInfo] of Object.entries(window.userAddress)) {
         userAddresses.push(

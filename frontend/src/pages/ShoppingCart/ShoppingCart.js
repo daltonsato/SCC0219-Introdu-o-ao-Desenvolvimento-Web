@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import Cookies from 'universal-cookie';
+import Cookies from 'universal-cookie'; // used for testing
 import { useHistory } from 'react-router-dom';
 
 import './ShoppingCart.css';
@@ -11,15 +11,17 @@ import Footer from '../components/Footer/Footer';
 export default function ShoppingCart() {
 	const cookies = new Cookies();
     let history = useHistory(); // used to redict user
-	var [totalApagar, setTotalApagar] = useState(0);
+	var [totalApagar, setTotalApagar] = useState(0); // total price of all products in the cart
 
-	let goToAddressSel = (props) => {
+	// Moves to next page needed in the flow of buying a product (selecting an address)
+	let goToAddressSel = () => {
 		let userCookie = cookies.get("SESSION");
 
-		window.purchaseCodes[userCookie] = "purchaseCodeExample";
+		window.purchaseCodes[userCookie] = "purchaseCodeExample"; // hardcoded for now. This will be defined by the backend later
 		history.push('/buy/select-address/purchaseCodeExample');
 	}
 
+	// Function that increases the quantity of an item in the user's shopping cart
 	let increase = (props) =>{
 		let productID = props.target.parentNode.id;
 
@@ -28,6 +30,7 @@ export default function ShoppingCart() {
 		setTotalApagar(totalApagar + window.shoppingCart[productID].price);
 	}
 
+	// Function that decreases the quantity of an item in the user's shopping cart
 	let decrease = (props) =>{
 		let productID = props.target.parentNode.id;
 		
@@ -38,12 +41,14 @@ export default function ShoppingCart() {
 		}
 	}
 
+	// hardcoded cookies used for testing
 	let testCookie = "280E8410C4A05326EB815B577B05574FDFB4AE016C399ACF1B02CFE5C59D59FE"; // sha-256 -> ganeshtestlogin (used for testing)
 	let activeUserSession = [ testCookie ];
 
-	let shoppingCartComponent;
-	let itensList = [];
+	let shoppingCartComponent; // component that will contain the main elements of the shopping cart page (if user is logged in)
+	let itensList = []; // list of divs containing the itens from the user's shopping cart
 
+	// If user is logged in, he/she has a shopping cart and the itens from it can be loaded into the page
 	if (activeUserSession.includes(cookies.get("SESSION"))) {
 		totalApagar = 0;
 		for (const [prodName, prodDetails] of Object.entries(window.shoppingCart)) {
@@ -97,7 +102,7 @@ export default function ShoppingCart() {
 			</div>
 		);
 	}
-	else {
+	else { // user is not logged in, he/she can't access this page
 		shoppingCartComponent = (
 			<h1> Usuário não logado </h1>
 		);

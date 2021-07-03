@@ -1,10 +1,14 @@
+// Page with information about how to contact the creators of the website and the business
+
 import React from 'react';
 
 import HomeHeader from '../components/Headers/HomeHeader';
 import Footer from '../components/Footer/Footer';
 
+// CSS
 import  './ContactUs.css'
 
+// Images
 import Person1 from '../../images/person1_contactImg.svg'
 import Person2 from '../../images/person2_contactImg.svg'
 import Person3 from '../../images/person3_contactImg.svg'

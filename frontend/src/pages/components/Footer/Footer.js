@@ -1,8 +1,12 @@
+// Footer used on the bottom of all pages
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// CSS
 import './Footer.css';
 
+// Images
 import EggLogo from '../../../images/egg_logo.png'
 
 export default function Footer() {

@@ -1,10 +1,16 @@
+// About Us Page
+// Talks a little about the company
+
 import React from 'react';
 
+// Header and Footer
 import HomeHeader from '../components/Headers/HomeHeader';
 import Footer from '../components/Footer/Footer';
 
+// CSS
 import  './AboutUs.css'
 
+// Images
 import AboutUsImg from '../../images/about_us.svg';
 
 export default function AboutUs() {

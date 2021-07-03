@@ -1,16 +1,22 @@
+// Admin Dashboard and Admin Login pages
+// If user is logged in, he/she sees the dashboard
+// Otherwise, he/she sees a login page
+
 import React from 'react';
-import Cookies from 'universal-cookie';
+import Cookies from 'universal-cookie'; // cookies used for testing
 import { useHistory, Link } from 'react-router-dom';
 
 import Footer from '../../components/Footer/Footer'
 
+// CSS
 import './AdminLogin.css';
 
 export default function AdminLogin() {
     const cookies = new Cookies();
     let history = useHistory(); // used to redict user
 
-    const adminPassDict = { "admin" : "admin" };
+    const adminPassDict = { "admin" : "admin" }; // hardcoded admin credentials used for testing
+    // temporary hardcoded cookies used for testing (testing login functionalities)
     let testCookieAdmin = "3D6C9103FE7C1073E52A94212A82EC95C87F35F37C697B2C338A5CB31458A66A"; // sha-256 -> ganeshadmin (used for testing)
     let activeAdminSession = [ testCookieAdmin ];
 
@@ -42,8 +48,10 @@ export default function AdminLogin() {
 
 
     // Change what is shown to user based on whether admin is logged or not
-    let adminScreen;
+    let adminScreen; // element that will contain the HTML related to the login page or to the admin dashboard
 
+    // If user has a cookie that represents an active admin session, he/she can see the dashboard. As a consequence, he/she seese the products and users
+    // Users and products are loaded to a list of divs here
     if (activeAdminSession.includes(cookies.get("ADMIN_SESSION"))) {
         const productsDivs = [];
         const usersDivs = [];
@@ -67,7 +75,7 @@ export default function AdminLogin() {
         }
         
         // Creating divs with the data from users (see temporary dictinary in index.js)
-        console.log(window.usersDivs);
+        // console.log(window.usersDivs);
         for (const [userID, userDetails] of Object.entries(window.users)) {
             usersDivs.push(
                 <li key={"li_"+userID} className="adminProductListItem shadow d-flex align-itens-center justify-content-center p-3 my-3">
@@ -84,6 +92,7 @@ export default function AdminLogin() {
             );
         }
 
+        // Defining admin screen (dashboard, because user is logged as admin)
         adminScreen = (
             <div className="adminLoginBackground container py-4">
                 <div className="row text-center py-5">
@@ -115,7 +124,7 @@ export default function AdminLogin() {
             </div>
         )
     }
-    else {
+    else { // if user is not logged as admin, show admin login page
         adminScreen = (
             <div className="adminLoginBackground d-flex flex-column align-items-center justify-content-center container py-4">
                 <div className="row text-center">

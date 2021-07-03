@@ -1,3 +1,5 @@
+// Simple Not Found page used whenever a user tries to access a path that doesn't exist
+
 import React from 'react';
 
 import HomeHeader from '../Headers/HomeHeader'

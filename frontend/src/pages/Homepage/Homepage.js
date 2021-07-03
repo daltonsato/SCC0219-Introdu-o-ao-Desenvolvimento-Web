@@ -1,7 +1,11 @@
+// Homepage, that's it.
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// CSS
 import './Homepage.css';
+
 import HomeHeader from '../components/Headers/HomeHeader';
 import Footer from '../components/Footer/Footer';
 
@@ -66,7 +70,7 @@ export default function Homepage() {
                     </div>
                 </div>
                 <br /><br /><br /><br /><br /><br />
-                <div className="row justify-content-center align-items-center"> { /* Change to carousel: https://getbootstrap.com/docs/4.0/components/carousel/ */ }
+                <div className="row justify-content-center align-items-center"> { /* Change to carousel later: https://getbootstrap.com/docs/4.0/components/carousel/ */ }
                     <div className="col-sm-12 col-md-3 d-flex flex-column justify-content-center align-items-center m-3 py-3">
                         <div className="homepageProductEggOuter d-flex justify-content-center align-items-center px-4 py-5">
                             <div className="homepageProductEggInner px-4 py-5">

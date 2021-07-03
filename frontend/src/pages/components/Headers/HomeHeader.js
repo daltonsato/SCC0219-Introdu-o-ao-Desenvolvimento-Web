@@ -1,7 +1,10 @@
+// Header used in almost all pages
+
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Cookies from 'universal-cookie';
+import Cookies from 'universal-cookie'; // used for testing in the frontend, cookies will be assigned in the backend
 
+// CSS
 import './HomeHeader.css';
 
 // Images
@@ -11,14 +14,14 @@ import MyProfileImg from '../../../images/my_profile_icon.svg';
 
 class HomeHeader extends React.Component {
     render() {
-        const activeSessions = [ "280E8410C4A05326EB815B577B05574FDFB4AE016C399ACF1B02CFE5C59D59FE" ]; // this will be treated in the backend
+        const activeSessions = [ "280E8410C4A05326EB815B577B05574FDFB4AE016C399ACF1B02CFE5C59D59FE" ]; // used for testing, this will be treated in the backend later
         
-        let isLoggedComponent;
+        let isLoggedComponent; // components that changes based on wether the user is logged or not (shows some different info)
 
         const cookies = new Cookies();
-        let sessionCookie = cookies.get('SESSION');
+        let sessionCookie = cookies.get('SESSION'); // session cookie from the user (if he/she has one)
 
-        if (activeSessions.includes(sessionCookie)) {
+        if (activeSessions.includes(sessionCookie)) { // if user is logged in...
             isLoggedComponent = (
                 <li className="nav-item d-flex">
                     <Link className="nav-link navBarLinkLoginImg d-flex align-items-center justify-content-center py-1 px-1 mx-1" to="/shopping-cart"> 
@@ -29,7 +32,7 @@ class HomeHeader extends React.Component {
                     </Link>
                 </li> );
         }
-        else {
+        else { // user is not logged in
             console.log("not in active sessions");
             isLoggedComponent = (
                 <li className="nav-item">
@@ -40,7 +43,8 @@ class HomeHeader extends React.Component {
 
         return (
             <nav className="navbar navbar-default navbar-expand-lg homepageHeader sticky-top py-2 px-4"> {/*navbar-expand-lg */}
-            {/* <nav className="navbar navbar-inverse bg-inverse navbar-toggleable-sm fixed-top"></nav> */}
+            {/* COLLAPSE IS NOT WORKING!! CAN'T FIND A WAY TO FIX IT...
+            <nav className="navbar navbar-inverse bg-inverse navbar-toggleable-sm fixed-top"></nav> */}
                 <Link className="navbar-brand d-flex justify-content-center align-items-center" to="/"><img className="img-fluid headerLogo" src={EggLogo} alt="Egg Logo"/>
                     <span className="headerBrandName p-2"> TAMAGOVO </span>
                 </Link>

@@ -1,3 +1,6 @@
+// Page used to create a new account
+// Not working for now...
+
 import React from 'react';
 
 import Footer from '../components/Footer/Footer';
