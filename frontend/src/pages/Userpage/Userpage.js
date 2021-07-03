@@ -21,6 +21,7 @@ export default function Userpage() {
 
     const [,setValue] = useState();    
 
+    //deletes an address
     function deleteAddr(props) {
      
        if(window.userAddress[props.target.id].main === "1"){
@@ -30,13 +31,13 @@ export default function Userpage() {
        
         delete window.userAddress[props.target.id];
 		console.log(window.userAddress);
-        //history.push("/my-profile");
-        setValue({}); // needed to re-render elements of page (and remove the deleted element)
+        //re-render the elements of the page
+        setValue({}); 
+        
     }
     
+    //sets the value of an address to main
    function setToMain(props){
-       //console.log(props.target.id);
-       //console.log(document.getElementsByClassName("mainAddress")[0]);
 
        if(props.target.classList.contains("mainAddress")){
            return;
@@ -47,16 +48,15 @@ export default function Userpage() {
         window.userAddress[oldMain].main = "0";
         window.userAddress[props.target.id].main = "1";
         props.target.id = "";
-        //history.push("/my-profile");
+        //re-render the elements of the page
         setValue({});
       
    }
 
+    //change div to accepts some input values to create a new address 
     function addAddr(props){
-        //console.log(props.target.Children);
 
         if(props.target.classList.contains("inputPhase")){
-            //alert();
             return;
         }
 
@@ -103,9 +103,13 @@ export default function Userpage() {
         document.getElementById("saveChanges").addEventListener("click", saveAddr, false);
     }
     
+    //save the input values and creates a new address
     function saveAddr(props){
-       
+
+            //funtion only works if all input values are not null
             if(document.getElementById("street").value !== "" && document.getElementById("number").value !== "" && document.getElementById("city").value !== "" && document.getElementById("CEP").value !== ""){
+                 
+                // Sets an ID for the new product and inserts it in the list of addresses
                 let newProdId;
                 do {
                     newProdId = "addr" + Math.floor(Math.random() * 1001); // random from 0 to 1000
@@ -121,6 +125,7 @@ export default function Userpage() {
                     "CEP" : document.getElementById("CEP").value,
                     "main" : "0"
                 }
+                //re-render the elements of the page
                 history.push("");
                 history.push("my-profile");
            }else{
@@ -146,6 +151,7 @@ export default function Userpage() {
     const purchases = [];
     const addresses = [];
   
+    //loads the purchases 
     for (const [purchaseID, purchaseDetails] of Object.entries(window.purchaseHistory)) {
 
         purchases.push(
@@ -165,13 +171,16 @@ export default function Userpage() {
       
     }
 
+    //loads user addresses
     var setMain;
     for (const [addressID, addressDetails] of Object.entries(window.userAddress)) {
 
+        //if the address is the main address show it in the div
         if(addressDetails.main === "1"){
             setMain = (
                  <div id= {addressID} className = "mainAddress d-inline mx-4 py-2 px-1"  onClick = {setToMain}>Endereço padrão</div>
             );
+        //if not set a button that can make it the main address
         }else{
             setMain = (
                 <div  className = "d-inline"  onClick = {setToMain}>
@@ -194,6 +203,8 @@ export default function Userpage() {
       
         );
     }
+
+    //if the limit number of addresses has not been reached show an add address button
     if(addresses.length < 3){
         addresses.push(
             //todos os elementos dentro da div possuem o onClick
@@ -202,6 +213,7 @@ export default function Userpage() {
                     <h2 className = "inputPhase">Adicionar endereço</h2>
                 </div> 
         );
+    //if there are already 3 addresses make another div to show the limit has been reached
     }else{
         addresses.push(
             <div className = "address p-5 text-center">
