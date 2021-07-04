@@ -1,12 +1,17 @@
+// Payment Page
 import React from 'react';
 import { Link } from 'react-router-dom'
 
+// CSS
 import './Payment.css';
+
+// Header and Footer
 import HomeHeader from '../components/Headers/HomeHeader';
 import Footer from '../components/Footer/Footer';
 
 export default function Payment() {
 
+	//Confirm the payment, emptying the shopping cart
 	let confirmPayment = (props) => {
         // let productID = props.target.parentNode.id;
         

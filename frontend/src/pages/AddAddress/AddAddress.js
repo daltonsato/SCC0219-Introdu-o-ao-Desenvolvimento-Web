@@ -1,7 +1,11 @@
+// Page to add any address to sent the products
 import React from 'react';
 import { Link } from 'react-router-dom'
 
+// CSS
 import './AddAddress.css';
+
+// Header and Footer
 import HomeHeader from '../components/Headers/HomeHeader';
 import Footer from '../components/Footer/Footer';
 
