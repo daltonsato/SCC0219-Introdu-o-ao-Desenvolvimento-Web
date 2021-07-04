@@ -59,10 +59,27 @@ Test 1:
 - Enter with payment data
 - Automatic return to homepage
 
+Test 2:
+- Access /homepage
+- log in to test account (user: test@test.com; password: test)
+- Go to the user profile (/my-profile or click in the profile icon button)
+- Make these three actions any number of times by clicking in their respective buttons:
+  - Definir padrão: Should define the desired address as the new main address
+  - Excluir: Should delete the desired address if possible
+  - Adicionar endereço: Should ask for inputs to create a new address, after clicking in the 'salvar' button a new address should appear
+
 
 ## Test Results
 Test 1:
 - ShoppingCart must be empty (payment done)
+
+Test 2: 
+- The address designed configuration should be maintained, 'Adicionar endereço' button only showing if there are less than 3 addresses, limit exceded message showing if there are exactly 3 addresses. Addresses should be filled first from left to right then up to bottom
+
+
+
+
+
 
 ## Build Procedures and other relevant information
 
