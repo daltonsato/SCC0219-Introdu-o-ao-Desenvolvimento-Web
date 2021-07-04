@@ -47,6 +47,10 @@ Using React, we designed our screens, applying the Single Page Application style
 _// TO DO: Any comment you may want to add to help understand your code. This is good programming practice_
 
 ## Test Plan
+All tests were manually executed. We tested all functionalities already implement in the website. To conduct the tests, we forced some inputs (malformed and normal inputs) into the parts where we have user interacting with the server. For now, the server doesn't exist. We created some atribbutes in the "windon" (see the index.js) and used it as our "database". 
+
+Some of the test flows we had were:
+
 Test 1:
 - Access /homepage
 - log in to test account (user: test@test.com; password: test)
