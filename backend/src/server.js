@@ -1,18 +1,24 @@
-const express = require('express');
-// const cors = require('cors');
-require('dotenv').config()
+// https://github.com/balta-io/1972/tree/master/src
 
-// SCRIPT PARA INICIAR SERVIDOR: "yarn startServer": "nodemon src/server.js"
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+
+dotenv.config();
+const app = express();
+const port = process.env.PORT || 3000;
 
 const routes = require('./routes');
 
-// app.use(cors()); 
-app.use(express.json());
+app.use(cors()); 
+app.use(express.json()); // used to parse JSON bodies
+app.use(express.urlencoded()); // parse URL-encoded bodies
+
 app.use(routes);
 
-const httpServer = app.listen(process.env.PORT, () => {
-    console.log(`Server listening on port ${process.env.PORT}`);
+const httpServer = app.listen(port, () => {
+    console.log(`Server listening on port ${port}`);
     
-    //Attempt to avoid nodemon's SIGTERM leaving zombie processes using port
-    process.on('beforeExit', (l) => httpServer.close());
+    //Attempt to avoid leaving zombie processes using port
+    process.on('beforeExit', () => httpServer.close());
 });
