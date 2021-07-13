@@ -6,7 +6,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^9.0.2",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.13.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
