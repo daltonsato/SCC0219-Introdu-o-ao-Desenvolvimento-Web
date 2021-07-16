@@ -9,7 +9,7 @@ router.get('/user/info/:email', clientController.getUserInfo);
 router.get('/user/list-all', clientController.getUsersList);
 router.post('/user/register', clientController.registerClient);
 router.delete('/user/delete/:id', clientController.deleteClient);
-
+router.put('/user/update', productController.updateUser); // only the user can edit itself
 
 
 
