@@ -3,9 +3,9 @@ const router = express.Router();
 
 const productController = require('./controllers/productController');
 
-// User routes
+// Client routes
 
-// Products routes
+// Products' routes
 router.get('/products/info/:slug', productController.getProductInfoBySlug);
 router.get('/products/list-all', productController.getProductsList);
 router.post('/products/create', productController.createProduct);

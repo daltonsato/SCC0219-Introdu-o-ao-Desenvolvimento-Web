@@ -5,6 +5,11 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
+// Schemas
+require('./models/clientModel');
+require('./models/productModel');
+require('./models/orderModel');
+
 dotenv.config();
 
 const app = express();
@@ -23,7 +28,7 @@ mongoose.connect(`mongodb+srv://${dbUser}:${dbPassword}@web-usp.7zrod.mongodb.ne
     useUnifiedTopology: true 
 });
 
-app.use(cors());  // Cross-Origin Resource Sharing
+app.use(cors()); // Cross-Origin Resource Sharing
 app.use(express.json()); // used to parse JSON bodies
 // app.use(express.urlencoded()); // parse URL-encoded bodies -> deprecated
 
