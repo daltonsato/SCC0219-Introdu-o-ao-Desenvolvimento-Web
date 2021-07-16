@@ -51,6 +51,8 @@ exports.getProductsList = async (req, res, next) => {
 // Getting all info from a product based on its slug
 exports.getProductInfoBySlug = async (req, res, next) => {
     console.log("Executing getProductInfo()");
+    
+    prodSlug = req.params.slug;
 
     console.log("Product slug: ", prodSlug);
 
@@ -60,7 +62,7 @@ exports.getProductInfoBySlug = async (req, res, next) => {
     }
     catch (err) {
         res.status(400).send({
-            "message" : "Erro ao listas produtos",
+            "message" : "Erro ao buscar informações sobre produto.",
             "data" : err
         });
     }
