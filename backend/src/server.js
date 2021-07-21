@@ -1,9 +1,10 @@
 // https://github.com/balta-io/1972/tree/master/src
 
 const express = require('express');
-const cors = require('cors');
+// const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const cors = require('cors')
 
 // Schemas
 require('./models/clientModel');
@@ -23,10 +24,16 @@ let dbPassword = process.env.DB_PASS;
 console.log(`Database user info: ${dbUser} : ${dbPassword}`);
 
 // Connecting to database (mongoDB)
-mongoose.connect(`mongodb+srv://${dbUser}:${dbPassword}@web-usp.7zrod.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, { 
-    useNewUrlParser: true,
-    useUnifiedTopology: true 
-});
+try {
+    mongoose.connect(`mongodb+srv://${dbUser}:${dbPassword}@web-usp.7zrod.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, { 
+        useNewUrlParser: true,
+        useUnifiedTopology: true 
+    });
+}
+catch (err) {
+    console.log("[!] Error when connectiong to MongoBD! Aborting...");
+    return;
+}
 
 app.use(cors()); // Cross-Origin Resource Sharing
 app.use(express.json()); // used to parse JSON bodies

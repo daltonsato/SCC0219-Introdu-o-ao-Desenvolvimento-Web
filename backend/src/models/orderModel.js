@@ -7,6 +7,10 @@ const schema = new Schema({
         required: true,
         ref: 'Client'
     },
+    purchaseID: {
+        type: String,
+        required: true
+    },
     products: [{
         quantity: {
             type: Number,
@@ -25,12 +29,13 @@ const schema = new Schema({
     purchaseDate: {
         type: Date,
         required: true,
-        default: Date.now()
+        default: Date.now
     },
     status: {
         type: String,
         require: true,
-        enum: ['created', 'confirmed', 'delivered']
+        enum: ['created', 'confirmed', 'delivered'],
+        default: 'created'
     }
 });
 

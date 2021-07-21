@@ -1,26 +1,30 @@
 const crypto = require('crypto');
 
-const ClientModel = mongoose.model('Order');
+const mongoose = require('mongoose');
 
-// May use "guid" to generate IDs...
+const Client = mongoose.model('Order');
+const authService = require('../services/authService');
 
 exports.registerClient = async (req, res, next) => {
-    console.log("Executando funçaõ registerClient()");
-    var newClient = new ClientModel();
+    console.log("Executing registerClient()");
+    var newClient = new Client();
 
-    let username = req.body['username'];
-    let password = req.body['password'];
-    let email = req.body['email'];
+    let username = req.body.username;
+    let password = req.body.password;
+    let email = req.body.email;
+
+    // TO DO: Must make some checks before using username, password and email
 
     let hashedPass = crypto.createHash("sha256").update(str(password) + process.env.SALT_KEY).digest("hex");
 
     newClient.name = username;
     newClient.password = hashedPass;
     newClient.email = email;
+    newClient.roles = ["user"]; // there are user or admin roles
 
     try {
-        await newOrder.save();
-        res.status(200).send({
+        await newClient.save();
+        res.status(201).send({
             "message" : "Cliente cadastrado com sucesso!"
         });
     }
@@ -32,15 +36,97 @@ exports.registerClient = async (req, res, next) => {
     }
 };
 
+exports.authenticateClient = async (req, res, next) => {
+    console.log("Executing authenticateClient()");
+    try {
+        const client = await Client.findOne({
+            email: data.email,
+            password: crypto.createHash("sha256").update(str(data.password) + process.env.SALT_KEY).digest("hex")
+        });
+        
+        if(!client) {
+            res.status(404).send({
+                message: 'Usuário ou senha inválidos.'
+            });
+            return;
+        }
+
+        const token = await authService.generateToken({
+            id: client._id,
+            email: client.email,
+            name: client.name,
+            roles: client.roles
+        });
+
+        res.status(201).send({
+            token: token,
+            data: {
+                email: client.email,
+                name: client.name
+            }
+        });
+    }
+    catch (err) {
+        res.status(500).send({
+            message: 'Falha ao processar requisição.'
+        });
+    }
+};
+
+exports.refreshToken = async(req, res, next) => {
+    console.log("Executing refreshToken()");
+
+    try {
+        const token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+        if (!token) {
+            res.status(401).json({
+                message: 'Acesso não autorizado.'
+            });
+        }
+
+        const data = await authService.decodeToken(token);
+
+        const client = await Client.findOne({ email: data.email});
+
+        if (!client) {
+            res.status(404).send({
+                message: 'Cliente não encontrado.'
+            });
+            return;
+        }
+
+        const newToken = await authService.generateToken({
+            id: client._id,
+            email: client.email,
+            name: client.name,
+            roles: client.roles
+        });
+
+        res.status(201).send({
+            token: newToken,
+            data: {
+                email: client.email,
+                name: client.name
+            }
+        });
+    } 
+    catch (err) {
+        res.status(500).send({
+            message: 'Falha ao processar sua requisição.'
+        });
+    }
+};
+
 exports.deleteClient = async (req, res, next) => { 
     console.log("Executing deleteProductById()");
     
-    // must be admin to do this, must validate later!!
+    // TO DO: must be admin to do this, must validate later!!
 
     let userID = req.params.id;
 
     try {
-        await ClientModel.findOneAndRemove(userID);
+        await Client.findOneAndRemove(userID);
         res.status(200).send({
             "message" : "Cliente removido com sucesso!"
         });
@@ -56,12 +142,12 @@ exports.deleteClient = async (req, res, next) => {
 exports.getUserInfo = async (req, res, next) => { 
     console.log("Executing getUserInfo()");
     
-    // must be admin or the current user to do this!!
+    // TO DO: must be admin or the current user to do this!!
 
     let userMail = req.params.email;
 
     try {
-        await ClientModel.findOne({ email: userMail})
+        await Client.findOne({ email: userMail})
         res.status(200).send(data);
     }
     catch (err) {
@@ -74,8 +160,11 @@ exports.getUserInfo = async (req, res, next) => {
 
 exports.getUsersList = async (req, res, next) => {
     console.log("Executing getUsersList()");
+
+    // TO DO: must be admin to do this!!
+    
     try {
-        let data = await ClientModel.find({}, 'name email');
+        let data = await Client.find({}, 'name email');
         res.status(200).send(data);
     }
     catch (err) {
@@ -91,10 +180,10 @@ exports.updateUser = async (req, res, next) => {
 
     console.log("Executing updateProductById()");
 
-    // Only the user can edit itself, must validate!!!
+    // TO DO: Only the user can edit itself or the admin can edit anyone, must validate!!!
 
     try {
-        await ClientModel.findByIdAndUpdate(userID, {
+        await Client.findByIdAndUpdate(userID, {
             $set: {
                 name: req.body.username,
                 email: req.body.email,

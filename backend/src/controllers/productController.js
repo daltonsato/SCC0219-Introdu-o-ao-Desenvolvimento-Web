@@ -3,13 +3,13 @@
 // To learn how to upload images: https://www.youtube.com/watch?v=BD39FmSlJTs&list=PLHlHvK2lnJndvvycjBqQAbgEDqXxKLoqn&index=33
 const mongoose = require('mongoose');
 
-const ProductModel = mongoose.model('Product');
+const Product = mongoose.model('Product');
 
 exports.createProduct = async (req, res, next) => {
-    var newProd = new ProductModel();
+    var newProd = new Product();
     
-    // missing input treatment....
-    // must check if it's admin that is making the request!
+    // TO DO: missing input treatment....
+    // TO DO: must check if it's admin that is making the request!
 
     newProd.name = req.body.name; 
     newProd.slug = req.body.slug; 
@@ -37,7 +37,7 @@ exports.createProduct = async (req, res, next) => {
 exports.getProductsList = async (req, res, next) => {
     console.log("Executing getProductsList()");
     try {
-        let data = await ProductModel.find({}, 'name slug price description category');
+        let data = await Product.find({}, 'name slug price description category');
         res.status(200).send(data);
     }
     catch (err) {
@@ -57,7 +57,7 @@ exports.getProductInfoBySlug = async (req, res, next) => {
     console.log("Product slug: ", prodSlug);
 
     try {
-        await ProductModel.findOne({ slug: prodSlug})
+        await Product.findOne({ slug: prodSlug})
         res.status(200).send(data);
     }
     catch (err) {
@@ -74,7 +74,7 @@ exports.updateProductById = async (req, res, next) => {
     console.log("Executing updateProductById()");
 
     try {
-        await ProductModel.findByIdAndUpdate(prodID, {
+        await Product.findByIdAndUpdate(prodID, {
             $set: {
                 name: req.body.name,
                 slug: req.body.slug,
@@ -104,7 +104,7 @@ exports.deleteProductById = async (req, res, next) => {
     let prodID = req.params.id;
 
     try {
-        await ProductModel.findOneAndRemove(prodID);
+        await Product.findOneAndRemove(prodID);
         res.status(200).send({
             "message" : "Produto removido com sucesso!"
         });

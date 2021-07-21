@@ -33,7 +33,8 @@ const schema = new Schema({
     category: {
         type: String,
         required: true,
-        trim: true
+        enum: ['ovo em pó', 'ovo caipira', 'ovo branco', 'ovo exótico'],
+        default: 'ovo exótico'
     }
 });
 
