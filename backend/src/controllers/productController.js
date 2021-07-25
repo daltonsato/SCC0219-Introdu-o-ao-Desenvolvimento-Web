@@ -42,7 +42,7 @@ exports.getProductsList = async (req, res, next) => {
     }
     catch (err) {
         res.status(400).send({
-            "message" : "Erro ao listas produtos",
+            "message" : "Erro ao listar produtos",
             "data" : err
         });
     }
