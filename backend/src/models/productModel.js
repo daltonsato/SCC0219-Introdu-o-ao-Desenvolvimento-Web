@@ -33,9 +33,10 @@ const schema = new Schema({
     category: {
         type: String,
         required: true,
-        enum: ['ovo em pó', 'ovo caipira', 'ovo branco', 'ovo exótico'],
+        enum: ['pó', 'caipira', 'branco'],
         default: 'ovo exótico'
     }
+    
 });
 
 module.exports = mongoose.model('Product', schema);

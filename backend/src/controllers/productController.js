@@ -22,7 +22,7 @@ exports.createProduct = async (req, res, next) => {
     try {
         await newProd.save();
         res.status(200).send({
-            "message" : "Produto atualizado com sucesso!"
+            "message" : "Produto cadastrado com sucesso!"
         });
     }
     catch (err) {
@@ -37,7 +37,7 @@ exports.createProduct = async (req, res, next) => {
 exports.getProductsList = async (req, res, next) => {
     console.log("Executing getProductsList()");
     try {
-        let data = await Product.find({}, 'name slug price description category');
+        let data = await Product.find({}, 'name slug price quantity suppliers description category');
         res.status(200).send(data);
     }
     catch (err) {
@@ -57,8 +57,18 @@ exports.getProductInfoBySlug = async (req, res, next) => {
     console.log("Product slug: ", prodSlug);
 
     try {
-        await Product.findOne({ slug: prodSlug})
-        res.status(200).send(data);
+        let data = await Product.findOne({ slug: prodSlug});
+        console.log(data);
+        if(data === null)
+        {
+            res.status(400).send({
+                "message" : "Produto não encontrado!"
+            });
+        }
+        else
+        {
+            res.status(200).send(data);
+        }
     }
     catch (err) {
         res.status(400).send({
@@ -104,10 +114,18 @@ exports.deleteProductById = async (req, res, next) => {
     let prodID = req.params.id;
 
     try {
-        await Product.findOneAndRemove(prodID);
-        res.status(200).send({
+        let aux = await Product.findOneAndDelete({slug: prodID});
+        if(aux === null) {
+            res.status(400).send({
+                "message" : "Produto não encontrado!"
+            });
+        }
+        else
+        {
+            res.status(200).send({
             "message" : "Produto removido com sucesso!"
-        });
+            });
+        }
     }
     catch (err) {
         res.status(400).send({

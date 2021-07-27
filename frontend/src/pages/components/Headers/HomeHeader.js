@@ -21,7 +21,14 @@ class HomeHeader extends React.Component {
 
     componentDidMount() {
         const cookies = new Cookies();
-        let sessionCookie = cookies.get('SESSION'); // session cookie from the user (if they have one)
+        let sessionCookie;
+
+        if (cookies.get('ADMIN_SESSION')) {
+            sessionCookie = cookies.get('ADMIN_SESSION'); // session cookie from the user (if they have one)
+        }
+        else {
+            sessionCookie = cookies.get('SESSION'); // session cookie from the user (if they have one)
+        }   
 
         if (sessionCookie) {
             fetch(window.BACKEND_URL + '/user/validate', {

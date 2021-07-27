@@ -2,7 +2,7 @@ const crypto = require('crypto');
 
 const mongoose = require('mongoose');
 
-const Client = mongoose.model('Order');
+const Client = mongoose.model('Client');
 const authService = require('../services/authService');
 
 exports.registerClient = async (req, res, next) => {
@@ -12,15 +12,17 @@ exports.registerClient = async (req, res, next) => {
     let username = req.body.username;
     let password = req.body.password;
     let email = req.body.email;
+    let addresses = [];
 
     // TO DO: Must make some checks before using username, password and email
 
-    let hashedPass = crypto.createHash("sha256").update(str(password) + process.env.SALT_KEY).digest("hex");
+    let hashedPass = crypto.createHash("sha256").update(String(password) + process.env.SALT_KEY).digest("hex");
 
     newClient.name = username;
     newClient.password = hashedPass;
     newClient.email = email;
     newClient.roles = ["user"]; // there are user or admin roles
+    //newClient.addressList = req.body.address;
 
     try {
         await newClient.save();
@@ -36,12 +38,12 @@ exports.registerClient = async (req, res, next) => {
     }
 };
 
-exports.authenticateClient = async (req, res, next) => {
-    console.log("Executing authenticateClient()");
+exports.authenticateUser = async (req, res, next) => {
+    console.log("Executing authenticateUser()");
     try {
         const client = await Client.findOne({
-            email: data.email,
-            password: crypto.createHash("sha256").update(str(data.password) + process.env.SALT_KEY).digest("hex")
+            email: req.body.email,
+            password: crypto.createHash("sha256").update(String(req.body.password) + process.env.SALT_KEY).digest("hex")
         });
         
         if(!client) {
@@ -58,7 +60,24 @@ exports.authenticateClient = async (req, res, next) => {
             roles: client.roles
         });
 
-        res.status(201).send({
+        if (client.roles.includes('admin')) {
+            res.cookie("ADMIN_SESSION", token, {
+                // secure: true, // used with HTTPS !!
+                // httpOnly: true, // avoid XSS JS from stealing cookies
+                sameSite : 'strict',
+                path: '/'
+            });
+        }
+        else {
+            res.cookie("SESSION", token, {
+                // secure: true, // used with HTTPS !!
+                // httpOnly: true, // avoid XSS JS from stealing cookies
+                sameSite : 'strict',
+                path: '/'
+            });
+        }
+
+        res.status(200).send({
             token: token,
             data: {
                 email: client.email,
@@ -103,7 +122,24 @@ exports.refreshToken = async(req, res, next) => {
             roles: client.roles
         });
 
-        res.status(201).send({
+        if (client.roles.includes('admin')) {
+            res.cookie("ADMIN_SESSION", token, {
+                // secure: true, // used with HTTPS !!
+                httpOnly: true,
+                sameSite : 'strict',
+                path: '/'
+            });
+        }
+        else {
+            res.cookie("SESSION", token, {
+                // secure: true, // used with HTTPS !!
+                httpOnly: true,
+                sameSite : 'strict',
+                path: '/'
+            });
+        }
+
+        res.status(200).send({
             token: newToken,
             data: {
                 email: client.email,
@@ -126,10 +162,11 @@ exports.deleteClient = async (req, res, next) => {
     let userID = req.params.id;
 
     try {
-        await Client.findOneAndRemove(userID);
+        let aux = await Client.findOneAndDelete({_id: userID});
         res.status(200).send({
             "message" : "Cliente removido com sucesso!"
         });
+        console.log(aux);
     }
     catch (err) {
         res.status(400).send({
@@ -147,7 +184,7 @@ exports.getUserInfo = async (req, res, next) => {
     let userMail = req.params.email;
 
     try {
-        await Client.findOne({ email: userMail})
+        let data = await Client.findOne({ email: userMail});
         res.status(200).send(data);
     }
     catch (err) {
@@ -160,8 +197,6 @@ exports.getUserInfo = async (req, res, next) => {
 
 exports.getUsersList = async (req, res, next) => {
     console.log("Executing getUsersList()");
-
-    // TO DO: must be admin to do this!!
     
     try {
         let data = await Client.find({}, 'name email');
@@ -178,7 +213,8 @@ exports.getUsersList = async (req, res, next) => {
 exports.updateUser = async (req, res, next) => {
     let userID = req.body.id; // this ID is created by MongoDB
 
-    console.log("Executing updateProductById()");
+    console.log("Executing updateUser()");
+    console.log(req.body);
 
     // TO DO: Only the user can edit itself or the admin can edit anyone, must validate!!!
 
@@ -187,7 +223,7 @@ exports.updateUser = async (req, res, next) => {
             $set: {
                 name: req.body.username,
                 email: req.body.email,
-                password: crypto.createHash("sha256").update(str(req.body.password) + process.env.SALT_KEY).digest("hex")
+                password: crypto.createHash("sha256").update(String(req.body.password) + process.env.SALT_KEY).digest("hex")
             }
         });
         
@@ -196,6 +232,111 @@ exports.updateUser = async (req, res, next) => {
         });
     }
     catch (err) {
+        res.status(400).send({
+            "message" : "Erro ao atualizar dados do cliente.",
+            "data" : err
+        });
+    }
+
+    
+};
+
+exports.addAddress = async (req, res, next) => {
+    
+    let userID = req.body.id;
+    console.log(req.body);
+    try {
+        await Client.findByIdAndUpdate(userID, {
+            $push: {
+                address: req.body.address
+            }
+        });
+
+        res.status(201).send({
+            message: 'Endereço cadastrado'
+        });
+    }
+    catch (err){
+        res.status(400).send({
+            "message" : "Erro ao atualizar dados do cliente.",
+            "data" : err
+        });
+    }
+};
+
+exports.deleteAddress = async (req, res, next) => {
+    
+    let userID = req.body.id
+    let AddrID = req.body.addrid
+    try {
+        let aux = await Client.findByIdAndUpdate(userID, {
+            $pull: {
+                "address": {_id: AddrID}
+            }
+        });
+        console.log(aux);
+        
+        if(aux === null)
+        {
+            res.status(400).send({
+                "message" : "Endereço não encontrado!"
+            });
+            console.log(aux);
+        }
+        else
+        {
+            res.status(200).send({
+                "message" : "Endereço removido com sucesso!"
+            });
+            console.log(aux);
+        }
+    }
+    catch (err) {
+        res.status(400).send({
+            "message" : "Erro ao remover Endereço.",
+            "data" : err
+        });
+    }
+}
+
+exports.toMainAddress = async (req, res, next) => {
+    let userID = req.body.id; 
+    let addrMain = req.body.addrID;
+    let newMain = req.body.new;
+
+    // TO DO: Only the user can edit itself, must validate!!!
+
+    try {
+        await Client.findByIdAndUpdate(userID, {
+
+            
+
+        });
+
+        
+        res.status(200).send({
+            "message" : "Dados do cliente atualizados com sucesso!"
+        });
+    }
+    catch (err) {
+        res.status(400).send({
+            "message" : "Erro ao atualizar dados do cliente.",
+            "data" : err
+        });
+    }
+};
+
+exports.getAddress = async (req, res, next) => {
+    let userID = req.body.id;
+    let addrID = req.body.addrid;
+    console.log(req.body);
+    let num = req.params.address.number;
+    try {
+        res.status(201).send({
+            message: 'Endereço cadastrado'
+        });
+    }
+    catch (err){
         res.status(400).send({
             "message" : "Erro ao atualizar dados do cliente.",
             "data" : err

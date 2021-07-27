@@ -7,6 +7,9 @@ import 'jquery';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
+window.BACKEND_URL = 'http://localhost:1337';
+window.FRONTEND_URL = 'http://localhost:3000';
+
 // created for testing
 window.productsList = {
   "product0" : {
@@ -56,28 +59,6 @@ window.productsList = {
     "description" : "blablabla",
     "suppliers" : "Empresa1",
     "category" : "caipira"
-  }
-};
-
-// created for testing
-window.users = {
-  "user0" : {
-      "name" : "Suero Tiffani",
-      "CPF" : "111.111.111-11",
-      "telContact" : "(11)1111-1111",
-      "email" : "suerotiffani@email.com"
-  },
-  "user1" : {
-    "name" : "Bergljot Antelmo",
-    "CPF" : "222.222.222-22",
-    "telContact" : "(22)2222-2222",
-    "email" : "bergljot_antelmo@email.com"
-  },
-  "user2" : {
-    "name" : "Byelobog Anapa",
-    "CPF" : "333.333.333-33",
-    "telContact" : "(33)3333-3333",
-    "email" : "byelobog_anapa@email.com"
   }
 };
 
@@ -151,7 +132,7 @@ window.userAddress = {
 
 };
 
-// created for testing
+// Only stored in the database after order is finished
 window.shoppingCart = {};
 
 // created for testing

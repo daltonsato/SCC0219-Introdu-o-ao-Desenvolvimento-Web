@@ -142,13 +142,12 @@ All the functionality is still under construction because there's no backend. Fo
 ## Problems
 - We've spent a lot of time on this, but the header is not working as it should on mobile phones (small screens). It looks like a problem with `popper.js`, but we didn't manage to solve it yet.
 - The onClick funtion on the div that prompts to add another address is called by its children, an image and a text causing some problems if you click exactly on them. we coudnt resolve this issue properly, the sub-optimal solution makes that if you click in the image or text of the div the onClick function will not be called  
+- More and more problems... Infinite loop in `/admin` after getting list of users/products because of useEffect. Can't find a way to fix it and make the page work
+- Set-Cookie header sent from the backend stopped working and we don't know why and can't fix it
 
 ## Comments: 
 _// TO DO: Any comments you wish to add._
 ### Next Steps:
 - Add more modularization, remove redundancies
-- Develop back-end using Node.js
-- Use Passport to authenticate users
-- Start using a real database to store users, products, shopping carts etc.
 - Fix header when using small screens (it collapses into a menu icon but doesn't show the menu's options wen needed)
 

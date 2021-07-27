@@ -12,13 +12,11 @@ import add from '../../images/Add.png';
 
 
 export default function Userpage() {
-
     const cookies = new Cookies();
     let history = useHistory(); // used to redict user
-   
-    let testCookie = "280E8410C4A05326EB815B577B05574FDFB4AE016C399ACF1B02CFE5C59D59FE"; // sha-256 -> ganeshtestlogin (used for testing)
-	let activeUserSession = [ testCookie ];
+    let sessionCookie;
 
+    const [ isLogged, setIsLogged ] = useState(false);
     const [,setValue] = useState();    
 
     //deletes an address
@@ -105,45 +103,64 @@ export default function Userpage() {
     
     //save the input values and creates a new address
     function saveAddr(props){
+        //funtion only works if all input values are not null
+        if(document.getElementById("street").value !== "" && document.getElementById("number").value !== "" && document.getElementById("city").value !== "" && document.getElementById("CEP").value !== ""){
+                
+            // Sets an ID for the new product and inserts it in the list of addresses
+            let newProdId;
+            do {
+                newProdId = "addr" + Math.floor(Math.random() * 1001); // random from 0 to 1000
+            } while (newProdId in window.userAddress);
 
-            //funtion only works if all input values are not null
-            if(document.getElementById("street").value !== "" && document.getElementById("number").value !== "" && document.getElementById("city").value !== "" && document.getElementById("CEP").value !== ""){
-                 
-                // Sets an ID for the new product and inserts it in the list of addresses
-                let newProdId;
-                do {
-                    newProdId = "addr" + Math.floor(Math.random() * 1001); // random from 0 to 1000
-                } while (newProdId in window.userAddress);
-    
-                window.userAddress[newProdId] = {
-                    "nickname" : "",
-                    "street" : document.getElementById("street").value,
-                    "number" : document.getElementById("number").value,
-                    "complement" : "",
-                    "city" :  document.getElementById("city").value,
-                    "state" : "",
-                    "CEP" : document.getElementById("CEP").value,
-                    "main" : "0"
-                }
-                //re-render the elements of the page
-                history.push("");
-                history.push("my-profile");
-           }else{
-               alert("Preencha todos os campos");
-           }
-
-         
-        
+            window.userAddress[newProdId] = {
+                "nickname" : "",
+                "street" : document.getElementById("street").value,
+                "number" : document.getElementById("number").value,
+                "complement" : "",
+                "city" :  document.getElementById("city").value,
+                "state" : "",
+                "CEP" : document.getElementById("CEP").value,
+                "main" : "0"
+            }
+            //re-render the elements of the page
+            history.push("");
+            history.push("my-profile");
+        }
+        else{
+            alert("Preencha todos os campos");
+        }
     }
 
-    if (!activeUserSession.includes(cookies.get("SESSION"))) {
+    if (cookies.get('ADMIN_SESSION')) {
+        sessionCookie = cookies.get('ADMIN_SESSION');
+    }
+    else {
+        sessionCookie = cookies.get('SESSION');
+    }   
+
+    if (sessionCookie) {
+        fetch(window.BACKEND_URL + '/user/validate', {
+            method: 'POST',
+            headers: {
+                'x-access-token': sessionCookie
+            }
+        })
+        .then((res) => res.json())
+        .then((result) => {
+            if (result.token_status === "OK")
+                setIsLogged(true);
+        });
+    }
+
+    if (!isLogged) {
         history.push("/store");
         return (<div>Você precisa estar logado para ver essa página</div>);
     }
 
 	function logOut(props){
-		if(activeUserSession.includes(cookies.get("SESSION"))){
-			cookies.remove("SESSION", {path: "/", domain: "localhost"});
+		if(isLogged){
+			cookies.remove("SESSION");
+            cookies.remove("ADMIN_SESSION");
 			history.push("/");
 		}
 	}

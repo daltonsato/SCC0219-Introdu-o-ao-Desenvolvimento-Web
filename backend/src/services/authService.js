@@ -10,6 +10,8 @@ exports.decodeToken = async (token) => {
 };
 
 exports.authorize = (req, res, next) => {
+    console.log("Executing authorize()");
+
     let token = req.body.token || req.query.token || req.headers['x-access-token'];
 
     if (!token) {

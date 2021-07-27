@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie'; // cookies used for testing
 
 // CSS
@@ -16,6 +16,8 @@ export default function Store() {
     let testCookie = "280E8410C4A05326EB815B577B05574FDFB4AE016C399ACF1B02CFE5C59D59FE"; // sha-256 -> ganeshtestlogin (used for testing)
 	let activeUserSession = [ testCookie ];
     const cookies = new Cookies();
+    let [ productsList, setProdsList ] = useState([]);
+    let loadedProds = false;
 
     // Function that shows the description of a product (triggered when user click on the item's image)
     let showDescription = (props) => {
@@ -101,20 +103,54 @@ export default function Store() {
        
     }
 
+    var listProducts = async () => {
+        var products = [];
+
+        let respProducts = await fetch(window.BACKEND_URL + '/products/list-all');
+        console.log(respProducts);
+
+        if(respProducts.status === 200) {
+            respProducts.json().then((propsData) => {
+                propsData.forEach((prod) => {
+                    products.push(prod);
+                })
+            });
+            return products;
+        }
+        else
+        {
+            console.log("Deu ruim!");
+            return null;
+        }
+    }
+
     const eggsCaipira = [];
     const eggsBranco = [];
     const eggsPo = [];
 
-    // Loading all eggs to the page (3 categories)
+    //listProducts().then((res) => {
+    //    if(res.status === 200) { // got list of products
+    //        res.json().then((prods) => {
+    //            console.log(prods);
+    //        });
+    //    }
+    //});
 
-    for (const [eggID, eggDetails] of Object.entries(window.productsList)) {
+    // setProdsList(listProducts(), [loadedProds]);
+
+    // useEffect(() => setProdsList(listProducts()));
+    
+    // Loading all eggs to the page (3 categories)
+    for (const [eggID, eggDetails] of Object.entries(productsList)) {
+        console.log(eggDetails);
+        console.log("aqui");
         // src={require("./../../images/ovos.png")} -> not working...
         //  Popper not working properly -> data-toggle="popover" data-content="Produto adicionado ao carrinho!"
         if (eggDetails.category === "caipira") {
             eggsCaipira.push(
                 <div key={"div_" + eggID} id={"div_" + eggID} className= "d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
                     <div className = "productContainer">
-                        <h6 > {eggDetails.name} </h6>
+                        <h6 > {eggID} </h6>
                         <img className="storeImgHover img-fluid w-50 rounded mx-auto d-block py-4" src={ovo} alt="ovo" onClick={showDescription}/>
                         <h6 className = "pb-2"> Preço: R$ {eggDetails.price} </h6>
                         <div id={eggID} className = "storeBuyButton mx-auto w-50" onClick={addToCart}>
@@ -124,7 +160,7 @@ export default function Store() {
                     <div id={"modalBox_"+eggID} className="modalBox d-none"> 
                         <div className="modalBoxContent">
                             <span className="closeModalButton" onClick={closeModalBox}>&times;</span>
-                            <h1> Descrição - {eggDetails.name}: </h1>
+                            <h1> Descrição - {eggID}: </h1>
                             <p> {eggDetails.description}</p>
                         </div>
                     </div>
@@ -135,7 +171,7 @@ export default function Store() {
             eggsBranco.push(
                 <div key={"div_" + eggID} id={"div_" + eggID} className= "d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
                     <div className = "productContainer">
-                        <h6 > {eggDetails.name} </h6>
+                        <h6 > {eggID} </h6>
                         <img className="storeImgHover img-fluid w-50 rounded mx-auto d-block py-4" src={ovo} alt="ovo" onClick={showDescription}/>
                         <h6 className = "pb-2"> Preço: R$ {eggDetails.price} </h6>
                         <div id={eggID} className = "storeBuyButton mx-auto w-50" onClick={addToCart}>
@@ -145,7 +181,7 @@ export default function Store() {
                     <div id={"modalBox_"+eggID} className="modalBox d-none"> 
                         <div className="modalBoxContent">
                             <span className="closeModalButton" onClick={closeModalBox}>&times;</span>
-                            <h1> Descrição - {eggDetails.name}: </h1>
+                            <h1> Descrição - {eggID}: </h1>
                             <p> {eggDetails.description}</p>
                         </div>
                     </div>
@@ -156,7 +192,7 @@ export default function Store() {
             eggsPo.push(
                 <div key={"div_" + eggID} id={"div_" + eggID} className= "d-flex justify-content-center align-itens-center col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
                     <div className = "productContainer">
-                        <h6 > {eggDetails.name} </h6>
+                        <h6 > {eggID} </h6>
                         <img className="storeImgHover img-fluid w-50 rounded mx-auto d-block py-3" src={ovoPo} alt="ovo em pó" onClick={showDescription}/>
                         <h6 className = "pb-2"> Preço: R$ {eggDetails.price} </h6>
                         <div id={eggID} className = "storeBuyButton mx-auto w-50" onClick={addToCart}>
@@ -166,12 +202,16 @@ export default function Store() {
                     <div id={"modalBox_"+eggID} className="modalBox d-none"> 
                         <div className="modalBoxContent">
                             <span className="closeModalButton" onClick={closeModalBox}>&times;</span>
-                            <h1> Descrição - {eggDetails.name}: </h1>
+                            <h1> Descrição - {eggID}: </h1>
                             <p> {eggDetails.description}</p>
                         </div>
                     </div>
                 </div>
             );
+        }
+        else
+        {
+            console.log("Vazio");
         }
     }
 

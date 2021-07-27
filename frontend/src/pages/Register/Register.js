@@ -59,7 +59,7 @@ export default function Login() {
                     <div className="col d-flex align-items-center justify-content-center">
                         <input className="loginFormButton my-5 py-3 px-5 shadow" type="submit" value="Criar conta"></input>
                     </div>
-                    <div id="alertText" className="text-center"> <h3 id="alertH3"></h3></div>
+                    <div id="alertText" className="text-center"> <h3 id="alertH3">-</h3></div>
                 </form>
                 
             </div>
