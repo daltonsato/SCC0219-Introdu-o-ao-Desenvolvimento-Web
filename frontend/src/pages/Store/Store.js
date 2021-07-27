@@ -12,11 +12,9 @@ import ovo from '../../images/ovos.png';
 import ovoPo from '../../images/ovoPo.png';
 
 export default function Store() {
-    // Cookies used for testing
-    let testCookie = "280E8410C4A05326EB815B577B05574FDFB4AE016C399ACF1B02CFE5C59D59FE"; // sha-256 -> ganeshtestlogin (used for testing)
-	let activeUserSession = [ testCookie ];
     const cookies = new Cookies();
     let [ productsList, setProdsList ] = useState([]);
+    let [ isLogged, setIsLogged ] = useState(false);
 
     // Function that shows the description of a product (triggered when user click on the item's image)
     let showDescription = (props) => {
@@ -60,7 +58,7 @@ export default function Store() {
     // Function that adds an item to the user's shopping cart
     // A message is shown to alert the user about the action
     let addToCart = (props) => {
-        if (!activeUserSession.includes(cookies.get("SESSION"))) {
+        if (!isLogged) {
             let popup = document.getElementById("addItemPopup");
             let popupText = document.getElementById("popupText");
             popupText.innerHTML = "Você precisa estar logado para adicionar itens ao carrinho!";
@@ -78,7 +76,7 @@ export default function Store() {
         }
         let productID = props.target.parentNode.id;
         if (window.shoppingCart[productID] === null || window.shoppingCart[productID] === undefined) {
-            window.shoppingCart[productID] = {"prodName": window.productsList[productID].name, "quantity" : 1, "price" : window.productsList[productID].price};
+            window.shoppingCart[productID] = {"prodName": productsList[productID].name, "quantity" : 1, "price" : productsList[productID].price};
 			console.log(window.shoppingCart[productID]);
         }
         else {
@@ -119,7 +117,32 @@ export default function Store() {
         else {
             return null;
         }
-    }
+    };
+
+    var checkIfLogged = async () => {
+        if (isLogged)
+            return true;
+        
+            let sessionCookie = cookies.get("ADMIN_SESSION");
+            if (sessionCookie == null)
+                sessionCookie = cookies.get("SESSION");
+
+        let resp = await fetch(window.BACKEND_URL + '/user/validate', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'x-access-token': sessionCookie
+            }
+        });
+
+        resp = await resp.json();
+
+        if (resp.token_status === "OK")
+            return true;
+        else
+            return false;
+    };
 
     const eggsCaipira = [];
     const eggsBranco = [];
@@ -129,6 +152,12 @@ export default function Store() {
         listProducts().then((prods) => {
             setProdsList(prods);
         });
+    }
+
+    if (!isLogged) {
+        checkIfLogged().then(() => {
+            setIsLogged(true);
+        })
     }
     
     // Loading all eggs to the page (3 categories)
