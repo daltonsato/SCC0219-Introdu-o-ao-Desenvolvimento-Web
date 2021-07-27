@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Cookies from 'universal-cookie'; // used for testing in the frontend, cookies will be assigned in the backend
+import Cookies from 'universal-cookie';
 
 // CSS
 import './HomeHeader.css';
@@ -11,17 +11,40 @@ import './HomeHeader.css';
 import EggLogo from '../../../images/egg_logo.png';
 import ShoppingCart from '../../../images/shopping_cart_home.svg';
 import MyProfileImg from '../../../images/my_profile_icon.svg';
-
 class HomeHeader extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLogged: false
+        };
+    }
+
+    componentDidMount() {
+        const cookies = new Cookies();
+        let sessionCookie = cookies.get('SESSION'); // session cookie from the user (if they have one)
+
+        if (sessionCookie) {
+            fetch(window.BACKEND_URL + '/user/validate', {
+                method: 'POST',
+                headers: {
+                    'x-access-token': sessionCookie
+                }
+            })
+            .then((res) => res.json())
+            .then((result) => {
+                this.setState({
+                    isLogged: true, 
+                });
+            });
+        }
+    }
+
     render() {
-        const activeSessions = [ "280E8410C4A05326EB815B577B05574FDFB4AE016C399ACF1B02CFE5C59D59FE" ]; // used for testing, this will be treated in the backend later
-        
+        const { isLogged } = this.state;
+
         let isLoggedComponent; // components that changes based on wether the user is logged or not (shows some different info)
 
-        const cookies = new Cookies();
-        let sessionCookie = cookies.get('SESSION'); // session cookie from the user (if he/she has one)
-
-        if (activeSessions.includes(sessionCookie)) { // if user is logged in...
+        if (isLogged) { // if user is logged in...
             isLoggedComponent = (
                 <li className="nav-item d-flex">
                     <Link className="nav-link navBarLinkLoginImg d-flex align-items-center justify-content-center py-1 px-1 mx-1" to="/shopping-cart"> 
@@ -33,7 +56,6 @@ class HomeHeader extends React.Component {
                 </li> );
         }
         else { // user is not logged in
-            console.log("not in active sessions");
             isLoggedComponent = (
                 <li className="nav-item">
                     <Link className="nav-link navBarLinkLogin py-1 px-2 mx-2" to="/login">Login / Criar conta</Link>
