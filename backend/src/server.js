@@ -4,7 +4,7 @@ const express = require('express');
 // const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
-const cors = require('cors')
+const cors = require('cors');
 
 // Schemas
 require('./models/clientModel');
@@ -35,7 +35,12 @@ catch (err) {
     return;
 }
 
-app.use(cors()); // Cross-Origin Resource Sharing
+var corsOptions = {
+    origin: 'http://localhost:3000' ,
+    credentials: true
+}
+
+app.use(cors(corsOptions)); // Cross-Origin Resource Sharing
 app.use(express.json()); // used to parse JSON bodies
 // app.use(express.urlencoded()); // parse URL-encoded bodies -> deprecated
 
