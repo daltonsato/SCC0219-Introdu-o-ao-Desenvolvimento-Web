@@ -24,10 +24,7 @@ router.post('/user/login', clientController.authenticateUser); // authenticates 
 router.delete('/user/delete/:id', clientController.deleteClient); // only admin can do this
 router.put('/user/update', authService.authorize || authService.isAdmin, clientController.updateUser); // only the user can edit itself
 router.put('/user/add-address', clientController.addAddress);
-router.get('/user/get-add/:address', clientController.getAddress);
 router.delete('/user/deleteAddr', clientController.deleteAddress);
-router.put('/user/main-address', clientController.toMainAddress);
-
 
 // Products routes
 router.get('/products/info/:slug', productController.getProductInfoBySlug);
