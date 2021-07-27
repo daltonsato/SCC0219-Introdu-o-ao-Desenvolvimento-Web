@@ -128,7 +128,7 @@ export default function AdminLogin() {
                 // setProdDiv(productsDivs => [...productsDivs, newElement]);
                 // Isso causa um looping infinito devido a forma como o useEffect funciona
                 // Tentei corrigir de mil formas diferentes mas nenhuma funciona
-                // Desisto, o tempo dedico a esse projeto já foi infinitamente maior que o necessário/correto/saudável
+                // Desisto, o tempo dedicado a esse projeto já foi infinitamente maior que o necessário/correto/saudável
                 
             // }
 
@@ -154,7 +154,7 @@ export default function AdminLogin() {
                 // setUsersDiv(usersDivs => [...usersDivs, newElement]);
                 // Isso causa um looping infinito devido a forma como o useEffect funciona
                 // Tentei corrigir de mil formas diferentes mas nenhuma funciona
-                // Desisto, o tempo dedico a esse projeto já foi infinitamente maior que o necessário/correto/saudável
+                // Desisto, o tempo dedicado a esse projeto já foi infinitamente maior que o necessário/correto/saudável
             // }
         }
             // console.log("usersDivs filled:", usersDivs);
