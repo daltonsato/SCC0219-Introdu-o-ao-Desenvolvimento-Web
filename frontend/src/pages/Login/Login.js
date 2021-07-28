@@ -21,7 +21,7 @@ export default function Login() {
             "password": passwd  
         };
 
-        let resp = await fetch(process.env.BACKEND_URL +'/user/login', {
+        let resp = await fetch(window.BACKEND_URL +'/user/login', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

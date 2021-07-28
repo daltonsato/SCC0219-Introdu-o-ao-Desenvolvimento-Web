@@ -139,7 +139,7 @@ export default function Userpage() {
         if (sessionCookie == null)
             sessionCookie = cookies.get("SESSION");
             
-        let resp = await fetch(process.env.BACKEND_URL + '/user/validate', {
+        let resp = await fetch(window.BACKEND_URL + '/user/validate', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

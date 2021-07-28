@@ -10,6 +10,9 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 const dotenv = require('dotenv');
 dotenv.config();
 
+window.BACKEND_URL = 'http://localhost:1337';
+window.FRONTEND_URL = 'http://localhost:3000';
+
 //created for testing
 window.purchaseHistory = {
   "purchase0" : {

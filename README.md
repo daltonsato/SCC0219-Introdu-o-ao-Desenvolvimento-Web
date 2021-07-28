@@ -159,7 +159,7 @@ The `/admin` path contains the administrator pages. A default creadencial you ca
 
 You can registers new account in `/register`.
 
-There are 2 important variables "fixed" in the `index.js` file (in `/frontend/src`): the `BACKEND_URL` and the `FRONTEND_URL`. If you're running the front and backend locally, there's no need to change anything. On the contrary, change these to the APIs of your front and backend.
+If you're running the front and backend locally, there's no need to change anything. On the contrary, change the `.env` BACKEND_URL and FRONTEND_URL to the APIs of your front and backend.
 
 All pages from the mockup are included in the project. You can navigate through most of them starting at the `Homepage`. However, the `/admin` page is only accessible by typing in the URL: `http://localhost:3000/admin` (to avoid normal users "exploring" the admin login page). 
 

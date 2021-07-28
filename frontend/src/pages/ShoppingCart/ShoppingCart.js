@@ -29,7 +29,7 @@ export default function ShoppingCart() {
 	let increase = async (props) =>{
 		let productID = props.target.parentNode.id;
 
-		let quantityProdAvaible = await fetch(process.env.BACKEND_URL + '/products/info/' + window.shoppingCart[productID].slug);
+		let quantityProdAvaible = await fetch(window.BACKEND_URL + '/products/info/' + window.shoppingCart[productID].slug);
 		quantityProdAvaible = (await quantityProdAvaible.json()).quantity;
 		console.log(quantityProdAvaible);
 
@@ -61,7 +61,7 @@ export default function ShoppingCart() {
 		if (sessionCookie == null)
 			sessionCookie = cookies.get("SESSION");
 
-        let resp = await fetch(process.env.BACKEND_URL + '/user/validate', {
+        let resp = await fetch(window.BACKEND_URL + '/user/validate', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

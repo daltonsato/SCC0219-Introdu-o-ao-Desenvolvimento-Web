@@ -33,7 +33,7 @@ export default function AdminEditProduct() {
 
         // console.log("Antes da alteração: ", window.productsList[params.id])
         
-        let respUpdate = await fetch(process.env.BACKEND_URL + '/products/update', {
+        let respUpdate = await fetch(window.BACKEND_URL + '/products/update', {
             method: 'PUT',
             headers: {
                 "x-access-token": cookies.get("ADMIN_SESSION"),
@@ -71,7 +71,7 @@ export default function AdminEditProduct() {
     var listProducts = async () => {
         var products = [];
 
-        let respProducts = await fetch(process.env.BACKEND_URL + '/products/list-all');
+        let respProducts = await fetch(window.BACKEND_URL + '/products/list-all');
 
         if(respProducts.status === 200) {
             let prodsData = await respProducts.json();
@@ -93,7 +93,7 @@ export default function AdminEditProduct() {
         
         let sessionCookie = cookies.get("ADMIN_SESSION");
 
-        let resp = await fetch(process.env.BACKEND_URL + '/user/validate', {
+        let resp = await fetch(window.BACKEND_URL + '/user/validate', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
