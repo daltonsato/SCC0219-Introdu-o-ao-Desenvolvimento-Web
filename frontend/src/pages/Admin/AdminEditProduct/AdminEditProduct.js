@@ -1,9 +1,9 @@
 // Page used by the admin to edit the details of a product
 
-import React from 'react';
+import React, { useState } from 'react';
 import Cookies from 'universal-cookie'; // temporary, just to test login and cookies 
 
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useParams } from "react-router";
 
 import Footer from '../../components/Footer/Footer'
@@ -12,17 +12,19 @@ import './AdminEditProduct.css';
 
 export default function AdminEditProduct() {
     const cookies = new Cookies();
-    let history = useHistory(); // used to redict user
     let params = useParams(); // params in URL (see routes.js)
 
-    // used to test cookies (repeated throughout pages...)
-    let testCookieAdmin = "3D6C9103FE7C1073E52A94212A82EC95C87F35F37C697B2C338A5CB31458A66A"; // sha-256 -> ganeshadmin (used for testing)
-    let activeAdminSession = [ testCookieAdmin ];
+    const [ isLogged, setIsLogged ] = useState(false);
+    const [ done, setDone ] = useState(false);
+
+    const [ productsList, setProdList ] = useState([]);
 
     let productComponent; // element that contains details about the product that will be edited
 
     // Function to save changes made to the product that was being modified
-    var saveProductChanges = () => {
+    var saveProductChanges = async () => {
+        let product = productsList[params.id];
+
         let name = document.getElementById("name").value;
         let price = document.getElementById("price").value;
         let quantity = document.getElementById("quantity").value;
@@ -31,37 +33,109 @@ export default function AdminEditProduct() {
 
         // console.log("Antes da alteração: ", window.productsList[params.id])
 
-        // (temporary) changing the details about the product to the new values set
-        window.productsList[params.id].name = name;
-        window.productsList[params.id].price = price;
-        window.productsList[params.id].quantity = quantity;
-        window.productsList[params.id].description = description;
-        window.productsList[params.id].suppliers = suppliers;
+        let respUpdate = await fetch(window.BACKEND_URL + '/products/update', {
+            method: 'PUT',
+            headers: {
+                "x-access-token": cookies.get("ADMIN_SESSION"),
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'id' : product._id,
+                'name': name,
+                'slug': product.slug,
+                'price': price,
+                'quantity': quantity,
+                'description': description,
+                'suppliers': suppliers,
+                'category': product.category
+            })
+        });
 
-        // console.log("Alteração feita com sucesso: ", window.productsList[params.id]);
+        if (respUpdate.status === 200) {
+            // console.log("Alteração feita com sucesso: ", window.productsList[params.id]);
         
-        // Shows popup to admin telling that the modifications were made
-        let popup = document.getElementById("saveChangesPopup");
-        let popupText = document.getElementById("popupText");
-        popupText.innerHTML += "Alterações salvas!<br/>";
+            // Shows popup to admin telling that the modifications were made
+            let popup = document.getElementById("saveChangesPopup");
+            let popupText = document.getElementById("popupText");
+            popupText.innerHTML += "Alterações salvas!<br/>";
 
-        popup.classList.remove("d-none");
+            popup.classList.remove("d-none");
 
-        setTimeout(() => { 
-            popup.classList.add("d-none"); 
-            popupText.innerHTML = "";
-        }, 2500);
+            setTimeout(() => { 
+                popup.classList.add("d-none"); 
+                popupText.innerHTML = "";
+            }, 2500);
+        }        
+    };
+
+    var listProducts = async () => {
+        var products = [];
+
+        let respProducts = await fetch(window.BACKEND_URL + '/products/list-all');
+
+        if(respProducts.status === 200) {
+            let prodsData = await respProducts.json();
+
+            prodsData.forEach((prod) => {
+                products.push(prod);
+            });
+
+            return products;
+        }
+        else {  
+            return null;
+        }
+    };
+
+    var checkIfLogged = async () => {
+        if (isLogged)
+            return true;
+        
+        let sessionCookie = cookies.get("ADMIN_SESSION");
+
+        let resp = await fetch(window.BACKEND_URL + '/user/validate', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'x-access-token': sessionCookie
+            }
+        });
+
+        resp = await resp.json();
+
+        if (resp.token_status === "OK")
+            return true;
+        else
+            return false;
+    };
+
+    if (!isLogged) {
+        checkIfLogged().then((res) => {
+            setIsLogged(res);
+            if (res === true) {
+                listProducts().then((prods) => {
+                    setProdList(prods);
+                    setDone(true);
+                });
+            }
+            else {
+                setDone(true);
+            }
+        });
     }
 
     // If user is not logged as admin (doesn't have admin cookies), user can't access page
-    if (!activeAdminSession.includes(cookies.get("ADMIN_SESSION"))) {
-        history.push("/admin"); // not an admin, can't access this page
+    if (!isLogged) {
+        // history.push("/admin"); // not an admin, can't access this page
+        if (done)
+            document.location = '/admin';
         return (<div> Redirecting... </div>);
     }
     else {
         // Checks if the product ID passed in the URL is related to a product (if so, shows details about the product)
-        if (window.productsList[params.id] !== undefined && window.productsList[params.id] !== null) {
-            let product = window.productsList[params.id]
+        if (productsList[params.id] !== undefined && productsList[params.id] !== null) {
+            let product = productsList[params.id];
             productComponent = (
                 <div className="col m-3 p-3 bg-white shadow">
                     <div className="row d-flex flex-column">
