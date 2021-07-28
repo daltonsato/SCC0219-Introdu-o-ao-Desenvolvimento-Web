@@ -84,7 +84,7 @@ exports.updateProductById = async (req, res, next) => {
     console.log("Executing updateProductById()");
 
     try {
-        await Product.findByIdAndUpdate(prodID, {
+        await Product.updateOne({'_id' : prodID}, {
             $set: {
                 name: req.body.name,
                 slug: req.body.slug,

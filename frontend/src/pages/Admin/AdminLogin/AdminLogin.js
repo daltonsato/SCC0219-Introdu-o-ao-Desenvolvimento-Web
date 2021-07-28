@@ -17,16 +17,13 @@ export default function AdminLogin() {
     
     const [ isLogged, setIsLogged ] = useState(false);
     const [ done, setDone ] = useState(false);
-    
-    const [ prodCount, setProdCount ] = useState(0);
-    const [ userCount, setUserCount ] = useState(0);
 
     var [productsDivs, setProdDiv] = useState([]);
     var [usersDivs, setUsersDiv] = useState([]);
 
     // Trigger to see details about a product (should change when we have backend)
     var goToEditProdPage = (event) => {
-        // console.log(event.target.id);
+        console.log(event.target.id);
         history.push('/admin/edit-product/'+event.target.id); // redirects to /admin/product...   
     };
 
@@ -101,7 +98,7 @@ export default function AdminLogin() {
 
         if (resp.status === 200) {
             resp.json().then((data) => {
-                document.location('/admin');
+                document.location = '/admin';
             });
         }
     }
@@ -145,7 +142,6 @@ export default function AdminLogin() {
             let auxDivs = [];
             // Creating divs with the data from products (see temporary dictinary in index.js)
             for (const [productID, productDetails] of Object.entries(products)) {
-                console.log(productID + ") productDetails:", productDetails);
                 let newElement = (
                     <li key={"li_prod_"+productID} className="adminProductListItem shadow d-flex align-itens-center justify-content-center p-3 my-3">
                         <div className="text-left px-3 w-100">
@@ -161,34 +157,33 @@ export default function AdminLogin() {
                     </li>
                 );
 
-                auxDivs.push(auxDivs);
-                
-                console.log("productsDivs:", productsDivs);    
+                auxDivs.push(newElement);
             }
-            if (!productsDivs.includes(auxDivs))
-                setProdDiv(productsDivs => [...productsDivs, auxDivs], [done]);
-            return (<div></div>);
+            
+            setProdDiv(productsDivs => [...productsDivs, auxDivs], [done]);
+
+            auxDivs = [];
 
             // Creating divs with the data from users (see temporary dictinary in index.js)
-            // for (const [userID, userDetails] of Object.entries(users)) {
-                // let newElement = (
-                //     <li key={"li_user_"+userID} className="adminProductListItem shadow d-flex align-itens-center justify-content-center p-3 my-3">
-                //         <div className="text-left px-3 w-50">
-                //             <span className="align-middle"> {userID} </span>
-                //         </div>
-                //         <div className="d-flex w-100 align-itens-center justify-content-center text-center d-none d-sm-none d-md-none d-lg-inline">
-                //             <span className="align-middle px-3"> {userDetails.name} - CPF: {userDetails.CPF} </span> 
-                //         </div>
-                //         <div className="d-flex w-50 justify-content-end">
-                //             <input id={userID} className="adminProductListButton py-2 px-4" type="button" value="Ver mais" onClick={goToEditUserPage}></input>
-                //         </div>
-                //     </li>
-                // );
+            for (const [userID, userDetails] of Object.entries(users)) {
+                let newElement = (
+                    <li key={"li_user_"+userID} className="adminProductListItem shadow d-flex align-itens-center justify-content-center p-3 my-3">
+                        <div className="text-left px-3 w-50">
+                            <span className="align-middle"> {userDetails.name} </span>
+                        </div>
+                        <div className="d-flex w-100 align-itens-center justify-content-center text-center d-none d-sm-none d-md-none d-lg-inline">
+                            <span className="align-middle px-3"> {userDetails.email} </span> 
+                        </div>
+                        <div className="d-flex w-50 justify-content-end">
+                            <input id={userDetails.email} className="adminProductListButton py-2 px-4" type="button" value="Ver mais" onClick={goToEditUserPage}></input>
+                        </div>
+                    </li>
+                );
 
-                // setUsersDiv(usersDivs => [...usersDivs, newElement]);
-            // }
+                auxDivs.push(newElement);   
+            }
+            setUsersDiv(usersDivs => [...usersDivs, auxDivs]);
         }
-            // console.log("usersDivs filled:", usersDivs);
     }
 
     if (!isLogged && !done) {
@@ -197,7 +192,6 @@ export default function AdminLogin() {
             if (res === true) {
                 loadUsersAndProducts().then(() => {
                     setDone(true);
-                    console.log("productsDivs:", productsDivs);
                 });
             }
         });
