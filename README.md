@@ -47,11 +47,10 @@ Using React, we designed our screens, applying the Single Page Application style
 _// TO DO: Any comment you may want to add to help understand your code. This is good programming practice_
 
 ## Test Plan
-All tests were manually executed. We tested all functionalities already implement in the website. To conduct the tests, we forced some inputs (malformed and normal inputs) into the parts where we have user interacting with the server. For now, the server doesn't exist. We created some atribbutes in the "windon" (see the index.js) and used it as our "database". 
+All tests were manually executed. We tested all functionalities already implement in the website. To conduct the tests, we forced some inputs (malformed and normal inputs) into the parts where we have user interacting with the server. 
 
 Some of the test flows we had were:
-
-Test 1:
+**Test 1:**
 - Access /homepage
 - log in to test account (user: test@test.com; password: test)
 - Go to buy products (/store, or click in 'Comprar' buttom)
@@ -63,7 +62,7 @@ Test 1:
 - Enter with payment data
 - Automatic return to homepage
 
-Test 2:
+**Test 2:**
 - Access /homepage
 - log in to test account (user: test@test.com; password: test)
 - Go to the user profile (/my-profile or click in the profile icon button)
@@ -74,16 +73,28 @@ Test 2:
 
 
 ## Test Results
-Test 1:
-- ShoppingCart must be empty (payment done)
+We've only done manual testing. We alreary know there are things not working and there are security vulnerabilities, but we didn't have time to finish everything (and didn't want to invest more time on this).
 
-Test 2: 
-- The address designed configuration should be maintained, 'Adicionar endereço' button only showing if there are less than 3 addresses, limit exceded message showing if there are exactly 3 addresses. Addresses should be filled first from left to right then up to bottom
+**Tests as user:**
+1. Create new user in `/register` -> [ OK* ]
+  a. There are no relevant checks to what is passed as username, email and password (lack of consistency)
+2. Log in as normal user in `/login` -> [ OK ]
+3. List products in `/store` -> [ OK ]
+4. Add, modify and remove itens in cart in `/store` and `/shopping-cart` -> [ OK* ]
+  a. Refreshing with F5 empties cart, there's no database here
+5. Finish order in `/shopping-cart` -> [ OK ]
+6. See user's profile in `/my-profile` -> [ OK ]
+  a. Not using the backend to show the info from the current user, but only logged users can see this page
 
+**Tests as admin:**
+1. Log in as admin in `/login` -> [ OK ]
+2. Delete user in `/admin/edit-user/...` -> [ OK ]
+3. See data from users and products in `/admin` -> [ OK* ]
+  a. There's a vulnerability related to IDOR here
+  b. Itens are repeated and too many requests are made to server, we were not able to solve this in time
+4. Update products' information in `/admin/edit-product/...`-> [ OK ]
 
-
-
-
+Obs.: the site is not secure at all. There are IDORs, broken authentication issues, backend endpoints without all the proper verifications, cookies that are not secure nor httpOnly...
 
 ## Build Procedures and other relevant information
 
@@ -139,15 +150,51 @@ As an admin, you can also login, change the details of a product (name, price, d
 
 All the functionality is still under construction because there's no backend. For now, we are inserting **for testing** elements like list of products and list of users in the `window` component, so if you press `F5` or reload the page by typing a new URL instead of navigating using buttons from the website, all the modifications that you do (such as changing products and users) will be lost. The data we are using to show products, users, itens, addresses etc. are coming from lists ("JSON-like" components) inside the `index.js` file. Later, all of there information will be in the backend. In addition to that, we are using "hardcoded" cookies to test logged-in functionalities.
 
+### Third milestone
+
+Almost everything is working with the backend. The frontend makes request to the backend API which then gather data from the MongoDB database we have instanciated using the Atlas from https://cloud.mongodb.com/.
+
+The `/admin` path contains the administrator pages. A default creadencial you can use to test it is:
+- To access admin account: `admin1@admin1.com : admin1`
+
+You can registers new account in `/register`.
+
+There are 2 important variables "fixed" in the `index.js` file (in `/frontend/src`): the `BACKEND_URL` and the `FRONTEND_URL`. If you're running the front and backend locally, there's no need to change anything. On the contrary, change these to the APIs of your front and backend.
+
+All pages from the mockup are included in the project. You can navigate through most of them starting at the `Homepage`. However, the `/admin` page is only accessible by typing in the URL: `http://localhost:3000/admin` (to avoid normal users "exploring" the admin login page). 
+
+To see all the frontend routes you can access, check the `routes.js` file [here](https://github.com/daltonsato/SCC0219-Introdu-o-ao-Desenvolvimento-Web/tree/master/frontend/src/routes.js).
+
+To see all the backend routes you can access, check the `routes.js` file [here](https://github.com/daltonsato/SCC0219-Introdu-o-ao-Desenvolvimento-Web/tree/master/backend/src/routes.js).
+
+### Running the frontend (React.js)
+
+To build and run the project, this standard guide [here](https://github.com/daltonsato/SCC0219-Introdu-o-ao-Desenvolvimento-Web/blob/master/frontend/README.md) still works.
+
+As an alternative to the standard guide, if you are using Linux, what you can do is:
+1. Inside `/frontend`, run `npm install` to install all dependencies from the project (a folder `node_modules` will be created)
+2. Run `npm start` inside `/frontend` and you're done!
+3. Wait until the development server is up (check your terminal) and then visit `http://localhost:3000/`.
+
+_Obs.: for Windows, you can use WSL and follow these steps. However, it was tested with the latest avaible version of Ubuntu2 0.04 LTS, since Ubuntu 18.04 WSL version did not support node_
+
+### Running the backend (Node.js)
+
+1. Inside `/backend`, run `npm install` to install all dependencies from the project (a folder `node_modules` will be created)
+2. Create a `.env` file following the example given in `env_example` file (inside `/backend`) -> if you're reviewing our project and want to use our database, please contact us so we can send you our `.env` file
+2. Run `npm run nodemon` inside `/backend`
+3. Check your terminal for the information that the backend is up and running and you're done!
+
 ## Problems
 - We've spent a lot of time on this, but the header is not working as it should on mobile phones (small screens). It looks like a problem with `popper.js`, but we didn't manage to solve it yet.
 - The onClick funtion on the div that prompts to add another address is called by its children, an image and a text causing some problems if you click exactly on them. we coudnt resolve this issue properly, the sub-optimal solution makes that if you click in the image or text of the div the onClick function will not be called  
-- More and more problems... Infinite loop in `/admin` after getting list of users/products because of useEffect. Can't find a way to fix it and make the page work
-- Set-Cookie header sent from the backend stopped working and we don't know why and can't fix it
+- After getting list of users/products, we can't avoid repeating 3 times the data we collect from the backend. Can't find a way to fix it...
+- Profile page is static, not integrated with backend because we didn't have time (project was too big for the time we had and the discipline's credits)
 
 ## Comments: 
-_// TO DO: Any comments you wish to add._
+Project was too big for a discipline with 1 "work credit". Too much work to deliver a medium quality project (because we had no time and didn't want to invest too much time on this)
 ### Next Steps:
 - Add more modularization, remove redundancies
 - Fix header when using small screens (it collapses into a menu icon but doesn't show the menu's options wen needed)
+- Fix all other problems described here
 
