@@ -31,6 +31,7 @@ class HomeHeader extends React.Component {
         }   
 
         if (sessionCookie) {
+            console.log(window.BACKEND_URL);
             fetch(window.BACKEND_URL + '/user/validate', {
                 method: 'POST',
                 headers: {

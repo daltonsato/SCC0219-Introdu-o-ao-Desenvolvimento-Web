@@ -7,8 +7,8 @@ import 'jquery';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
-const dotenv = require('dotenv');
-dotenv.config();
+// const dotenv = require('dotenv');
+// dotenv.config(); --> not working anymore WTFFFFF???????????
 
 window.BACKEND_URL = 'http://localhost:1337';
 window.FRONTEND_URL = 'http://localhost:3000';

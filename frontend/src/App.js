@@ -3,10 +3,6 @@ import './App.css';
 
 import Routes from './routes';
 
-const dotenv = require('dotenv');
-dotenv.config();
-
-
 function App() {
   return (
     <React.Fragment>
