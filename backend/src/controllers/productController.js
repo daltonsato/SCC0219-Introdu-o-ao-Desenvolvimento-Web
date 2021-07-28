@@ -108,6 +108,31 @@ exports.updateProductById = async (req, res, next) => {
     }
 };
 
+
+exports.updateProductQuantityBySlug = async (req, res, next) => {
+    let prodSlug = req.params.slug; // this ID is created by MongoDB
+
+    console.log("Executing updateProductQuantityBySlug()");
+
+    try {
+        let aux = await Product.findOneAndUpdate({slug : prodSlug}, {
+            $set: {
+            	quantity: req.body.quantity
+            }
+        });
+        
+        res.status(200).send({
+            "message" : "Produto deduzido com sucesso!"
+        });
+    }
+    catch (err) {
+        res.status(400).send({
+            "message" : "Erro ao deduzir produto",
+            "data" : err
+        });
+    }
+};
+
 exports.deleteProductById = async (req, res, next) => {
     console.log("Executing deleteProductById()");
 

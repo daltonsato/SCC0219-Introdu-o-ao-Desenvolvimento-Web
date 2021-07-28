@@ -76,19 +76,20 @@ export default function Store() {
             return;
         }
         let productID = props.target.parentNode.id;
-        if (window.shoppingCart[productID] === null || window.shoppingCart[productID] === undefined) {
-            window.shoppingCart[productID] = {"prodName": productsList[productID].name, "quantity" : 1, "price" : productsList[productID].price};
-			console.log(window.shoppingCart[productID]);
-        }
-        else {
-            window.shoppingCart[productID].quantity += 1;
-			console.log(window.shoppingCart[productID]);
-        }
-        console.log("Item adicionado ao carrinho: " + productID + ", qtd. atual: ", window.shoppingCart[productID]);
-        
         let popup = document.getElementById("addItemPopup");
         let popupText = document.getElementById("popupText");
-        popupText.innerHTML += "Item adicionado ao carrinho!<br/>";
+        if (window.shoppingCart[productID] === null || window.shoppingCart[productID] === undefined) {
+            window.shoppingCart[productID] = {"prodName": productsList[productID].name, "quantity" : 1, "price" : productsList[productID].price, "slug" : productsList[productID].slug};
+			popupText.innerHTML += "Item adicionado ao carrinho!<br/>";
+			console.log(window.shoppingCart[productID]);
+			console.log("Item adicionado ao carrinho: " + productID + ", qtd. atual: ", window.shoppingCart[productID]);
+        }
+		else
+		{
+			popupText.innerHTML = "Item já adicionado no carrinho!<br/>";
+			console.log(window.shoppingCart[productID]);
+		}
+        
 
         popup.classList.remove("d-none");
 
