@@ -39,7 +39,10 @@ var corsOptions = {
     origin: process.env.FRONTEND_URL,
     credentials: true
 }
-
+app.use((req, res, next) => {
+    res.setHeader("Content-Security-Policy", "default-src 'self' 'unsafe-inline'");
+    return next();
+})
 app.use(cors(corsOptions)); // Cross-Origin Resource Sharing
 app.use(express.json()); // used to parse JSON bodies
 // app.use(express.urlencoded()); // parse URL-encoded bodies -> deprecated
