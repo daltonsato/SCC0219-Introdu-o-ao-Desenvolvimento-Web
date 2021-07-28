@@ -32,8 +32,8 @@ export default function AdminEditProduct() {
         let suppliers = document.getElementById("suppliers").value;
 
         // console.log("Antes da alteração: ", window.productsList[params.id])
-        // process.env.BACKEND_URL + 
-        let respUpdate = await fetch('/products/update', {
+        
+        let respUpdate = await fetch(process.env.BACKEND_URL + '/products/update', {
             method: 'PUT',
             headers: {
                 "x-access-token": cookies.get("ADMIN_SESSION"),
@@ -71,8 +71,7 @@ export default function AdminEditProduct() {
     var listProducts = async () => {
         var products = [];
 
-        // process.env.BACKEND_URL + 
-        let respProducts = await fetch('/products/list-all');
+        let respProducts = await fetch(process.env.BACKEND_URL + '/products/list-all');
 
         if(respProducts.status === 200) {
             let prodsData = await respProducts.json();
@@ -93,8 +92,8 @@ export default function AdminEditProduct() {
             return true;
         
         let sessionCookie = cookies.get("ADMIN_SESSION");
-        // process.env.BACKEND_URL + 
-        let resp = await fetch('/user/validate', {
+
+        let resp = await fetch(process.env.BACKEND_URL + '/user/validate', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

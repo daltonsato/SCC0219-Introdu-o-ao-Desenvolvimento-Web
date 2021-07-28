@@ -28,8 +28,7 @@ export default function AdminEditUser() {
 
         let sessionCookie = cookies.get("ADMIN_SESSION");
         
-        // process.env.BACKEND_URL + 
-        let resp = await fetch('/user/delete/'+user._id, {
+        let resp = await fetch(process.env.BACKEND_URL +'/user/delete/'+user._id, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
@@ -45,11 +44,10 @@ export default function AdminEditUser() {
         history.push("/admin"); // returns to the admin main page
     }
 
-    // process.env.BACKEND_URL + 
     var getUserInfo = async () => {
         let sessionCookie = cookies.get("ADMIN_SESSION");
         
-        let respUser = await fetch('/user/info/'+params.id, {
+        let respUser = await fetch(process.env.BACKEND_URL +'/user/info/'+params.id, {
             headers: {
                 'Accept': 'application/json',
                 'x-access-token': sessionCookie
@@ -74,8 +72,8 @@ export default function AdminEditUser() {
         
         let sessionCookie = cookies.get("ADMIN_SESSION");
 
-        // process.env.BACKEND_URL + 
-        let resp = await fetch('/user/validate', {
+
+        let resp = await fetch(process.env.BACKEND_URL + '/user/validate', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
