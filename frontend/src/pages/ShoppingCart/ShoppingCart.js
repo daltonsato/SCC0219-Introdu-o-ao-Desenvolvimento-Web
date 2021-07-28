@@ -26,10 +26,18 @@ export default function ShoppingCart() {
 	}
 
 	// Function that increases the quantity of an item in the user's shopping cart
-	let increase = (props) =>{
+	let increase = async (props) =>{
 		let productID = props.target.parentNode.id;
 
+		let quantityProdAvaible = await fetch(window.BACKEND_URL + '/products/info/' + window.shoppingCart[productID].slug);
+		quantityProdAvaible = (await quantityProdAvaible.json()).quantity;
+		console.log(quantityProdAvaible);
+
 		window.shoppingCart[productID].quantity += 1;
+		if(window.shoppingCart[productID].quantity >= quantityProdAvaible)
+		{
+			window.shoppingCart[productID].quantity = quantityProdAvaible;
+		}
 		props.target.parentNode.childNodes[0].value = window.shoppingCart[productID].quantity;
 		setTotalApagar(totalApagar + window.shoppingCart[productID].price);
 	}
@@ -52,7 +60,7 @@ export default function ShoppingCart() {
 		let sessionCookie = cookies.get("ADMIN_SESSION");
 		if (sessionCookie == null)
 			sessionCookie = cookies.get("SESSION");
-		
+
         let resp = await fetch(window.BACKEND_URL + '/user/validate', {
             method: 'POST',
             headers: {
