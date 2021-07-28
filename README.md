@@ -76,21 +76,21 @@ Some of the test flows we had were:
 We've only done manual testing. We alreary know there are things not working and there are security vulnerabilities, but we didn't have time to finish everything (and didn't want to invest more time on this).
 
 **Tests as user:**
-1. Create new user in `/register` -> [ OK* ]
+1. Create new user in `/register` -> [ OK* ] \
   a. There are no relevant checks to what is passed as username, email and password (lack of consistency)
 2. Log in as normal user in `/login` -> [ OK ]
 3. List products in `/store` -> [ OK ]
-4. Add, modify and remove itens in cart in `/store` and `/shopping-cart` -> [ OK* ]
+4. Add, modify and remove itens in cart in `/store` and `/shopping-cart` -> [ OK* ] \
   a. Refreshing with F5 empties cart, there's no database here
 5. Finish order in `/shopping-cart` -> [ OK ]
-6. See user's profile in `/my-profile` -> [ OK ]
+6. See user's profile in `/my-profile` -> [ OK ] \
   a. Not using the backend to show the info from the current user, but only logged users can see this page
 
 **Tests as admin:**
 1. Log in as admin in `/login` -> [ OK ]
 2. Delete user in `/admin/edit-user/...` -> [ OK ]
-3. See data from users and products in `/admin` -> [ OK* ]
-  a. There's a vulnerability related to IDOR here
+3. See data from users and products in `/admin` -> [ OK* ] \
+  a. There's a vulnerability related to IDOR here \
   b. Itens are repeated and too many requests are made to server, we were not able to solve this in time
 4. Update products' information in `/admin/edit-product/...`-> [ OK ]
 
