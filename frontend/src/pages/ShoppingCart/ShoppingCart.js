@@ -11,6 +11,10 @@ import Footer from '../components/Footer/Footer';
 export default function ShoppingCart() {
 	const cookies = new Cookies();
     let history = useHistory(); // used to redict user
+
+	const [ isLogged, setIsLogged ] = useState(false);
+    const [ done, setDone ] = useState(false);
+	
 	var [totalApagar, setTotalApagar] = useState(0); // total price of all products in the cart
 
 	// Moves to next page needed in the flow of buying a product (selecting an address)
@@ -41,15 +45,43 @@ export default function ShoppingCart() {
 		}
 	}
 
-	// hardcoded cookies used for testing
-	let testCookie = "280E8410C4A05326EB815B577B05574FDFB4AE016C399ACF1B02CFE5C59D59FE"; // sha-256 -> ganeshtestlogin (used for testing)
-	let activeUserSession = [ testCookie ];
+	var checkIfLogged = async () => {
+		if (isLogged)
+			return true;
+        
+		let sessionCookie = cookies.get("ADMIN_SESSION");
+		if (sessionCookie == null)
+			sessionCookie = cookies.get("SESSION");
+		
+        let resp = await fetch(window.BACKEND_URL + '/user/validate', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'x-access-token': sessionCookie
+            }
+        });
+
+        resp = await resp.json();
+
+        if (resp.token_status === "OK")
+            return true;
+        else
+            return false;
+    };
+
+    if (!isLogged && !done) {
+		checkIfLogged().then((res) => {
+            setIsLogged(res);
+            setDone(true);
+        });
+    }
 
 	let shoppingCartComponent; // component that will contain the main elements of the shopping cart page (if user is logged in)
 	let itensList = []; // list of divs containing the itens from the user's shopping cart
 
 	// If user is logged in, he/she has a shopping cart and the itens from it can be loaded into the page
-	if (activeUserSession.includes(cookies.get("SESSION"))) {
+	if (!done || isLogged) {
 		totalApagar = 0;
 		for (const [prodName, prodDetails] of Object.entries(window.shoppingCart)) {
 			itensList.push( <div key={"div_"+prodName} className="row">
