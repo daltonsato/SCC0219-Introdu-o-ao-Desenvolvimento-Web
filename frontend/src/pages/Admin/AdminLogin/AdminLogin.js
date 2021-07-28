@@ -36,7 +36,8 @@ export default function AdminLogin() {
     var listUsers = async () => {
         let users = [];
 
-        let respUsers = await fetch(window.BACKEND_URL + '/user/list-all', {
+        // process.env.BACKEND_URL + 
+        let respUsers = await fetch('/user/list-all', {
             method: 'GET',
             headers: {
                 "x-access-token": cookies.get("ADMIN_SESSION")
@@ -60,7 +61,8 @@ export default function AdminLogin() {
     var listProducts = async () => {
         var products = [];
 
-        let respProducts = await fetch(window.BACKEND_URL + '/products/list-all');
+        // process.env.BACKEND_URL + 
+        let respProducts = await fetch('/products/list-all');
 
         if(respProducts.status === 200) {
             let prodsData = await respProducts.json();
@@ -86,7 +88,8 @@ export default function AdminLogin() {
             "password": passwd  
         };
 
-        let resp = await fetch(window.BACKEND_URL + '/user/login', {
+        // process.env.BACKEND_URL + 
+        let resp = await fetch('/user/login', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -107,11 +110,12 @@ export default function AdminLogin() {
         if (isLogged)
             return true;
         
-            let sessionCookie = cookies.get("ADMIN_SESSION");
-            if (sessionCookie == null)
-                sessionCookie = cookies.get("SESSION");
+        let sessionCookie = cookies.get("ADMIN_SESSION");
+        if (sessionCookie == null)
+            sessionCookie = cookies.get("SESSION");
 
-        let resp = await fetch(window.BACKEND_URL + '/user/validate', {
+        // process.env.BACKEND_URL + 
+        let resp = await fetch('/user/validate', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

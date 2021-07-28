@@ -7,60 +7,8 @@ import 'jquery';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
-window.BACKEND_URL = 'http://localhost:1337';
-window.FRONTEND_URL = 'http://localhost:3000';
-
-// created for testing
-window.productsList = {
-  "product0" : {
-      "name" : "Ovo de galinha",
-      "price" : 100,
-      "quantity" : 14,
-      "description" : "blablabla",
-      "suppliers" : "Empresa1, Empresa2",
-      "category" : "caipira"
-  },
-  "product1" : {
-      "name" : "Ovo de codorna",
-      "price" : 85,
-      "quantity" : 200,
-      "description" : "blablabla",
-      "suppliers" : "Empresa1, Empresa2, Empresa3",
-      "category" : "caipira"
-  },
-  "product2" : {
-      "name" : "Ovo de codorna",
-      "price" : 25,
-      "quantity" : 30,
-      "description" : "blablabla",
-      "suppliers" : "Empresa2",
-      "category" : "branco"
-  },
-  "product3" : {
-      "name" : "Ovo de avestruz",
-      "price" : 150,
-      "quantity" : 44,
-      "description" : "blablabla",
-      "suppliers" : "Empresa1, Empresa2, Empresa3",
-      "category" : "pó"
-  },
-  "product4" : {
-    "name" : "Ovo de T-Rex",
-    "price" : 130,
-    "quantity" : 111,
-    "description" : "blablabla",
-    "suppliers" : "Empresa1, Empresa2",
-    "category" : "caipira"
-  },
-  "product5" : {
-    "name" : "Ovo de jacaré",
-    "price" : 15,
-    "quantity" : 65,
-    "description" : "blablabla",
-    "suppliers" : "Empresa1",
-    "category" : "caipira"
-  }
-};
+const dotenv = require('dotenv');
+dotenv.config();
 
 //created for testing
 window.purchaseHistory = {

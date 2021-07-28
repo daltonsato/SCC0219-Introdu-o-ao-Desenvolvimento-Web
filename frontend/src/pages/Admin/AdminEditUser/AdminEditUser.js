@@ -27,8 +27,9 @@ export default function AdminEditUser() {
         // console.log("Antes da alteração: ", window.users[params.id])
 
         let sessionCookie = cookies.get("ADMIN_SESSION");
-
-        let resp = await fetch(window.BACKEND_URL + '/user/delete/'+user._id, {
+        
+        // process.env.BACKEND_URL + 
+        let resp = await fetch('/user/delete/'+user._id, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
@@ -44,8 +45,16 @@ export default function AdminEditUser() {
         history.push("/admin"); // returns to the admin main page
     }
 
+    // process.env.BACKEND_URL + 
     var getUserInfo = async () => {
-        let respUser = await fetch(window.BACKEND_URL + '/user/info/'+params.id);
+        let sessionCookie = cookies.get("ADMIN_SESSION");
+        
+        let respUser = await fetch('/user/info/'+params.id, {
+            headers: {
+                'Accept': 'application/json',
+                'x-access-token': sessionCookie
+            }
+        });
 
         if(respUser.status === 200) {
             console.log(respUser);
@@ -65,7 +74,8 @@ export default function AdminEditUser() {
         
         let sessionCookie = cookies.get("ADMIN_SESSION");
 
-        let resp = await fetch(window.BACKEND_URL + '/user/validate', {
+        // process.env.BACKEND_URL + 
+        let resp = await fetch('/user/validate', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

@@ -1,10 +1,10 @@
 // https://github.com/balta-io/1972/tree/master/src
 
 const express = require('express');
-// const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 
 // Schemas
 require('./models/clientModel');
@@ -36,7 +36,7 @@ catch (err) {
 }
 
 var corsOptions = {
-    origin: 'http://localhost:3000' ,
+    origin: process.env.FRONTEND_URL,
     credentials: true
 }
 
@@ -45,6 +45,7 @@ app.use(express.json()); // used to parse JSON bodies
 // app.use(express.urlencoded()); // parse URL-encoded bodies -> deprecated
 
 app.use(routes);
+app.use(express.static(path.join(__dirname, 'build'))); // static route if no route was found in 'routes.js' -> files from React
 
 const httpServer = app.listen(port, () => {
     console.log(`== Server listening on port ${port} ==`);

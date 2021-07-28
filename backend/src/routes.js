@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path');
 
 const clientController = require('./controllers/clientController');
 const productController = require('./controllers/productController');
@@ -36,13 +37,22 @@ router.delete('/products/delete/:id', authService.isAdmin, productController.del
 router.get('/order', authService.authorize, orderController.getOrder); // only logged users can do this
 router.post('/order/new', authService.authorize, orderController.createOrder); // only logged users can do this
 
-// Test route
-router.get('/', (req, res) => {
-    console.log("Request: ", req);
-    res.status(200).send({
-        "version" : "0.0.1",
-        "message": "Working!"
-    });
+// Created because of our build folder...
+router.get('/admin', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
+
+router.get('/store', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+  
+// Test route
+// router.get('/', (req, res) => {
+//     console.log("Request: ", req);
+//     res.status(200).send({
+//         "version" : "0.0.1",
+//         "message": "Working!"
+//     });
+// });
 
 module.exports = router;

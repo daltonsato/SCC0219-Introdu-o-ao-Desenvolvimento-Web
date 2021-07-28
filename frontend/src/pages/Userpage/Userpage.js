@@ -135,11 +135,12 @@ export default function Userpage() {
         if (isLogged)
             return true;
         
-            let sessionCookie = cookies.get("ADMIN_SESSION");
-            if (sessionCookie == null)
-                sessionCookie = cookies.get("SESSION");
-
-        let resp = await fetch(window.BACKEND_URL + '/user/validate', {
+        let sessionCookie = cookies.get("ADMIN_SESSION");
+        if (sessionCookie == null)
+            sessionCookie = cookies.get("SESSION");
+            
+        // process.env.BACKEND_URL + 
+        let resp = await fetch('/user/validate', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

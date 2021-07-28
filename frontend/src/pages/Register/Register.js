@@ -22,7 +22,8 @@ export default function Login() {
             "password": password
         }
         
-        let resp = await fetch(window.BACKEND_URL + '/user/register', {
+        // process.env.BACKEND_URL + 
+        let resp = await fetch('/user/register', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

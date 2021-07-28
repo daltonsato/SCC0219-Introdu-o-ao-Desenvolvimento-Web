@@ -105,7 +105,8 @@ export default function Store() {
     var listProducts = async () => {
         var products = [];
 
-        let respProducts = await fetch(window.BACKEND_URL + '/products/list-all');
+        // process.env.BACKEND_URL + 
+        let respProducts = await fetch('/products/list-all');
 
         if(respProducts.status === 200) {
             let prodsData = await respProducts.json();
@@ -125,11 +126,12 @@ export default function Store() {
         if (isLogged)
             return true;
         
-            let sessionCookie = cookies.get("ADMIN_SESSION");
-            if (sessionCookie == null)
-                sessionCookie = cookies.get("SESSION");
-
-        let resp = await fetch(window.BACKEND_URL + '/user/validate', {
+        let sessionCookie = cookies.get("ADMIN_SESSION");
+        if (sessionCookie == null)
+            sessionCookie = cookies.get("SESSION");
+        
+        // process.env.BACKEND_URL + 
+        let resp = await fetch('/user/validate', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
