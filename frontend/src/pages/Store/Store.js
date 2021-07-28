@@ -15,6 +15,7 @@ export default function Store() {
     const cookies = new Cookies();
     let [ productsList, setProdsList ] = useState([]);
     let [ isLogged, setIsLogged ] = useState(false);
+    const [ done, setDone ] = useState(false);
 
     // Function that shows the description of a product (triggered when user click on the item's image)
     let showDescription = (props) => {
@@ -154,10 +155,11 @@ export default function Store() {
         });
     }
 
-    if (!isLogged) {
-        checkIfLogged().then(() => {
-            setIsLogged(true);
-        })
+    if (!isLogged && !done) {
+        checkIfLogged().then((res) => {
+            setIsLogged(res);
+            setDone(true);
+        });
     }
     
     // Loading all eggs to the page (3 categories)

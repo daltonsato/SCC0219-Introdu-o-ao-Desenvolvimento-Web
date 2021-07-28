@@ -14,10 +14,10 @@ import add from '../../images/Add.png';
 export default function Userpage() {
     const cookies = new Cookies();
     let history = useHistory(); // used to redict user
-    let sessionCookie;
 
     const [ isLogged, setIsLogged ] = useState(false);
-    const [,setValue] = useState();    
+    const [ done, setDone ] = useState(false);
+    const [,setValue] = useState();
 
     //deletes an address
     function deleteAddr(props) {
@@ -131,30 +131,40 @@ export default function Userpage() {
         }
     }
 
-    if (cookies.get('ADMIN_SESSION')) {
-        sessionCookie = cookies.get('ADMIN_SESSION');
-    }
-    else {
-        sessionCookie = cookies.get('SESSION');
-    }   
+    var checkIfLogged = async () => {
+        if (isLogged)
+            return true;
+        
+            let sessionCookie = cookies.get("ADMIN_SESSION");
+            if (sessionCookie == null)
+                sessionCookie = cookies.get("SESSION");
 
-    if (sessionCookie) {
-        fetch(window.BACKEND_URL + '/user/validate', {
+        let resp = await fetch(window.BACKEND_URL + '/user/validate', {
             method: 'POST',
             headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
                 'x-access-token': sessionCookie
             }
-        })
-        .then((res) => res.json())
-        .then((result) => {
-            if (result.token_status === "OK")
-                setIsLogged(true);
+        });
+
+        resp = await resp.json();
+
+        if (resp.token_status === "OK")
+            return true;
+        else
+            return false;
+    };
+
+    if (!isLogged && !done) {
+        checkIfLogged().then((res) => {
+            setIsLogged(res);
+            setDone(true);
         });
     }
 
-    if (!isLogged) {
-        history.push("/store");
-        return (<div>Você precisa estar logado para ver essa página</div>);
+    if (done && !isLogged) {
+        history.push('/store');
     }
 
 	function logOut(props){

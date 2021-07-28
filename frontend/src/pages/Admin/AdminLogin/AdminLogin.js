@@ -15,7 +15,11 @@ export default function AdminLogin() {
     let history = useHistory(); // used to redict user
     let cookies = new Cookies();
     
-    var [done, setDone] = useState(false);
+    const [ isLogged, setIsLogged ] = useState(false);
+    const [ done, setDone ] = useState(false);
+    
+    const [ prodCount, setProdCount ] = useState(0);
+    const [ userCount, setUserCount ] = useState(0);
 
     var [productsDivs, setProdDiv] = useState([]);
     var [usersDivs, setUsersDiv] = useState([]);
@@ -57,15 +61,15 @@ export default function AdminLogin() {
     }
 
     var listProducts = async () => {
-        let products = [];
+        var products = [];
 
         let respProducts = await fetch(window.BACKEND_URL + '/products/list-all');
 
-        if (respProducts.status === 200) {
-            respProducts.json().then((prodsData) => {
-                prodsData.forEach((prod) => {
-                    products.push(prod);
-                })
+        if(respProducts.status === 200) {
+            let prodsData = await respProducts.json();
+
+            prodsData.forEach((prod) => {
+                products.push(prod);
             });
 
             return products;
@@ -73,7 +77,7 @@ export default function AdminLogin() {
         else {
             return null;
         }
-    }
+    };
 
     // Function to handle admin login (should change when we have the backend)
     var handleAdminLogin = async () => {
@@ -91,49 +95,79 @@ export default function AdminLogin() {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
+            credentials: 'include',
             body: JSON.stringify(creds)
         });
 
         if (resp.status === 200) {
             resp.json().then((data) => {
-                history.push('/admin');
+                document.location('/admin');
             });
         }
     }
 
+    var checkIfLogged = async () => {
+        if (isLogged)
+            return true;
+        
+            let sessionCookie = cookies.get("ADMIN_SESSION");
+            if (sessionCookie == null)
+                sessionCookie = cookies.get("SESSION");
+
+        let resp = await fetch(window.BACKEND_URL + '/user/validate', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'x-access-token': sessionCookie
+            }
+        });
+
+        resp = await resp.json();
+
+        if (resp.token_status === "OK")
+            return true;
+        else
+            return false;
+    };
+
     let adminScreen;
 
     var loadUsersAndProducts = async () => {
-        let users = await listUsers();
-        let products = await listProducts();
+        let users, products;
 
-        if (users && products) {
+        if (!done) {
+            users = await listUsers();
+            products = await listProducts();
+        }
+
+        if (users && products && !done) {
+            let auxDivs = [];
             // Creating divs with the data from products (see temporary dictinary in index.js)
-            // for (const [productID, productDetails] of Object.entries(products)) {
-                // let newElement = (
-                //     <li key={"li_prod_"+productID} className="adminProductListItem shadow d-flex align-itens-center justify-content-center p-3 my-3">
-                //         <div className="text-left px-3 w-100">
-                //             <span className="align-middle"> {productDetails.name} </span>
-                //         </div>
-                //         <div className="d-flex w-100 align-itens-center justify-content-center d-none d-sm-none d-md-none d-lg-inline">
-                //             <span className="align-middle px-3"> Qtd.: {productDetails.quantity} </span> 
-                //             <span className="align-middle px-3"> Preço: R${productDetails.price}/un. </span> 
-                //         </div>
-                //         <div className="d-flex w-100 justify-content-end">
-                //             <input id={productID} className="adminProductListButton productButton py-2 px-4" type="button" value="Ver mais" onClick={goToEditProdPage}></input>
-                //         </div>
-                //     </li>
-                // );
+            for (const [productID, productDetails] of Object.entries(products)) {
+                console.log(productID + ") productDetails:", productDetails);
+                let newElement = (
+                    <li key={"li_prod_"+productID} className="adminProductListItem shadow d-flex align-itens-center justify-content-center p-3 my-3">
+                        <div className="text-left px-3 w-100">
+                            <span className="align-middle"> {productDetails.name} </span>
+                        </div>
+                        <div className="d-flex w-100 align-itens-center justify-content-center d-none d-sm-none d-md-none d-lg-inline">
+                            <span className="align-middle px-3"> Qtd.: {productDetails.quantity} </span> 
+                            <span className="align-middle px-3"> Preço: R${productDetails.price}/un. </span> 
+                        </div>
+                        <div className="d-flex w-100 justify-content-end">
+                            <input id={productID} className="adminProductListButton productButton py-2 px-4" type="button" value="Ver mais" onClick={goToEditProdPage}></input>
+                        </div>
+                    </li>
+                );
 
-                // setProdDiv(productsDivs => [...productsDivs, newElement]);
-                // Isso causa um looping infinito devido a forma como o useEffect funciona
-                // Tentei corrigir de mil formas diferentes mas nenhuma funciona
-                // Desisto, o tempo dedicado a esse projeto já foi infinitamente maior que o necessário/correto/saudável
+                auxDivs.push(auxDivs);
                 
-            // }
-
-            
-            // console.log("productsDivs filled:", productsDivs);
+                console.log("productsDivs:", productsDivs);    
+            }
+            if (!productsDivs.includes(auxDivs))
+                setProdDiv(productsDivs => [...productsDivs, auxDivs], [done]);
+            return (<div></div>);
 
             // Creating divs with the data from users (see temporary dictinary in index.js)
             // for (const [userID, userDetails] of Object.entries(users)) {
@@ -152,17 +186,24 @@ export default function AdminLogin() {
                 // );
 
                 // setUsersDiv(usersDivs => [...usersDivs, newElement]);
-                // Isso causa um looping infinito devido a forma como o useEffect funciona
-                // Tentei corrigir de mil formas diferentes mas nenhuma funciona
-                // Desisto, o tempo dedicado a esse projeto já foi infinitamente maior que o necessário/correto/saudável
             // }
         }
             // console.log("usersDivs filled:", usersDivs);
     }
-    
-    if (cookies.get("ADMIN_SESSION") != null) {
-        loadUsersAndProducts();
 
+    if (!isLogged && !done) {
+        checkIfLogged().then((res) => {
+            setIsLogged(res);
+            if (res === true) {
+                loadUsersAndProducts().then(() => {
+                    setDone(true);
+                    console.log("productsDivs:", productsDivs);
+                });
+            }
+        });
+    }
+    
+    if (isLogged && cookies.get("SESSION") == null) {
         // Defining admin screen (dashboard, because user is logged as admin)
         adminScreen = (
             <div className="adminLoginBackground container py-4">
