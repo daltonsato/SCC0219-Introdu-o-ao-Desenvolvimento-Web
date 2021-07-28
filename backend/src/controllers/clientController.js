@@ -12,7 +12,7 @@ exports.registerClient = async (req, res, next) => {
     let username = req.body.username;
     let password = req.body.password;
     let email = req.body.email;
-    let addresses = [];
+    //let addresses = [];
 
     // TO DO: Must make some checks before using username, password and email
 
@@ -192,14 +192,14 @@ exports.getUserInfo = async (req, res, next) => {
             "message" : "Erro ao buscar informações do usuário.",
             "data" : err
         });
-    }
+    }    
 };
 
 exports.getUsersList = async (req, res, next) => {
     console.log("Executing getUsersList()");
     
     try {
-        let data = await Client.find({}, 'name email');
+        let data = await Client.find({}, 'name email addressList');
         res.status(200).send(data);
     }
     catch (err) {
@@ -244,16 +244,16 @@ exports.updateUser = async (req, res, next) => {
 exports.addAddress = async (req, res, next) => {
     
     let userID = req.body.id;
-    console.log(req.body);
+    //console.log(req.body);
     try {
-        await Client.findByIdAndUpdate(userID, {
+       let aux =  await Client.findByIdAndUpdate(userID, {
             $push: {
-                address: req.body.address
+                addressList: req.body.address
             }
         });
-
+        console.log(aux);
         res.status(201).send({
-            message: 'Endereço cadastrado'
+            message: 'Endereço registrado'
         });
     }
     catch (err){
@@ -271,7 +271,7 @@ exports.deleteAddress = async (req, res, next) => {
     try {
         let aux = await Client.findByIdAndUpdate(userID, {
             $pull: {
-                "address": {_id: AddrID}
+                "addressList": {_id: AddrID}
             }
         });
         console.log(aux);
@@ -299,47 +299,3 @@ exports.deleteAddress = async (req, res, next) => {
     }
 }
 
-exports.toMainAddress = async (req, res, next) => {
-    let userID = req.body.id; 
-    let addrMain = req.body.addrID;
-    let newMain = req.body.new;
-
-    // TO DO: Only the user can edit itself, must validate!!!
-
-    try {
-        await Client.findByIdAndUpdate(userID, {
-
-            
-
-        });
-
-        
-        res.status(200).send({
-            "message" : "Dados do cliente atualizados com sucesso!"
-        });
-    }
-    catch (err) {
-        res.status(400).send({
-            "message" : "Erro ao atualizar dados do cliente.",
-            "data" : err
-        });
-    }
-};
-
-exports.getAddress = async (req, res, next) => {
-    let userID = req.body.id;
-    let addrID = req.body.addrid;
-    console.log(req.body);
-    let num = req.params.address.number;
-    try {
-        res.status(201).send({
-            message: 'Endereço cadastrado'
-        });
-    }
-    catch (err){
-        res.status(400).send({
-            "message" : "Erro ao atualizar dados do cliente.",
-            "data" : err
-        });
-    }
-};
